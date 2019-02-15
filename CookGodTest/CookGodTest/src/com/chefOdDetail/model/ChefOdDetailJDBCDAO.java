@@ -37,10 +37,8 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -82,8 +80,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -120,8 +117,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -170,8 +166,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -227,8 +222,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -258,7 +252,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 	public static void main(String[] args) {
 
 		// ·s¼W
-		ChefOdDetailJDBCDAO dao = new ChefOdDetailJDBCDAO();
+//		ChefOdDetailJDBCDAO dao = new ChefOdDetailJDBCDAO();
 //		ChefOdDetailVO chefOdDetailVO = new ChefOdDetailVO();
 //		chefOdDetailVO.setChefOrId("CF20190213-000012");
 //		chefOdDetailVO.setFoodSupId("T00003");

@@ -33,10 +33,8 @@ public class FavChefJDBCDAO implements FavChefDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -75,8 +73,7 @@ public class FavChefJDBCDAO implements FavChefDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -113,8 +110,7 @@ public class FavChefJDBCDAO implements FavChefDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -160,8 +156,7 @@ public class FavChefJDBCDAO implements FavChefDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -214,8 +209,7 @@ public class FavChefJDBCDAO implements FavChefDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -245,7 +239,7 @@ public class FavChefJDBCDAO implements FavChefDAO_interface {
 	public static void main(String[] args) {
 
 		// ·s¼W
-		FavChefJDBCDAO dao = new FavChefJDBCDAO();
+//		FavChefJDBCDAO dao = new FavChefJDBCDAO();
 //		FavChefVO favChefVO = new FavChefVO();
 //		favChefVO.setCustId("b00001");
 //		favChefVO.setChefId("T00003");

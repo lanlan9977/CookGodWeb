@@ -36,10 +36,8 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -80,8 +78,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -120,8 +117,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -170,8 +166,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -227,8 +222,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -258,7 +252,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 	public static void main(String[] args) {
 
 		// ·s¼W
-		BroadcastJDBCDAO dao = new BroadcastJDBCDAO();
+//		BroadcastJDBCDAO dao = new BroadcastJDBCDAO();
 //		BroadcastVO broadcastVO = new BroadcastVO();
 //		broadcastVO.setBroadcastStart(Timestamp.valueOf("2019-01-04 01:01:01"));
 //		broadcastVO.setBroadcastCon("7");

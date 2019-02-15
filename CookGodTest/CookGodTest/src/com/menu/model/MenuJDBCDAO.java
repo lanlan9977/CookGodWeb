@@ -37,10 +37,8 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -83,8 +81,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -123,8 +120,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -175,8 +171,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -233,8 +228,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -264,7 +258,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 	public static void main(String[] args) {
 
 		// ·s¼W
-		MenuJDBCDAO dao = new MenuJDBCDAO();
+//		MenuJDBCDAO dao = new MenuJDBCDAO();
 //		MenuVO menuVO = new MenuVO();
 //		menuVO.setMenuName("88888");
 //		menuVO.setMenuResume("77777");
