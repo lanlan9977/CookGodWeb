@@ -8,9 +8,9 @@ public interface FavChefDAO_interface {
 
 	public void update(FavChefVO favChefVO);
 
-	public void delete(String custId);
+	public void delete(String cust_ID);
 
-	public FavChefVO findByPrimaryKey(String custId);
+	public FavChefVO findByPrimaryKey(String cust_ID);
 
 	public List<FavChefVO> getAll();
 }

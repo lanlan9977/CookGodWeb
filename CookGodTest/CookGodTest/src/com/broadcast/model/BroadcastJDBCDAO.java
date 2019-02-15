@@ -3,22 +3,12 @@ package com.broadcast.model;
 import java.util.*;
 import java.sql.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 
-public class BroadcastDAO implements BroadcastDAO_interface {
-
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "CA106";
+	String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO BROADCAST(BROADCAST_ID,BROADCAST_START,BROADCAST_CON,BROADCAST_STATUS,CUST_ID)  VALUES ('B'||LPAD((BROADCAST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM BROADCAST";
@@ -31,10 +21,10 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
-
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setTimestamp(1, broadcastVO.getBroadcast_start());
@@ -47,6 +37,9 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -72,8 +65,8 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setTimestamp(1, broadcastVO.getBroadcast_start());
@@ -86,6 +79,9 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -112,7 +108,8 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, broadcast_ID);
@@ -122,6 +119,9 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -150,7 +150,8 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, broadcast_ID);
@@ -168,6 +169,9 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -205,7 +209,8 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -221,6 +226,9 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -245,5 +253,49 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	public static void main(String[] args) {
+
+		// 新增
+		BroadcastJDBCDAO dao = new BroadcastJDBCDAO();
+//		BroadcastVO broadcastVO = new BroadcastVO();
+//		broadcastVO.setBroadcastStart(Timestamp.valueOf("2019-01-04 01:01:01"));
+//		broadcastVO.setBroadcastCon("7");
+//		broadcastVO.setBroadcastStatus(1);
+//		broadcastVO.setCustId("a00001");
+//		dao.insert(broadcastVO);
+
+		// 修改
+//		BroadcastVO broadcastVO2 = new BroadcastVO();
+//		broadcastVO2.setBroadcastId("B00003");
+//		broadcastVO2.setBroadcastStart(Timestamp.valueOf("2019-01-04 01:01:01"));
+//		broadcastVO2.setBroadcastCon("98888");
+//		broadcastVO2.setBroadcastStatus(8);
+//		broadcastVO2.setCustId("a00001");
+//		dao.update(broadcastVO2);
+
+		// 刪除
+//		dao.delete("B00003");
+
+		// 查詢
+//		BroadcastVO broadcastVO3 = dao.findByPrimaryKey("B00002");
+//		System.out.print(broadcastVO3.getBroadcastId() + ",");
+//		System.out.print(broadcastVO3.getBroadcastStart() + ",");
+//		System.out.print(broadcastVO3.getBroadcastCon() + ",");
+//		System.out.print(broadcastVO3.getBroadcastStatus() + ",");
+//		System.out.print(broadcastVO3.getCustId() + ",");
+//		System.out.println("---------------------");
+
+		// 查詢
+//		List<BroadcastVO> list = dao.getAll();
+//		for (BroadcastVO aBroadcast : list) {
+//			System.out.print(aBroadcast.getBroadcastId() + ",");
+//			System.out.print(aBroadcast.getBroadcastStart() + ",");
+//			System.out.print(aBroadcast.getBroadcastCon() + ",");
+//			System.out.print(aBroadcast.getBroadcastStatus() + ",");
+//			System.out.print(aBroadcast.getCustId() + ",");
+//			System.out.println();
+//		}
 	}
 }

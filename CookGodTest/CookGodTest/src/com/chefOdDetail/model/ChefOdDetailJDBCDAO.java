@@ -3,22 +3,12 @@ package com.chefOdDetail.model;
 import java.util.*;
 import java.sql.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 
-public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
-
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "CA106";
+	String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO CHEF_OD_DETAIL (CHEF_OR_ID,FOOD_SUP_ID,FOOD_ID,CHEF_OD_QTY,CHEF_OD_STOTAL)  VALUES (?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM CHEF_OD_DETAIL";
@@ -33,7 +23,8 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, chefOdDetailVO.getChef_or_ID());
@@ -47,6 +38,9 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -73,7 +67,8 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, chefOdDetailVO.getFood_sup_ID());
@@ -86,6 +81,9 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -111,7 +109,8 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, chef_or_ID);
 			pstmt.executeUpdate();
@@ -120,6 +119,9 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -148,7 +150,8 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, chef_or_ID);
@@ -166,6 +169,9 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -203,7 +209,8 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -219,6 +226,9 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -243,6 +253,52 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	public static void main(String[] args) {
+
+		// 新增
+		ChefOdDetailJDBCDAO dao = new ChefOdDetailJDBCDAO();
+//		ChefOdDetailVO chefOdDetailVO = new ChefOdDetailVO();
+//		chefOdDetailVO.setChefOrId("CF20190213-000012");
+//		chefOdDetailVO.setFoodSupId("T00003");
+//		chefOdDetailVO.setFoodId("F00001");
+//		chefOdDetailVO.setChefOdQty(0);
+//		chefOdDetailVO.setChefOdStotal(1);
+//		dao.insert(chefOdDetailVO);
+
+		// 修改
+//		ChefOdDetailVO chefOdDetailVO2 = new ChefOdDetailVO();
+//		chefOdDetailVO2.setChefOrId("CF20190213-000012");
+//		chefOdDetailVO2.setFoodSupId("T00003");
+//		chefOdDetailVO2.setFoodId("F00001");
+//		chefOdDetailVO2.setChefOdQty(0);
+//		chefOdDetailVO2.setChefOdStotal(2);
+//		dao.update(chefOdDetailVO2);
+
+		// 刪除
+//		dao.delete("CF20190213-000012");
+
+		// 查詢
+//		ChefOdDetailVO chefOdDetailVO3 = dao.findByPrimaryKey("CF20190213-000012");
+//		System.out.print(chefOdDetailVO3.getChefOrId() + ",");
+//		System.out.print(chefOdDetailVO3.getFoodSupId() + ",");
+//		System.out.print(chefOdDetailVO3.getFoodId() + ",");
+//		System.out.print(chefOdDetailVO3.getChefOdQty() + ",");
+//		System.out.print(chefOdDetailVO3.getChefOdStotal() + ",");
+//		System.out.println("---------------------");
+
+		// 查詢
+//		List<ChefOdDetailVO> list = dao.getAll();
+//		for (ChefOdDetailVO aChefOdDetail : list) {
+//			System.out.print(aChefOdDetail.getChefOrId() + ",");
+//			System.out.print(aChefOdDetail.getFoodSupId() + ",");
+//			System.out.print(aChefOdDetail.getFoodId() + ",");
+//			System.out.print(aChefOdDetail.getChefOdQty() + ",");
+//			System.out.print(aChefOdDetail.getChefOdStotal() + ",");
+//			System.out.println();
+//		}
+
 	}
 
 }

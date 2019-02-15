@@ -1,33 +1,27 @@
 package com.favChef.model;
 
 public class FavChefVO {
-	private String custId;
-	private String chefId;
+	private String cust_ID;
+	private String chef_ID;
 
 	public FavChefVO() {
-		super();
+
 	}
 
-	public FavChefVO(String chefId, String custId) {
-		super();
-		this.chefId = chefId;
-		this.custId = custId;
+	public String getCust_ID() {
+		return cust_ID;
 	}
 
-	public String getCustId() {
-		return custId;
+	public void setCust_ID(String cust_ID) {
+		this.cust_ID = cust_ID;
 	}
 
-	public void setCustId(String custId) {
-		this.custId = custId;
+	public String getChef_ID() {
+		return chef_ID;
 	}
 
-	public String getChefId() {
-		return chefId;
-	}
-
-	public void setChefId(String chefId) {
-		this.chefId = chefId;
+	public void setChef_ID(String chef_ID) {
+		this.chef_ID = chef_ID;
 	}
 
 }

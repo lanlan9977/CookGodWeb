@@ -1,63 +1,57 @@
 package com.chefOdDetail.model;
 
 public class ChefOdDetailVO {
-	private String chefOrId;
-	private String foodSupId;
-	private String foodId;
-	private Integer chefOdQty;
-	private Integer chefOdStotal;
+
+	private String chef_or_ID;
+	private String food_sup_ID;
+	private String food_ID;
+	private Integer chef_od_qty;
+	private Integer chef_od_stotal;
 
 	public ChefOdDetailVO() {
-		super();
+
+	}
+	
+	public String getChef_or_ID() {
+		return chef_or_ID;
 	}
 
-	public ChefOdDetailVO(String chefOrId, String foodSupId, String foodId, Integer chefOdQty, Integer chefOdStotal) {
-		super();
-		this.chefOrId = chefOrId;
-		this.foodSupId = foodSupId;
-		this.foodId = foodId;
-		this.chefOdQty = chefOdQty;
-		this.chefOdStotal = chefOdStotal;
+	public void setChef_or_ID(String chef_or_ID) {
+		this.chef_or_ID = chef_or_ID;
 	}
 
-	public String getChefOrId() {
-		return chefOrId;
+	public String getFood_sup_ID() {
+		return food_sup_ID;
 	}
 
-	public void setChefOrId(String chefOrId) {
-		this.chefOrId = chefOrId;
+	public void setFood_sup_ID(String food_sup_ID) {
+		this.food_sup_ID = food_sup_ID;
 	}
 
-	public String getFoodSupId() {
-		return foodSupId;
+	public String getFood_ID() {
+		return food_ID;
 	}
 
-	public void setFoodSupId(String foodSupId) {
-		this.foodSupId = foodSupId;
+	public void setFood_ID(String food_ID) {
+		this.food_ID = food_ID;
 	}
 
-	public String getFoodId() {
-		return foodId;
+	public Integer getChef_od_qty() {
+		return chef_od_qty;
 	}
 
-	public void setFoodId(String foodId) {
-		this.foodId = foodId;
+	public void setChef_od_qty(Integer chef_od_qty) {
+		this.chef_od_qty = chef_od_qty;
 	}
 
-	public Integer getChefOdQty() {
-		return chefOdQty;
+	public Integer getChef_od_stotal() {
+		return chef_od_stotal;
 	}
 
-	public void setChefOdQty(Integer chefOdQty) {
-		this.chefOdQty = chefOdQty;
+	public void setChef_od_stotal(Integer chef_od_stotal) {
+		this.chef_od_stotal = chef_od_stotal;
 	}
 
-	public Integer getChefOdStotal() {
-		return chefOdStotal;
-	}
 
-	public void setChefOdStotal(Integer chefOdStotal) {
-		this.chefOdStotal = chefOdStotal;
-	}
 
 }

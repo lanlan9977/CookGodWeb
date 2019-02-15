@@ -3,113 +3,99 @@ package com.chefOrder.model;
 import java.sql.Date;
 
 public class ChefOrderVO {
-	private String chefOrId;
-	private String chefOrStatus;
-	private Date chefOrStart;
-	private Date chefOrSend;
-	private Date chefOrRcv;
-	private Date chefOrEnd;
-	private String chefOrName;
-	private String chefOrAddr;
-	private Integer chefOrTel;
-	private String chefId;
+	private String chef_or_ID;
+	private String chef_or_status;
+	private Date chef_or_start;
+	private Date chef_or_send;
+	private Date chef_or_rcv;
+	private Date chef_or_end;
+	private String chef_or_name;
+	private String chef_or_addr;
+	private Integer chef_or_tel;
+	private String chef_ID;
 
 	public ChefOrderVO() {
-		super();
+
 	}
 
-	public ChefOrderVO(String chefOrId, String chefOrStatus, Date chefOrStart, Date chefOrSend, Date chefOrRcv,
-			Date chefOrEnd, String chefOrName, String chefOrAddr, Integer chefOrTel, String chefId) {
-		super();
-		this.chefOrId = chefOrId;
-		this.chefOrStatus = chefOrStatus;
-		this.chefOrStart = chefOrStart;
-		this.chefOrSend = chefOrSend;
-		this.chefOrRcv = chefOrRcv;
-		this.chefOrEnd = chefOrEnd;
-		this.chefOrName = chefOrName;
-		this.chefOrAddr = chefOrAddr;
-		this.chefOrTel = chefOrTel;
-		this.chefId = chefId;
+	public String getChef_or_ID() {
+		return chef_or_ID;
 	}
 
-	public String getChefOrId() {
-		return chefOrId;
+	public void setChef_or_ID(String chef_or_ID) {
+		this.chef_or_ID = chef_or_ID;
 	}
 
-	public void setChefOrId(String chefOrId) {
-		this.chefOrId = chefOrId;
+	public String getChef_or_status() {
+		return chef_or_status;
 	}
 
-	public String getChefOrStatus() {
-		return chefOrStatus;
+	public void setChef_or_status(String chef_or_status) {
+		this.chef_or_status = chef_or_status;
 	}
 
-	public void setChefOrStatus(String chefOrStatus) {
-		this.chefOrStatus = chefOrStatus;
+	public Date getChef_or_start() {
+		return chef_or_start;
 	}
 
-	public Date getChefOrStart() {
-		return chefOrStart;
+	public void setChef_or_start(Date chef_or_start) {
+		this.chef_or_start = chef_or_start;
 	}
 
-	public void setChefOrStart(Date chefOrStart) {
-		this.chefOrStart = chefOrStart;
+	public Date getChef_or_send() {
+		return chef_or_send;
 	}
 
-	public Date getChefOrSend() {
-		return chefOrSend;
+	public void setChef_or_send(Date chef_or_send) {
+		this.chef_or_send = chef_or_send;
 	}
 
-	public void setChefOrSend(Date chefOrSend) {
-		this.chefOrSend = chefOrSend;
+	public Date getChef_or_rcv() {
+		return chef_or_rcv;
 	}
 
-	public Date getChefOrRcv() {
-		return chefOrRcv;
+	public void setChef_or_rcv(Date chef_or_rcv) {
+		this.chef_or_rcv = chef_or_rcv;
 	}
 
-	public void setChefOrRcv(Date chefOrRcv) {
-		this.chefOrRcv = chefOrRcv;
+	public Date getChef_or_end() {
+		return chef_or_end;
 	}
 
-	public Date getChefOrEnd() {
-		return chefOrEnd;
+	public void setChef_or_end(Date chef_or_end) {
+		this.chef_or_end = chef_or_end;
 	}
 
-	public void setChefOrEnd(Date chefOrEnd) {
-		this.chefOrEnd = chefOrEnd;
+	public String getChef_or_name() {
+		return chef_or_name;
 	}
 
-	public String getChefOrName() {
-		return chefOrName;
+	public void setChef_or_name(String chef_or_name) {
+		this.chef_or_name = chef_or_name;
 	}
 
-	public void setChefOrName(String chefOrName) {
-		this.chefOrName = chefOrName;
+	public String getChef_or_addr() {
+		return chef_or_addr;
 	}
 
-	public String getChefOrAddr() {
-		return chefOrAddr;
+	public void setChef_or_addr(String chef_or_addr) {
+		this.chef_or_addr = chef_or_addr;
 	}
 
-	public void setChefOrAddr(String chefOrAddr) {
-		this.chefOrAddr = chefOrAddr;
+	public Integer getChef_or_tel() {
+		return chef_or_tel;
 	}
 
-	public Integer getChefOrTel() {
-		return chefOrTel;
+	public void setChef_or_tel(Integer chef_or_tel) {
+		this.chef_or_tel = chef_or_tel;
 	}
 
-	public void setChefOrTel(Integer chefOrTel) {
-		this.chefOrTel = chefOrTel;
+	public String getChef_ID() {
+		return chef_ID;
 	}
 
-	public String getChefId() {
-		return chefId;
+	public void setChef_ID(String chef_ID) {
+		this.chef_ID = chef_ID;
 	}
 
-	public void setChefId(String chefId) {
-		this.chefId = chefId;
-	}
 }

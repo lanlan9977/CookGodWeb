@@ -3,22 +3,12 @@ package com.chefOrder.model;
 import java.util.*;
 import java.sql.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 
-public class ChefOrderDAO implements ChefOrderDAO_interface {
-
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "CA106";
+	String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO CHEF_ORDER(CHEF_OR_ID,CHEF_OR_STATUS,CHEF_OR_START,CHEF_OR_SEND,CHEF_OR_RCV,CHEF_OR_END,CHEF_OR_NAME,CHEF_OR_ADDR,CHEF_OR_TEL,CHEF_ID) VALUES ('CF'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD((CHEF_ORDER_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM CHEF_ORDER";
@@ -33,7 +23,8 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, chefOrderVO.getChef_or_status());
@@ -51,6 +42,9 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -76,7 +70,8 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, chefOrderVO.getChef_or_status());
@@ -94,6 +89,9 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -119,7 +117,9 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, chef_or_ID);
 			pstmt.executeUpdate();
@@ -128,6 +128,9 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -156,7 +159,8 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, chef_or_ID);
@@ -179,6 +183,9 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -216,7 +223,8 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -237,6 +245,9 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -263,4 +274,68 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 		return list;
 	}
 
+	public static void main(String[] args) {
+
+		// 新增
+		ChefOrderJDBCDAO dao = new ChefOrderJDBCDAO();
+//		ChefOrderVO chefOrderVO = new ChefOrderVO();
+//		chefOrderVO.setChefOrStatus(7);
+//		chefOrderVO.setChefOrStart(Date.valueOf("2019-08-08"));
+//		chefOrderVO.setChefOrSend(Date.valueOf("2019-08-08"));
+//		chefOrderVO.setChefOrRcv(Date.valueOf("2019-08-08"));
+//		chefOrderVO.setChefOrEnd(Date.valueOf("2019-08-08"));
+//		chefOrderVO.setChefOrName("1");
+//		chefOrderVO.setChefOrAddr("1");
+//		chefOrderVO.setChefOrTel(1);
+//		chefOrderVO.setChefId("T00003");
+//		dao.insert(chefOrderVO);
+
+		// 修改
+//		ChefOrderVO chefOrderVO2 = new ChefOrderVO();
+//		chefOrderVO2.setChefOrId("CF20190213-000012");
+//		chefOrderVO2.setChefOrStatus(7);
+//		chefOrderVO2.setChefOrStart(Date.valueOf("2019-08-08"));
+//		chefOrderVO2.setChefOrSend(Date.valueOf("2019-08-08"));
+//		chefOrderVO2.setChefOrRcv(Date.valueOf("2019-08-08"));
+//		chefOrderVO2.setChefOrEnd(Date.valueOf("2019-08-09"));
+//		chefOrderVO2.setChefOrName("1");
+//		chefOrderVO2.setChefOrAddr("2");
+//		chefOrderVO2.setChefOrTel(1);
+//		chefOrderVO2.setChefId("T00003");
+//		dao.update(chefOrderVO2);
+
+		// 刪除
+//		dao.delete("CF20190213-000011");
+
+		// 查詢
+//		ChefOrderVO chefOrderVO3 = dao.findByPrimaryKey("CF20190213-000012");
+//		System.out.print(chefOrderVO3.getChefOrId() + ",");
+//		System.out.print(chefOrderVO3.getChefOrStatus() + ",");
+//		System.out.print(chefOrderVO3.getChefOrStart() + ",");
+//		System.out.print(chefOrderVO3.getChefOrSend() + ",");
+//		System.out.print(chefOrderVO3.getChefOrRcv() + ",");
+//		System.out.print(chefOrderVO3.getChefOrEnd() + ",");
+//		System.out.print(chefOrderVO3.getChefOrName() + ",");
+//		System.out.print(chefOrderVO3.getChefOrAddr() + ",");
+//		System.out.print(chefOrderVO3.getChefOrTel() + ",");
+//		System.out.print(chefOrderVO3.getChefId() + ",");
+//		System.out.println("---------------------");
+
+		// 查詢
+//		List<ChefOrderVO> list = dao.getAll();
+//		for (ChefOrderVO aChefOrder : list) {
+//			System.out.print(aChefOrder.getChefOrId() + ",");
+//			System.out.print(aChefOrder.getChefOrStatus() + ",");
+//			System.out.print(aChefOrder.getChefOrStart() + ",");
+//			System.out.print(aChefOrder.getChefOrSend() + ",");
+//			System.out.print(aChefOrder.getChefOrRcv() + ",");
+//			System.out.print(aChefOrder.getChefOrEnd() + ",");
+//			System.out.print(aChefOrder.getChefOrName() + ",");
+//			System.out.print(aChefOrder.getChefOrAddr() + ",");
+//			System.out.print(aChefOrder.getChefOrTel() + ",");
+//			System.out.print(aChefOrder.getChefId() + ",");
+//			System.out.println();
+//		}
+
+	}
 }

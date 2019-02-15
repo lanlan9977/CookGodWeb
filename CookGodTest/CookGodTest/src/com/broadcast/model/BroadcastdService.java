@@ -1,5 +1,6 @@
 package com.broadcast.model;
 
+import java.util.List;
 import java.sql.Timestamp;
 
 public class BroadcastdService {
@@ -9,20 +10,41 @@ public class BroadcastdService {
 		dao = new BroadcastDAO();
 	}
 
-	public BroadcastVO addbroadcast(String broadcastId, Timestamp broadcastStart, String broadcastCon,
-			String broadcastStatus, String custId) {
+	public BroadcastVO addBroadcast(Timestamp broadcast_start, String broadcast_con, String broadcast_status,
+			String cust_ID) {
 		BroadcastVO broadcastVO = new BroadcastVO();
-		
-		
-		broadcastVO.setBroadcastId(broadcastId);
-		broadcastVO.setBroadcastStart(broadcastStart);
-		broadcastVO.setBroadcastCon(broadcastCon);
-		broadcastVO.setBroadcastStatus(broadcastStatus);
-		broadcastVO.setCustId(custId);
+		broadcastVO.setBroadcast_start(broadcast_start);
+		broadcastVO.setBroadcast_con(broadcast_con);
+		broadcastVO.setBroadcast_status(broadcast_status);
+		broadcastVO.setCust_ID(cust_ID);
 		dao.insert(broadcastVO);
-		
-		
+
 		return broadcastVO;
+	}
+
+	public BroadcastVO updateBroadcast(String broadcast_ID, Timestamp broadcast_start, String broadcast_con,
+			String broadcast_status, String cust_ID) {
+		BroadcastVO broadcastVO = new BroadcastVO();
+		broadcastVO.setBroadcast_ID(broadcast_ID);
+		broadcastVO.setBroadcast_start(broadcast_start);
+		broadcastVO.setBroadcast_con(broadcast_con);
+		broadcastVO.setBroadcast_status(broadcast_status);
+		broadcastVO.setCust_ID(cust_ID);
+		dao.update(broadcastVO);
+
+		return broadcastVO;
+	}
+
+	public void daleteBroadcast(String broadcast_ID) {
+		dao.delete(broadcast_ID);
+	}
+
+	public BroadcastVO getOneBroadcast(String broadcast_ID) {
+		return dao.findByPrimaryKey(broadcast_ID);
+	}
+
+	public List<BroadcastVO> gelAllBroadcast() {
+		return dao.getAll();
 	}
 
 }

@@ -3,23 +3,13 @@ package com.menu.model;
 import java.util.*;
 import java.sql.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+public class MenuJDBCDAO implements MenuDAO_interface {
 
-public class MenuDAO implements MenuDAO_interface {
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "CA106";
+	String passwd = "123456";
 
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	private static final String INSERT_STMT = "INSERT INTO MENU (MENU_ID,MENU_NAME,MENU_RESUME,MENU_PIC,MENU_STATUS,MENU_PRICE) VALUES ('M'||LPAD((MENU_SEQ.NEXTVAL),5,'0'),?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM MENU";
 	private static final String GET_ONE_STMT = "SELECT * FROM MENU WHERE MENU_ID = ?";
@@ -33,7 +23,8 @@ public class MenuDAO implements MenuDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, menuVO.getMenu_name());
@@ -47,6 +38,9 @@ public class MenuDAO implements MenuDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -73,7 +67,8 @@ public class MenuDAO implements MenuDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, menuVO.getMenu_name());
@@ -87,6 +82,9 @@ public class MenuDAO implements MenuDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -113,7 +111,8 @@ public class MenuDAO implements MenuDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, menu_ID);
@@ -123,6 +122,9 @@ public class MenuDAO implements MenuDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -151,7 +153,8 @@ public class MenuDAO implements MenuDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
@@ -171,6 +174,9 @@ public class MenuDAO implements MenuDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -208,7 +214,8 @@ public class MenuDAO implements MenuDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -225,6 +232,9 @@ public class MenuDAO implements MenuDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -249,6 +259,51 @@ public class MenuDAO implements MenuDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	public static void main(String[] args) {
+
+		// 新增
+		MenuJDBCDAO dao = new MenuJDBCDAO();
+//		MenuVO menuVO = new MenuVO();
+//		menuVO.setMenuName("88888");
+//		menuVO.setMenuResume("77777");
+//		menuVO.setMenuStatus(0);
+//		menuVO.setMenuPrice(1);
+//		dao.insert(menuVO);
+
+		// 修改
+//		MenuVO menuVO2 = new MenuVO();
+//		menuVO2.setMenuId("M00011");
+//		menuVO2.setMenuName("999");
+//		menuVO2.setMenuResume("77777");
+//		menuVO2.setMenuStatus(0);
+//		menuVO2.setMenuPrice(1);
+//		dao.update(menuVO2);
+
+		// 刪除
+//		dao.delete("M00007");
+
+		// 查詢
+//		MenuVO menuVO3 = dao.findByPrimaryKey("M00009");
+//		System.out.print(menuVO3.getMenuId() + ",");
+//		System.out.print(menuVO3.getMenuName() + ",");
+//		System.out.print(menuVO3.getMenuResume() + ",");
+//		System.out.print(menuVO3.getMenuStatus() + ",");
+//		System.out.print(menuVO3.getMenuPrice() + ",");
+//		System.out.println("---------------------");
+
+		// 查詢
+//		List<MenuVO> list = dao.getAll();
+//		for (MenuVO aMenu : list) {
+//			System.out.print(aMenu.getMenuId() + ",");
+//			System.out.print(aMenu.getMenuName() + ",");
+//			System.out.print(aMenu.getMenuResume() + ",");
+//			System.out.print(aMenu.getMenuStatus() + ",");
+//			System.out.print(aMenu.getMenuPrice() + ",");
+//			System.out.println();
+//		}
+
 	}
 
 }

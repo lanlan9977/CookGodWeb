@@ -7,9 +7,9 @@ public interface BroadcastDAO_interface {
 
 	public void update(BroadcastVO broadcastVO);
 
-	public void delete(String broadcastId);
+	public void delete(String broadcast_ID);
 
-	public BroadcastVO findByPrimaryKey(String broadcastId);
+	public BroadcastVO findByPrimaryKey(String broadcast_ID);
 
 	public List<BroadcastVO> getAll();
 }

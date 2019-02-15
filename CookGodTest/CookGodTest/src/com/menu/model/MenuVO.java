@@ -2,73 +2,63 @@ package com.menu.model;
 
 public class MenuVO implements java.io.Serializable {
 	
-	private String menuId;
-	private String menuName;
-	private String menuResume;
-	private byte[] menuPic;
-	private String menuStatus;
-	private Integer menuPrice;
-	
+	private String menu_ID;
+	private String menu_name;
+	private String menu_resume;
+	private byte[] menu_pic;
+	private String menu_status;
+	private Integer menu_price;
+
 	public MenuVO() {
-		super();
+
 	}
 	
-	public MenuVO(String menuId, String menuName, String menuResume, byte[] menuPic, String menuStatus,
-			Integer menuPrice) {
-		super();
-		this.menuId = menuId;
-		this.menuName = menuName;
-		this.menuResume = menuResume;
-		this.menuPic = menuPic;
-		this.menuStatus = menuStatus;
-		this.menuPrice = menuPrice;
+	public String getMenu_ID() {
+		return menu_ID;
 	}
 
-	public String getMenuId() {
-		return menuId;
+	public void setMenu_ID(String menu_ID) {
+		this.menu_ID = menu_ID;
 	}
 
-	public void setMenuId(String menuId) {
-		this.menuId = menuId;
+	public String getMenu_name() {
+		return menu_name;
 	}
 
-	public String getMenuName() {
-		return menuName;
+	public void setMenu_name(String menu_name) {
+		this.menu_name = menu_name;
 	}
 
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
+	public String getMenu_resume() {
+		return menu_resume;
 	}
 
-	public String getMenuResume() {
-		return menuResume;
+	public void setMenu_resume(String menu_resume) {
+		this.menu_resume = menu_resume;
 	}
 
-	public void setMenuResume(String menuResume) {
-		this.menuResume = menuResume;
+	public byte[] getMenu_pic() {
+		return menu_pic;
 	}
 
-	public byte[] getMenuPic() {
-		return menuPic;
+	public void setMenu_pic(byte[] menu_pic) {
+		this.menu_pic = menu_pic;
 	}
 
-	public void setMenuPic(byte[] menuPic) {
-		this.menuPic = menuPic;
+	public String getMenu_status() {
+		return menu_status;
 	}
 
-	public String getMenuStatus() {
-		return menuStatus;
+	public void setMenu_status(String menu_status) {
+		this.menu_status = menu_status;
 	}
 
-	public void setMenuStatus(String menuStatus) {
-		this.menuStatus = menuStatus;
+	public Integer getMenu_price() {
+		return menu_price;
 	}
 
-	public Integer getMenuPrice() {
-		return menuPrice;
+	public void setMenu_price(Integer menu_price) {
+		this.menu_price = menu_price;
 	}
 
-	public void setMenuPrice(Integer menuPrice) {
-		this.menuPrice = menuPrice;
-	}
 }

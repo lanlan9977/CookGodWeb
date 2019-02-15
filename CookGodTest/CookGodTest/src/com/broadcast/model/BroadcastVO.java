@@ -3,64 +3,54 @@ package com.broadcast.model;
 import java.sql.Timestamp;
 
 public class BroadcastVO implements java.io.Serializable {
-	private String broadcastId;
-	private Timestamp broadcastStart;
-	private String broadcastCon;
-	private String broadcastStatus;
-	private String custId;
+	private String broadcast_ID;
+	private Timestamp broadcast_start;
+	private String broadcast_con;
+	private String broadcast_status;
+	private String cust_ID;
 
 	public BroadcastVO() {
-		super();
+		
 	}
 
-	public BroadcastVO(String broadcastId, Timestamp broadcastStart, String broadcastCon, String broadcastStatus,
-			String custId) {
-		super();
-		this.broadcastId = broadcastId;
-		this.broadcastStart = broadcastStart;
-		this.broadcastCon = broadcastCon;
-		this.broadcastStatus = broadcastStatus;
-		this.custId = custId;
+	public String getBroadcast_ID() {
+		return broadcast_ID;
 	}
 
-	public String getBroadcastId() {
-		return broadcastId;
+	public void setBroadcast_ID(String broadcast_ID) {
+		this.broadcast_ID = broadcast_ID;
 	}
 
-	public void setBroadcastId(String broadcastId) {
-		this.broadcastId = broadcastId;
+	public Timestamp getBroadcast_start() {
+		return broadcast_start;
 	}
 
-	public Timestamp getBroadcastStart() {
-		return broadcastStart;
+	public void setBroadcast_start(Timestamp broadcast_start) {
+		this.broadcast_start = broadcast_start;
 	}
 
-	public void setBroadcastStart(Timestamp broadcastStart) {
-		this.broadcastStart = broadcastStart;
+	public String getBroadcast_con() {
+		return broadcast_con;
 	}
 
-	public String getBroadcastCon() {
-		return broadcastCon;
+	public void setBroadcast_con(String broadcast_con) {
+		this.broadcast_con = broadcast_con;
 	}
 
-	public void setBroadcastCon(String broadcastCon) {
-		this.broadcastCon = broadcastCon;
+	public String getBroadcast_status() {
+		return broadcast_status;
 	}
 
-	public String getBroadcastStatus() {
-		return broadcastStatus;
+	public void setBroadcast_status(String broadcast_status) {
+		this.broadcast_status = broadcast_status;
 	}
 
-	public void setBroadcastStatus(String broadcastStatus) {
-		this.broadcastStatus = broadcastStatus;
+	public String getCust_ID() {
+		return cust_ID;
 	}
 
-	public String getCustId() {
-		return custId;
-	}
-
-	public void setCustId(String custId) {
-		this.custId = custId;
+	public void setCust_ID(String cust_ID) {
+		this.cust_ID = cust_ID;
 	}
 
 }

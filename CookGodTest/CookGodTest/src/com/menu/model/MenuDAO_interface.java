@@ -7,9 +7,9 @@ public interface MenuDAO_interface {
 
 	public void update(MenuVO menuVO);
 
-	public void delete(String menuId);
+	public void delete(String menu_ID);
 
-	public MenuVO findByPrimaryKey(String menuId);
+	public MenuVO findByPrimaryKey(String menu_ID);
 
 	public List<MenuVO> getAll();
 }

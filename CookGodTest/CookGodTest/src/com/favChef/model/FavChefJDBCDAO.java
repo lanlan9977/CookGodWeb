@@ -3,23 +3,12 @@ package com.favChef.model;
 import java.util.*;
 import java.sql.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+public class FavChefJDBCDAO implements FavChefDAO_interface {
 
-
-public class FavChefDAO implements FavChefDAO_interface {
-
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "CA106";
+	String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO FAV_CHEF (CUST_ID,CHEF_ID)  VALUES (?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM FAV_CHEF";
@@ -34,7 +23,8 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, favChefVO.getCust_ID());
@@ -44,7 +34,10 @@ public class FavChefDAO implements FavChefDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
-		}finally {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -70,16 +63,20 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-			
+
 			pstmt.setString(1, favChefVO.getChef_ID());
 			pstmt.setString(2, favChefVO.getCust_ID());
-			
+
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -105,7 +102,8 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, cust_ID);
 			pstmt.executeUpdate();
@@ -114,6 +112,9 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -141,7 +142,8 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, cust_ID);
@@ -157,7 +159,10 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-		}  finally {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -194,7 +199,8 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
@@ -207,7 +213,10 @@ public class FavChefDAO implements FavChefDAO_interface {
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-		}finally {
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -233,4 +242,36 @@ public class FavChefDAO implements FavChefDAO_interface {
 		return list;
 	}
 
+	public static void main(String[] args) {
+
+		// 新增
+		FavChefJDBCDAO dao = new FavChefJDBCDAO();
+//		FavChefVO favChefVO = new FavChefVO();
+//		favChefVO.setCustId("b00001");
+//		favChefVO.setChefId("T00003");
+//		dao.insert(favChefVO);
+
+		// 修改
+//		FavChefVO FavChefVO2 = new FavChefVO();
+//		FavChefVO2.setCustId("a00002");
+//		FavChefVO2.setChefId("C02121");
+//		dao.update(FavChefVO2);
+
+		// 刪除
+//		dao.delete("b00001");
+
+		// 查詢
+//		FavChefVO favChefVO3 = dao.findByPrimaryKey("b00001");
+//		System.out.print(favChefVO3.getCustId() + ",");
+//		System.out.print(favChefVO3.getChefId() + ",");
+//		System.out.println("---------------------");
+
+		// 查詢
+//		List<FavChefVO> list = dao.getAll();
+//		for (FavChefVO aFavChef : list) {
+//			System.out.print(aFavChef.getCustId() + ",");
+//			System.out.print(aFavChef.getChefId() + ",");
+//			System.out.println();
+//		}
+	}
 }

@@ -7,9 +7,9 @@ public interface ChefOdDetailDAO_interface {
 
 	public void update(ChefOdDetailVO chefOdDetailVO);
 
-	public void delete(String chefOrId);
+	public void delete(String chef_or_ID);
 
-	public ChefOdDetailVO findByPrimaryKey(String chefOrId);
+	public ChefOdDetailVO findByPrimaryKey(String chef_or_ID);
 
 	public List<ChefOdDetailVO> getAll();
 }
