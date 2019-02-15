@@ -12,8 +12,17 @@
   
   	<resource-ref>
 		<description>DB Connection</description>
-		<res-ref-name>jdbc/TestDB</res-ref-name>
+		<res-ref-name>jdbc/CookGodDB</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
+	
+		<servlet>
+		<servlet-name>BroadcastServlet</servlet-name>
+		<servlet-class>com.broadcast.controller.BroadcastServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BroadcastServlet</servlet-name>
+		<url-pattern>/broadcast/broadcast.do</url-pattern>
+	</servlet-mapping>
 </web-app>
