@@ -21,6 +21,30 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>BroadcastServlet</servlet-name>
-    <url-pattern>/broadcast/broadcast.do</url-pattern>
+    <url-pattern>/back-end/broadcast/broadcast.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CustServlet</servlet-name>
+    <servlet-class>com.cust.controller.CustServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustServlet</servlet-name>
+    <url-pattern>/back-end/cust/cust.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FoodOrderServlet</servlet-name>
+    <servlet-class>com.foodOrder.controller.FoodOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FoodOrderServlet</servlet-name>
+    <url-pattern>/back-end/foodOrder/foodOrder.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MenuOrderServlet</servlet-name>
+    <servlet-class>com.moodOrder.controller.MenuOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuOrderServlet</servlet-name>
+    <url-pattern>/back-end/menuOrder/menuOrder.do</url-pattern>
   </servlet-mapping>
 </web-app>

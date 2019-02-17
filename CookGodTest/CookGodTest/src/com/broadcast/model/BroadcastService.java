@@ -3,10 +3,10 @@ package com.broadcast.model;
 import java.util.List;
 import java.sql.Timestamp;
 
-public class BroadcastdService {
+public class BroadcastService {
 	private BroadcastDAO_interface dao;
 
-	public BroadcastdService() {
+	public BroadcastService() {
 		dao = new BroadcastDAO();
 	}
 

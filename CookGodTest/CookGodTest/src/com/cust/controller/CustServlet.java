@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,25 +28,31 @@ public class CustServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		List<CustVO> custList = (List<CustVO>) session.getAttribute("custList");
 
-		// µn¤J(¬d¸ßCUST¤º¸ê®Æ)
+		// ç•¶é¡§å®¢ç™»å…¥
 		if ("selectCust".equals(action)) {
 			String cust_acc = req.getParameter("cust_acc");
 			String cust_pwd = req.getParameter("cust_pwd");
 			CustService custService = new CustService();
 			CustVO db_custVO = custService.getOneCustAcc(cust_acc);
 
-			
 			String cust_accDB = db_custVO.getCust_acc();
 
-			//¤ñ¹ïÅU«È¿é¤JªºCUST±b¸¹¬O§_»P¸ê®Æ®wªº¤@¼Ë
-			if(cust_acc.equals(cust_accDB)) {
-				
-			}else {
-				
+			// è¾¨è­˜è³‡æ–™åº«æ˜¯å¦æœ‰è©²å¸³è™Ÿ
+			if (cust_acc.equals(cust_accDB)) {
+				session.setAttribute("cust",db_custVO);
+				String url ="/back-end/mainPage.jsp";
+				RequestDispatcher rd=req.getRequestDispatcher(url);
+				rd.forward(req,res);
+
+			} else {
+
 			}
+			
 
 		}
-
+		String url = "/back-end/cust/addCust.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher(url);
+		rd.forward(req, res);
 	}
 
 }

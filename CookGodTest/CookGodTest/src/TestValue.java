@@ -1,4 +1,4 @@
-import com.broadcast.model.BroadcastdService;
+import com.broadcast.model.BroadcastService;
 import com.menu.model.MenuService;
 
 public class TestValue {
