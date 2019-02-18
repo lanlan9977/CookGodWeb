@@ -30,7 +30,7 @@ public class CustServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		List<CustVO> custList = (List<CustVO>) session.getAttribute("custList");
 
-		// ç•¶é¡§å®¢ç™»å…¥
+		// ®”î™¿ÍµÇÈë
 		if ("selectCust".equals(action)) {
 			String cust_acc = req.getParameter("cust_acc");
 			String cust_pwd = req.getParameter("cust_pwd");
@@ -39,18 +39,17 @@ public class CustServlet extends HttpServlet {
 
 			String cust_accDB = db_custVO.getCust_acc();
 
-			// è¾¨è­˜è³‡æ–™åº«æ˜¯å¦æœ‰è©²å¸³è™Ÿ
+			// ±æ×RÙYÁÏìÊÇ·ñÓĞÔ“¤Ì–
 			if (cust_acc.equals(cust_accDB)) {
-				session.setAttribute("cust", db_custVO);
+				session.setAttribute("cust", db_custVO);// Œ¢´Ëî™¿ÍÙYÁÏ´æÈësession
 
-				BroadcastService broadcastService = new BroadcastService();
-				List<BroadcastVO> broadcastList =new ArrayList<>();
-				broadcastList= broadcastService.getOneBroadcastByCustID(db_custVO.getCust_ID());
+				BroadcastService broadcastService = new BroadcastService();// È¡µÃÙYÁÏìƒÈÔ“•ş†TµÄÍÆ²¥ÓÏ¢
+				List<BroadcastVO> broadcastList = broadcastService.getOneBroadcastByCustID(db_custVO.getCust_ID());
 
-				session.setAttribute("broadcast", broadcastList);
+				session.setAttribute("broadcast", broadcastList);// Œ¢Ô“î™¿ÍµÄÍÆ²¥ÓÏ¢´æÈësession
 
 				String url = "/back-end/mainPage.jsp";
-				RequestDispatcher rd = req.getRequestDispatcher(url);
+				RequestDispatcher rd = req.getRequestDispatcher(url);// §»ØÖÁÖ÷í“Ãæ
 				rd.forward(req, res);
 
 			} else {

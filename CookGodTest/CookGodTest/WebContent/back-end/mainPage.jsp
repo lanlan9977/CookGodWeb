@@ -4,10 +4,9 @@
 <%
 	CustVO custVO = (CustVO) session.getAttribute("cust");
 	List<BroadcastVO> broadcastList = (ArrayList<BroadcastVO>) session.getAttribute("broadcast");
+	int count = 0;
 %>
 
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
