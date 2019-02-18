@@ -13,6 +13,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO BROADCAST(BROADCAST_ID,BROADCAST_START,BROADCAST_CON,BROADCAST_STATUS,CUST_ID)  VALUES ('B'||LPAD((BROADCAST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM BROADCAST";
 	private static final String GET_ONE_STMT = "SELECT * FROM BROADCAST WHERE BROADCAST_ID = ?";
+	private static final String GET_ONE_STMT_CUST_ID = "SELECT * FROM BROADCAST WHERE CUST_ID = ?";
 	private static final String DELETE = "DELETE FROM BROADCAST WHERE BROADCAST_ID = ?";
 	private static final String UPDATE = "UPDATE BROADCAST SET BROADCAST_START= ?, BROADCAST_CON= ?, BROADCAST_STATUS= ?, CUST_ID= ? WHERE BROADCAST_ID = ?";
 
@@ -248,10 +249,69 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 		}
 		return list;
 	}
+	@Override
+	public List<BroadcastVO> findByCust_ID(String cust_ID) {
+		List<BroadcastVO> list = new ArrayList<BroadcastVO>();
+		BroadcastVO broadcastVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_STMT_CUST_ID);
+
+			pstmt.setString(1, cust_ID);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				broadcastVO = new BroadcastVO();
+				broadcastVO.setBroadcast_ID(rs.getString("BROADCAST_ID"));
+				broadcastVO.setBroadcast_start(rs.getTimestamp("BROADCAST_START"));
+				broadcastVO.setBroadcast_con(rs.getString("BROADCAST_CON"));
+				broadcastVO.setBroadcast_status(rs.getString("BROADCAST_STATUS"));
+				broadcastVO.setCust_ID(rs.getString("CUST_ID"));
+				list.add(broadcastVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 
 	public static void main(String[] args) {
 
-		// ·s¼W
+		// ï¿½sï¿½W
 //		BroadcastJDBCDAO dao = new BroadcastJDBCDAO();
 //		BroadcastVO broadcastVO = new BroadcastVO();
 //		broadcastVO.setBroadcastStart(Timestamp.valueOf("2019-01-04 01:01:01"));
@@ -260,7 +320,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 //		broadcastVO.setCustId("a00001");
 //		dao.insert(broadcastVO);
 
-		// ­×§ï
+		// ï¿½×§ï¿½
 //		BroadcastVO broadcastVO2 = new BroadcastVO();
 //		broadcastVO2.setBroadcastId("B00003");
 //		broadcastVO2.setBroadcastStart(Timestamp.valueOf("2019-01-04 01:01:01"));
@@ -269,10 +329,10 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 //		broadcastVO2.setCustId("a00001");
 //		dao.update(broadcastVO2);
 
-		// §R°£
+		// ï¿½Rï¿½ï¿½
 //		dao.delete("B00003");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		BroadcastVO broadcastVO3 = dao.findByPrimaryKey("B00002");
 //		System.out.print(broadcastVO3.getBroadcastId() + ",");
 //		System.out.print(broadcastVO3.getBroadcastStart() + ",");
@@ -281,7 +341,7 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 //		System.out.print(broadcastVO3.getCustId() + ",");
 //		System.out.println("---------------------");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		List<BroadcastVO> list = dao.getAll();
 //		for (BroadcastVO aBroadcast : list) {
 //			System.out.print(aBroadcast.getBroadcastId() + ",");

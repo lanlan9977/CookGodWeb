@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="Big5"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +17,14 @@
 
 	<form class="form-inline" method="post" action="menuOrder.do">
 		<label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label> 
-		<input type="TEXT" name="MenuOrder" size="45" placeholder="Х╪╦Е┘╔Ф╛╡Е╞╘Ф═╦Е ╢И│╦Е╔≈И╓░Х╗┌Е√╝Г╥╗Х≥÷" value="M000001">
+		<input type="TEXT" name="MenuOrder" size="45" placeholder="©И╓J╠Щ╪f╝ждY©О╝Mю\╜qЁФ╫s╦╧" value="M000001">
 		<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="MenuOrderStatus">
-			<option selected>Х╚▀Е╞╘Ф═╦...</option>
-			<option value="M1">Е╞╘Ф═╦И─ И│▌</option>
-			<option value="M0">Е╞╘Ф═╦Д╦█И─ И│▌</option>
+			<option selected>╫п╪f╝ж...</option>
+			<option value="M1">╪f╝жЁq╧L</option>
+			<option value="M0">╪f╝ж╓ёЁq╧L</option>
 		</select> 
 		<input type="hidden" name="action" value="SendStatus">
-		<button type="submit" class="btn btn-primary my-1">Г≥╪И─│</button>
+		<button type="submit" class="btn btn-primary my-1">╣o╟e</button>
 
 	</form>
 

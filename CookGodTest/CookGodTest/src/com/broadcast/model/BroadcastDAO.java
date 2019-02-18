@@ -23,6 +23,7 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO BROADCAST(BROADCAST_ID,BROADCAST_START,BROADCAST_CON,BROADCAST_STATUS,CUST_ID)  VALUES ('B'||LPAD((BROADCAST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM BROADCAST";
 	private static final String GET_ONE_STMT = "SELECT * FROM BROADCAST WHERE BROADCAST_ID = ?";
+	private static final String GET_ONE_STMT_CUST_ID = "SELECT * FROM BROADCAST WHERE CUST_ID = ?";
 	private static final String DELETE = "DELETE FROM BROADCAST WHERE BROADCAST_ID = ?";
 	private static final String UPDATE = "UPDATE BROADCAST SET BROADCAST_START= ?, BROADCAST_CON= ?, BROADCAST_STATUS= ?, CUST_ID= ? WHERE BROADCAST_ID = ?";
 
@@ -30,7 +31,6 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 	public void insert(BroadcastVO broadcastVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
 
 		try {
 
@@ -207,6 +207,61 @@ public class BroadcastDAO implements BroadcastDAO_interface {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				broadcastVO = new BroadcastVO();
+				broadcastVO.setBroadcast_ID(rs.getString("BROADCAST_ID"));
+				broadcastVO.setBroadcast_start(rs.getTimestamp("BROADCAST_START"));
+				broadcastVO.setBroadcast_con(rs.getString("BROADCAST_CON"));
+				broadcastVO.setBroadcast_status(rs.getString("BROADCAST_STATUS"));
+				broadcastVO.setCust_ID(rs.getString("CUST_ID"));
+				list.add(broadcastVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<BroadcastVO> findByCust_ID(String cust_ID) {
+		List<BroadcastVO> list = new ArrayList<BroadcastVO>();
+		BroadcastVO broadcastVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT_CUST_ID);
+
+			pstmt.setString(1, cust_ID);
+
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

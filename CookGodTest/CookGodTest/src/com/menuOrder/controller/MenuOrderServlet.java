@@ -38,12 +38,16 @@ public class MenuOrderServlet extends HttpServlet {
 		if ("M1".equals(status)) {
 			broadcast_con_sb.append("已通過審核");
 //			menuOrderVO_DB.setMenu_od_status("M1");
-//			menuOrderService.updateMenuOrder(menu_od_ID, "M1", menu_od_book, menu_od_end, menu_od_rate, menu_od_msg, chef_ID, menu_ID)
+			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "M1", menuOrderVO_DB.getMenu_od_book(),
+					menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
+					menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
 
-		} else {
+		} else if ("M0".equals(status)) {
 			broadcast_con_sb.append("未通過審核");
 //			menuOrderVO_DB.setMenu_od_status("M2");
-//			menuOrderService.updateMenuOrder(menu_od_ID, "M0", menu_od_book, menu_od_end, menu_od_rate, menu_od_msg, chef_ID, menu_ID)
+			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "M2", menuOrderVO_DB.getMenu_od_book(),
+			menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
+			menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
 
 		}
 

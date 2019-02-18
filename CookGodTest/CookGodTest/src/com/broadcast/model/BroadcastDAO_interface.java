@@ -11,5 +11,7 @@ public interface BroadcastDAO_interface {
 
 	public BroadcastVO findByPrimaryKey(String broadcast_ID);
 
+	public List<BroadcastVO> findByCust_ID(String cust_ID);
+
 	public List<BroadcastVO> getAll();
 }

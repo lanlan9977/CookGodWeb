@@ -46,5 +46,8 @@ public class BroadcastService {
 	public List<BroadcastVO> gelAllBroadcast() {
 		return dao.getAll();
 	}
+	public List<BroadcastVO> getOneBroadcastByCustID(String cust_ID) {
+		return dao.findByCust_ID(cust_ID);
+	}
 
 }

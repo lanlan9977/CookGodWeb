@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.broadcast.model.BroadcastService;
+import com.broadcast.model.BroadcastVO;
 import com.cust.model.CustService;
 import com.cust.model.CustVO;
 
@@ -39,15 +41,21 @@ public class CustServlet extends HttpServlet {
 
 			// 辨識資料庫是否有該帳號
 			if (cust_acc.equals(cust_accDB)) {
-				session.setAttribute("cust",db_custVO);
-				String url ="/back-end/mainPage.jsp";
-				RequestDispatcher rd=req.getRequestDispatcher(url);
-				rd.forward(req,res);
+				session.setAttribute("cust", db_custVO);
+
+				BroadcastService broadcastService = new BroadcastService();
+				List<BroadcastVO> broadcastList =new ArrayList<>();
+				broadcastList= broadcastService.getOneBroadcastByCustID(db_custVO.getCust_ID());
+
+				session.setAttribute("broadcast", broadcastList);
+
+				String url = "/back-end/mainPage.jsp";
+				RequestDispatcher rd = req.getRequestDispatcher(url);
+				rd.forward(req, res);
 
 			} else {
 
 			}
-			
 
 		}
 		String url = "/back-end/cust/addCust.jsp";
