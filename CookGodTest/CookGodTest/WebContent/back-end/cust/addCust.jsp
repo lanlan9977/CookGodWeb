@@ -27,15 +27,16 @@
 		<div class="row justify-content-center">
 			<div class="row-5">
 				<div class="form-row">
-					<form method="post" action="cust.do">
+					<form method="post"
+						action="<%=request.getContextPath()%>/cust/cust.do">
 						<label for="exampleInputEmail1">Email address</label> <input
 							type="text" class="form-control" id="exampleInputEmail1"
-							aria-describedby="emailHelp" placeholder="Enter email"> <small
+							aria-describedby="emailHelp" name="cust_acc" placeholder="Enter email"> <small
 							id="emailHelp" class="form-text text-muted"></small>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">Password</label> <input
-						type="password" class="form-control" id="exampleInputPassword1"
+						type="password" name="cust_pwd"  class="form-control" id="exampleInputPassword1"
 						placeholder="Password">
 				</div>
 				<div class="form-group form-check">
@@ -43,17 +44,17 @@
 					<label class="form-check-label" for="exampleCheck1">Check
 						me out</label>
 				</div>
-				<button type="submit" class="btn btn-primary" name="action"
-					values="selectCust">µn¤J</button>
-				</form>
+				<input type="hidden" name="action" values="selectCust">
+					<button type="submit" class="btn btn-primary">µn¤J</button>
+					</form>
 			</div>
 		</div>
 	</div>
-	<script src="<%=request.getContextPath()%>/back-end/cust/jquery-3.3.1.slim.min.js"
+	<script
+		src="<%=request.getContextPath()%>/back-end/cust/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script
-		src="<%=request.getContextPath()%>/back-end/cust/popper.min.js"
+	<script src="<%=request.getContextPath()%>/back-end/cust/popper.min.js"
 		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
 		crossorigin="anonymous"></script>
 	<script

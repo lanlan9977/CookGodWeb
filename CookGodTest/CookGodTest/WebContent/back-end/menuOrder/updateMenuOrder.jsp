@@ -15,9 +15,9 @@
 <body>
 
 
-	<form class="form-inline" method="post" action="menuOrder.do">
+	<form class="form-inline" method="post" action="<%=request.getContextPath()%>/menuOrder/menuOrder.do">
 		<label class="my-1 mr-2" for="inlineFormCustomSelectPref"></label> 
-		<input type="TEXT" name="MenuOrder" size="45" placeholder="¿é¤J±ý¼f®ÖÄY¿ï®MÀ\­q³æ½s¸¹" value="M000001">
+		<input type="TEXT" name="MenuOrderID" size="45" placeholder="¿é¤J±ý¼f®ÖÄY¿ï®MÀ\­q³æ½s¸¹" value="M00001">
 		<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="MenuOrderStatus">
 			<option selected>½Ð¼f®Ö...</option>
 			<option value="M1">¼f®Ö³q¹L</option>

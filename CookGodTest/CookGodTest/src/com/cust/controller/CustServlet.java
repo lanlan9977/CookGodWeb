@@ -30,26 +30,27 @@ public class CustServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		List<CustVO> custList = (List<CustVO>) session.getAttribute("custList");
 
-		// 當顧客登入
-		if ("selectCust".equals(action)) {
+		// 鐧诲叆涔嬪緦
+		if (action.equals("selectCust")) {
 			String cust_acc = req.getParameter("cust_acc");
 			String cust_pwd = req.getParameter("cust_pwd");
 			CustService custService = new CustService();
+
 			CustVO db_custVO = custService.getOneCustAcc(cust_acc);
 
 			String cust_accDB = db_custVO.getCust_acc();
 
-			// 辨識資料庫是否有該帳號
-			if (cust_acc.equals(cust_accDB)) {
-				session.setAttribute("cust", db_custVO);// 將此顧客資料存入session
+			// 鍒ゆ柗璩囨枡搴収鏄惁鏈夋椤у甯宠櫉
+			if (cust_accDB.equals(cust_acc)) {
+				session.setAttribute("cust", db_custVO);// 椤у璩囨枡瑷畾鍦╯ession
 
-				BroadcastService broadcastService = new BroadcastService();// 取得資料庫內該會員的推播訊息
-				List<BroadcastVO> broadcastList = broadcastService.getOneBroadcastByCustID(db_custVO.getCust_ID());
+				BroadcastService broadcastService = new BroadcastService();//
+				List<BroadcastVO> broadcastList = broadcastService.getOneBroadcastByCustID(db_custVO.getCust_ID());// 寰炶硣鏂欏韩鏌ヨ姝ら¨瀹㈢殑鎺ㄦ挱
 
-				session.setAttribute("broadcast", broadcastList);// 將該顧客的推播訊息存入session
+				session.setAttribute("broadcast", broadcastList);// 姝ら¨瀹㈢殑鎺ㄦ挱瑷畾鍦╯ession
 
 				String url = "/back-end/mainPage.jsp";
-				RequestDispatcher rd = req.getRequestDispatcher(url);// 帶回至主頁面
+				RequestDispatcher rd = req.getRequestDispatcher(url);//
 				rd.forward(req, res);
 
 			} else {
@@ -60,6 +61,7 @@ public class CustServlet extends HttpServlet {
 		String url = "/back-end/cust/addCust.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(url);
 		rd.forward(req, res);
+
 	}
 
 }

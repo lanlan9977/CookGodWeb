@@ -10,12 +10,11 @@ public class BroadcastService {
 		dao = new BroadcastDAO();
 	}
 
-	public BroadcastVO addBroadcast(Timestamp broadcast_start, String broadcast_con, String broadcast_status,
-			String cust_ID) {
+	public BroadcastVO addBroadcast(String broadcast_con,String cust_ID) {
 		BroadcastVO broadcastVO = new BroadcastVO();
-		broadcastVO.setBroadcast_start(broadcast_start);
+		broadcastVO.setBroadcast_start(new Timestamp(System.currentTimeMillis()));
 		broadcastVO.setBroadcast_con(broadcast_con);
-		broadcastVO.setBroadcast_status(broadcast_status);
+		broadcastVO.setBroadcast_status("B0");
 		broadcastVO.setCust_ID(cust_ID);
 		dao.insert(broadcastVO);
 
@@ -46,6 +45,7 @@ public class BroadcastService {
 	public List<BroadcastVO> gelAllBroadcast() {
 		return dao.getAll();
 	}
+
 	public List<BroadcastVO> getOneBroadcastByCustID(String cust_ID) {
 		return dao.findByCust_ID(cust_ID);
 	}

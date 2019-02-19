@@ -28,7 +28,7 @@ public class MenuOrderServlet extends HttpServlet {
 
 		String status = req.getParameter("MenuOrderStatus");
 
-		String menuOrderID = req.getParameter("MenuOrder");
+		String menuOrderID = req.getParameter("MenuOrderID");
 		MenuOrderService menuOrderService = new MenuOrderService();
 		MenuOrderVO menuOrderVO_DB = menuOrderService.getOneMenuOrder(menuOrderID);
 
@@ -46,17 +46,17 @@ public class MenuOrderServlet extends HttpServlet {
 			broadcast_con_sb.append("未通過審核");
 //			menuOrderVO_DB.setMenu_od_status("M2");
 			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "M2", menuOrderVO_DB.getMenu_od_book(),
-			menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
-			menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
+					menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
+					menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
 
 		}
 
 		BroadcastService broadcastService = new BroadcastService();
-//		broadcastService.addBroadcast(broadcast_start, broadcast_con_sb, broadcast_status, menuOrderVO_DB.getCust_ID());
+		broadcastService.addBroadcast(broadcast_con_sb.toString(), menuOrderVO_DB.getCust_ID());
 
-		String url = "/updateMenuOrder.jsp";
-		RequestDispatcher rd = req.getRequestDispatcher(url);
-		rd.forward(req, res);
+//		String url = "/back-end/menuOrder/updateMenuOrder.jsp";
+//		RequestDispatcher rd = req.getRequestDispatcher(url);
+//		rd.forward(req, res);
 
 	}
 
