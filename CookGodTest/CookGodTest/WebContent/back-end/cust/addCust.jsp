@@ -15,38 +15,42 @@
 </head>
 
 <body>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+
 	<div class="conatiner-fluid">
 		<div class="row justify-content-center">
 			<div class="row-5">
 				<div class="form-row">
 					<form method="post"
 						action="<%=request.getContextPath()%>/cust/cust.do">
+						<p>
+							<c:if test="${not empty errorMsgs}">
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</c:if>
+						</p>
 						<label for="exampleInputEmail1">Email address</label> <input
 							type="text" class="form-control" id="exampleInputEmail1"
-							aria-describedby="emailHelp" name="cust_acc" placeholder="Enter email"> <small
-							id="emailHelp" class="form-text text-muted"></small>
+							aria-describedby="emailHelp" name="cust_acc"
+							placeholder="Enter email"> <small id="emailHelp"
+							class="form-text text-muted"></small>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">Password</label> <input
-						type="password" name="cust_pwd"  class="form-control" id="exampleInputPassword1"
-						placeholder="Password">
+						type="password" name="cust_pwd" class="form-control"
+						id="exampleInputPassword1" placeholder="Password">
 				</div>
 				<div class="form-group form-check">
 					<input type="checkbox" class="form-check-input" id="exampleCheck1">
 					<label class="form-check-label" for="exampleCheck1">Check
 						me out</label>
 				</div>
-				<input type="hidden" name="action" values="selectCust">
-					<button type="submit" class="btn btn-primary">登入</button>
-					</form>
+				<input type="hidden" name="action" value="selectCust">
+				<button type="submit" class="btn btn-primary">登入</button>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -18,7 +18,7 @@ public class CustDAO implements CustDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -290,7 +290,7 @@ public class CustDAO implements CustDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt = con.prepareStatement(GET_ONE_STMT_FROM_CUST_ACC);
 
 			pstmt.setString(1, cust_acc);
 

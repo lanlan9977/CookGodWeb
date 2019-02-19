@@ -2,6 +2,7 @@ package com.cust.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -29,34 +30,41 @@ public class CustServlet extends HttpServlet {
 
 		String action = req.getParameter("action");
 		List<CustVO> custList = (List<CustVO>) session.getAttribute("custList");
+		
+		List<String> errorMsgs = new LinkedList<String>();
+				req.setAttribute("errorMsgs", errorMsgs);
+		try {
+			// 登入之後
+			if (action.equals("selectCust")) {
+				String cust_acc = req.getParameter("cust_acc");
+				String cust_pwd = req.getParameter("cust_pwd");
+				CustService custService = new CustService();
 
-		// 登入之後
-		if (action.equals("selectCust")) {
-			String cust_acc = req.getParameter("cust_acc");
-			String cust_pwd = req.getParameter("cust_pwd");
-			CustService custService = new CustService();
+				CustVO db_custVO = custService.getOneCustAcc(cust_acc);
 
-			CustVO db_custVO = custService.getOneCustAcc(cust_acc);
+				String cust_accDB = db_custVO.getCust_acc();
 
-			String cust_accDB = db_custVO.getCust_acc();
+				
 
-			// 判斷資料庫內是否有此顧客帳號
-			if (cust_accDB.equals(cust_acc)) {
-				session.setAttribute("cust", db_custVO);// 顧客資料設定在session
+				// 判斷資料庫內是否有此顧客帳號
+				if (cust_accDB.equals(cust_acc)) {
 
-				BroadcastService broadcastService = new BroadcastService();//
-				List<BroadcastVO> broadcastList = broadcastService.getOneBroadcastByCustID(db_custVO.getCust_ID());// 從資料庫查詢此顧客的推播
+					session.setAttribute("cust", db_custVO);// 顧客資料設定在session
 
-				session.setAttribute("broadcast", broadcastList);// 此顧客的推播設定在session
+					BroadcastService broadcastService = new BroadcastService();//
+					List<BroadcastVO> broadcastList = broadcastService.getOneBroadcastByCustID(db_custVO.getCust_ID());// 從資料庫查詢此顧客的推播
 
-				String url = "/back-end/mainPage.jsp";
-				RequestDispatcher rd = req.getRequestDispatcher(url);//
-				rd.forward(req, res);
+					session.setAttribute("broadcast", broadcastList);// 此顧客的推播設定在session
 
-			} else {
+					String url = "/back-end/mainPage.jsp";
+					RequestDispatcher rd = req.getRequestDispatcher(url);//
+					rd.forward(req, res);
+				}
 
 			}
 
+		} catch (NullPointerException e) {
+			errorMsgs.add("帳號或密碼錯誤");
 		}
 		String url = "/back-end/cust/addCust.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(url);
