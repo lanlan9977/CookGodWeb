@@ -15,8 +15,8 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT * FROM BROADCAST WHERE BROADCAST_ID = ?";
 	private static final String GET_ONE_STMT_CUST_ID = "SELECT * FROM BROADCAST WHERE CUST_ID = ?";
 	private static final String DELETE = "DELETE FROM BROADCAST WHERE BROADCAST_ID = ?";
-	private static final String UPDATE = "UPDATE BROADCAST SET BROADCAST_START= ?, BROADCAST_CON= ?, BROADCAST_STATUS= ?, CUST_ID= ? WHERE BROADCAST_ID = ?";
-
+	private static final String UPDATE = "UPDATE BROADCAST SET BROADCAST_STATUS= ? WHERE BROADCAST_ID = ?";
+	
 	@Override
 	public void insert(BroadcastVO broadcastVO) {
 		Connection con = null;
@@ -68,11 +68,8 @@ public class BroadcastJDBCDAO implements BroadcastDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setTimestamp(1, broadcastVO.getBroadcast_start());
-			pstmt.setString(2, broadcastVO.getBroadcast_con());
-			pstmt.setString(3, broadcastVO.getBroadcast_status());
-			pstmt.setString(4, broadcastVO.getCust_ID());
-			pstmt.setString(5, broadcastVO.getBroadcast_ID());
+			pstmt.setString(1, broadcastVO.getBroadcast_status());
+			pstmt.setString(2, broadcastVO.getBroadcast_ID());
 
 			pstmt.executeUpdate();
 

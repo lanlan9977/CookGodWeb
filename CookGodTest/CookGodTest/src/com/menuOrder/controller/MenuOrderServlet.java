@@ -1,6 +1,7 @@
 package com.menuOrder.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,20 +33,21 @@ public class MenuOrderServlet extends HttpServlet {
 		MenuOrderService menuOrderService = new MenuOrderService();
 		MenuOrderVO menuOrderVO_DB = menuOrderService.getOneMenuOrder(menuOrderID);
 
-		String menu_or_start = (menuOrderVO_DB.getMenu_od_start()).toString();
+		Timestamp menu_or_start1 = (menuOrderVO_DB.getMenu_od_start());
+		String menu_or_start=menu_or_start1.toString();
 		broadcast_con_sb.append("訂單推播通知；您在").append(menu_or_start).append("所訂購的嚴選套餐訂單");
 
-		if ("M1".equals(status)) {
+		if ("g1".equals(status)) {
 			broadcast_con_sb.append("已通過審核");
 //			menuOrderVO_DB.setMenu_od_status("M1");
-			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "M1", menuOrderVO_DB.getMenu_od_book(),
+			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "g1", menuOrderVO_DB.getMenu_od_book(),
 					menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
 					menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
 
-		} else if ("M0".equals(status)) {
+		} else if ("g2".equals(status)) {
 			broadcast_con_sb.append("未通過審核");
 //			menuOrderVO_DB.setMenu_od_status("M2");
-			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "M2", menuOrderVO_DB.getMenu_od_book(),
+			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "g2", menuOrderVO_DB.getMenu_od_book(),
 					menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
 					menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
 

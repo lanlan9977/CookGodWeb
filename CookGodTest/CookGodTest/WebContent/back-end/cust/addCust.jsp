@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -16,44 +16,45 @@
 
 <body>
 
-	<div class="conatiner-fluid">
-		<div class="row justify-content-center">
-			<div class="row-5">
-				<div class="form-row">
-					<form method="post"
-						action="<%=request.getContextPath()%>/cust/cust.do">
-						<p>
-							<c:if test="${not empty errorMsgs}">
-								<font style="color: red">�Эץ��H�U���~:</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
-						</p>
-						<label for="exampleInputEmail1">Email address</label> <input
+
+
+	<form method="post" action="<%=request.getContextPath()%>/cust/cust.do">
+		<div class="conatiner-fluid">
+			<div class="row justify-content-center">
+				<div class="row-5">
+					<c:if test="${not empty errorMsgs}">
+						<font style="color: red">請修正以下錯誤:</font>
+						<br>
+						<ul>
+							<c:forEach var="message" items="${errorMsgs}">
+								<li style="color: red">${message}</li>
+							</c:forEach>
+						</ul>
+					</c:if>
+					<div class="form-row">
+						<p></p>
+						<br> <label for="exampleInputEmail1">請輸入帳號:</label> <input
 							type="text" class="form-control" id="exampleInputEmail1"
 							aria-describedby="emailHelp" name="cust_acc"
 							placeholder="Enter email"> <small id="emailHelp"
 							class="form-text text-muted"></small>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">請輸入密碼:</label> <input
+							type="password" name="cust_pwd" class="form-control"
+							id="exampleInputPassword1" placeholder="Password">
+					</div>
+					<div class="form-group form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1">
+						<label class="form-check-label" for="exampleCheck1">Check
+							me out</label>
+					</div>
+					<input type="hidden" name="action" value="selectCust">
+					<button type="submit" class="btn btn-primary">登入</button>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label> <input
-						type="password" name="cust_pwd" class="form-control"
-						id="exampleInputPassword1" placeholder="Password">
-				</div>
-				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="exampleCheck1">
-					<label class="form-check-label" for="exampleCheck1">Check
-						me out</label>
-				</div>
-				<input type="hidden" name="action" value="selectCust">
-				<button type="submit" class="btn btn-primary">�n�J</button>
-				</form>
 			</div>
 		</div>
-	</div>
+	</form>
 	<script
 		src="<%=request.getContextPath()%>/back-end/cust/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

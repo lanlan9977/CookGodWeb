@@ -20,8 +20,8 @@
 		<input type="TEXT" name="MenuOrderID" size="45" placeholder="輸入欲審核嚴選套餐訂單編號" value="M00001">
 		<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="MenuOrderStatus">
 			<option selected>請審核...</option>
-			<option value="M1">審核通過</option>
-			<option value="M0">審核不通過</option>
+			<option value="g1">審核通過</option>
+			<option value="g2">審核不通過</option>
 		</select> 
 		<input type="hidden" name="action" value="SendStatus">
 		<button type="submit" class="btn btn-primary my-1">發送</button>
