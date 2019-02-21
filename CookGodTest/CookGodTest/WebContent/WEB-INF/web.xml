@@ -23,14 +23,29 @@
     <servlet-name>BroadcastServlet</servlet-name>
     <url-pattern>/broadcast/broadcast.do</url-pattern>
   </servlet-mapping>
+  
+  
+  
   <servlet>
+   <description></description>
+    <display-name>CustServlet</display-name>
     <servlet-name>CustServlet</servlet-name>
     <servlet-class>com.cust.controller.CustServlet</servlet-class>
   </servlet>
+  
   <servlet-mapping>
     <servlet-name>CustServlet</servlet-name>
     <url-pattern>/cust/cust.do</url-pattern>
   </servlet-mapping>
+ 
+  <servlet-mapping>
+    <servlet-name>CustServlet</servlet-name>
+    <url-pattern>/mainPage.jsp</url-pattern>
+  </servlet-mapping>
+
+
+  
+
   <servlet>
     <servlet-name>FoodOrderServlet</servlet-name>
     <servlet-class>com.foodOrder.controller.FoodOrderServlet</servlet-class>

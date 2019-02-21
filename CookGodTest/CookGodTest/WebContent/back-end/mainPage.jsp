@@ -23,24 +23,27 @@
 <body>
 
 
-<%if(custVO!=null){
-	 if ((custVO.getCust_sex()).equals("f"))
-    sex="小姐";
-%>
-<p>顧客編號:<%=custVO.getCust_ID()%><br>
-<p><%=custVO.getCust_name()%><%=sex%>    您好!<br>
+
+<nav class="navbar navbar-dark bg-primary">
+<%if(custVO==null){
+	response.sendRedirect(request.getContextPath()+"/back-end/cust/selectCust.jsp");
+	}else{ 
+	if ((custVO.getCust_sex()).equals("f")) sex="小姐";%>
+<p>顧客編號:<%=custVO.getCust_ID()%>
+<p><%=custVO.getCust_name()%><%=sex%>    歡迎!<br>
 
 
 
-	<form method="post" action="<%=request.getContextPath()%>/broadcast/broadcast.do" id="myForm">
+	<form method="post" action="<%=request.getContextPath()%>/broadcast/broadcast.do">
 		<div class="dropdown" >
-			<button type=button class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" name="EnterBroadMsg" >
+			<button type=button class="btn btn-dark dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" name="EnterBroadMsg" >
 				推播通知訊息 <span class="badge badge-light">${unReadCount}</span>
 			  </button>
 			    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-	                 <c:forEach var="broadcastVO" items="${broadcastConList}" varStatus="read">
+	                 <c:forEach var="broadcastVO" items="${broadcastConList}" varStatus="readiIndex">
 				      <c:if test="${not empty broadcastVO.broadcast_con}">
-					<button type="submit" name="readAction" class="dropdown-item" value="${read.index}">${broadcastVO.broadcast_con}></button>
+					     <button type="submit" name="readAction" class="dropdown-item" value="${readiIndex.index}">${broadcastVO.broadcast_con}>
+					     <input type="hidden" name="action" value="read"></button>
 				      </c:if>	
 			         </c:forEach>
 			       <c:if test="${empty broadcastConList}">
@@ -49,7 +52,7 @@
 			   </div>
 		</div>
 	</form>
-
+</nav>
 
 
 

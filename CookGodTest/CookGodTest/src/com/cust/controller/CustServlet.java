@@ -49,8 +49,7 @@ public class CustServlet extends HttpServlet {
 
 					int unReadCount = 0;
 					if (!broadcastConList.isEmpty()) {
-						
-						
+
 						for (int index = 0; index < broadcastConList.size(); index++) {
 							if ("B0".equals(broadcastConList.get(index).getBroadcast_status())) {// 假如推播狀態為未讀(B0)
 								unReadCount++;
@@ -71,11 +70,19 @@ public class CustServlet extends HttpServlet {
 				}
 			} catch (NullPointerException e) {
 				errorMsgs.add("帳號密碼錯誤，請重新輸入");
+
 			}
+			RequestDispatcher rd = req.getRequestDispatcher("/back-end/cust/selectCust.jsp");
+			rd.forward(req, res);
 		}
-		RequestDispatcher rd = req.getRequestDispatcher("/back-end/cust/addCust.jsp");
-		rd.forward(req, res);
+		List<BroadcastVO> broadcastConList = (ArrayList<BroadcastVO>) session.getAttribute("broadcastConList");
+		int unReadCount = (int) session.getAttribute("unReadCount");// JSP未讀推播訊息上的次數
 		
+		session.setAttribute("broadcastConList", broadcastConList);// 此顧客的推播訊息集合設定在session
+		session.setAttribute("unReadCount", unReadCount);// 此顧客未讀的推播訊息次數設定在session
+		RequestDispatcher rd = req.getRequestDispatcher("/back-end/mainPage.jsp");//
+		rd.forward(req, res);
+
 	}
 
 }
