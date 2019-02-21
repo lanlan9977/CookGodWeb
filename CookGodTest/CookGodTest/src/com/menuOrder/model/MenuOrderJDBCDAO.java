@@ -9,7 +9,7 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 	
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "COOKGOD";
+	String userid = "CA106";
 	String passwd = "123456";
 	
 	private static final String Insert_Stmt = 

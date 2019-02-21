@@ -17,7 +17,6 @@
 <body>
 
 
-
 	<form method="post" action="<%=request.getContextPath()%>/cust/cust.do">
 		<div class="conatiner-fluid">
 			<div class="row justify-content-center">
@@ -25,11 +24,11 @@
 					<c:if test="${not empty errorMsgs}">
 						<font style="color: red">請修正以下錯誤:</font>
 						<br>
-						<ul>
+						  <ul>
 							<c:forEach var="message" items="${errorMsgs}">
 								<li style="color: red">${message}</li>
 							</c:forEach>
-						</ul>
+						  </ul>
 					</c:if>
 					<div class="form-row">
 						<p></p>

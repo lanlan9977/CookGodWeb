@@ -14,7 +14,7 @@ import piciotest.PicIOTest;
 public class CustJDBCDAO implements CustDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CookGod";
+	String userid = "CA106";
 	String passwd = "123456";
 	
 	private static final String INSERT_STMT =
@@ -314,7 +314,7 @@ public class CustJDBCDAO implements CustDAO_interface {
 
 		CustJDBCDAO dao = new CustJDBCDAO();
 		
-//		//·s¼W
+//		//ï¿½sï¿½W
 //		CustVO custVO1 = new CustVO();
 //		custVO1.setCust_acc("tes88dt");
 //		custVO1.setCust_pwd("123");
@@ -331,7 +331,7 @@ public class CustJDBCDAO implements CustDAO_interface {
 //		custVO1.setCust_niname("ccc");
 //		dao.insert(custVO1);
 //		
-		//­×§ï
+		//ï¿½×§ï¿½
 //		CustVO custVO2 = new CustVO();
 //		custVO2.setCust_ID("C00001");
 //		custVO2.setCust_acc("test");
@@ -349,10 +349,10 @@ public class CustJDBCDAO implements CustDAO_interface {
 //		custVO2.setCust_niname("ccc");
 //		dao.update(custVO2);
 //		
-//		// §R°£
+//		// ï¿½Rï¿½ï¿½
 //		dao.delete("tess");
 //		
-//		//¬d¸ß
+//		//ï¿½dï¿½ï¿½
 //		CustVO custVO3 = dao.findByPrimaryKey("C00001");
 //		System.out.println(custVO3.getCust_acc()+",");
 //		System.out.println(custVO3.getCust_pwd()+",");
@@ -371,7 +371,7 @@ public class CustJDBCDAO implements CustDAO_interface {
 //		
 //		System.out.println("-------");
 		
-//		//¬d¸ßall
+//		//ï¿½dï¿½ï¿½all
 		List<CustVO> list = dao.getAll();
 		for (CustVO aCust: list) {
 			System.out.println(aCust.getCust_ID()+",");

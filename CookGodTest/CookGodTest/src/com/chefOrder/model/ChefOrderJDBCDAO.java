@@ -270,7 +270,7 @@ public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 
 	public static void main(String[] args) {
 
-		// ·s¼W
+		// ï¿½sï¿½W
 //		ChefOrderJDBCDAO dao = new ChefOrderJDBCDAO();
 //		ChefOrderVO chefOrderVO = new ChefOrderVO();
 //		chefOrderVO.setChefOrStatus(7);
@@ -284,7 +284,7 @@ public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 //		chefOrderVO.setChefId("T00003");
 //		dao.insert(chefOrderVO);
 
-		// ­×§ï
+		// ï¿½×§ï¿½
 //		ChefOrderVO chefOrderVO2 = new ChefOrderVO();
 //		chefOrderVO2.setChefOrId("CF20190213-000012");
 //		chefOrderVO2.setChefOrStatus(7);
@@ -298,10 +298,10 @@ public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 //		chefOrderVO2.setChefId("T00003");
 //		dao.update(chefOrderVO2);
 
-		// §R°£
+		// ï¿½Rï¿½ï¿½
 //		dao.delete("CF20190213-000011");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		ChefOrderVO chefOrderVO3 = dao.findByPrimaryKey("CF20190213-000012");
 //		System.out.print(chefOrderVO3.getChefOrId() + ",");
 //		System.out.print(chefOrderVO3.getChefOrStatus() + ",");
@@ -315,7 +315,7 @@ public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 //		System.out.print(chefOrderVO3.getChefId() + ",");
 //		System.out.println("---------------------");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		List<ChefOrderVO> list = dao.getAll();
 //		for (ChefOrderVO aChefOrder : list) {
 //			System.out.print(aChefOrder.getChefOrId() + ",");

@@ -14,7 +14,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CookGodDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
