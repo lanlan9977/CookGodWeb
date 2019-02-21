@@ -36,7 +36,6 @@ public class CustServlet extends HttpServlet {
 			CustVO db_custVO = custService.getOneCustAcc(cust_acc);
 
 			try {
-
 				String cust_accDB = db_custVO.getCust_acc();
 				if (cust_accDB.equals(cust_acc)) {// 判斷資料庫內是否有此顧客帳號
 
@@ -70,18 +69,36 @@ public class CustServlet extends HttpServlet {
 				}
 			} catch (NullPointerException e) {
 				errorMsgs.add("帳號密碼錯誤，請重新輸入");
-
 			}
 			RequestDispatcher rd = req.getRequestDispatcher("/back-end/cust/selectCust.jsp");
 			rd.forward(req, res);
+		} else {
+			List<BroadcastVO> broadcastConList = (ArrayList<BroadcastVO>) session.getAttribute("broadcastConList");
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			int unReadCount = (int) session.getAttribute("unReadCount");
+			session.setAttribute("broadcastConList", broadcastConList);
+			session.setAttribute("unReadCount", unReadCount);
+			RequestDispatcher rd = req.getRequestDispatcher("/back-end/mainPage.jsp");//
+			rd.forward(req, res);
 		}
-		List<BroadcastVO> broadcastConList = (ArrayList<BroadcastVO>) session.getAttribute("broadcastConList");
-		int unReadCount = (int) session.getAttribute("unReadCount");// JSP未讀推播訊息上的次數
-		
-		session.setAttribute("broadcastConList", broadcastConList);// 此顧客的推播訊息集合設定在session
-		session.setAttribute("unReadCount", unReadCount);// 此顧客未讀的推播訊息次數設定在session
-		RequestDispatcher rd = req.getRequestDispatcher("/back-end/mainPage.jsp");//
-		rd.forward(req, res);
 
 	}
 
