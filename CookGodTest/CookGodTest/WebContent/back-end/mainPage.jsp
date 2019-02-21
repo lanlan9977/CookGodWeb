@@ -6,7 +6,8 @@
     ArrayList<BroadcastVO> broadcastConList = (ArrayList<BroadcastVO>) session.getAttribute("broadcastConList");
 	CustVO custVO = (CustVO) session.getAttribute("cust");
 	int unReadCount = (int) session.getAttribute("unReadCount");
-	String sex="先生";%>
+	String sex="先生";
+%>
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,7 @@
 <body>
 
 
-	<%if(custVO!=null){
+<%if(custVO!=null){
 	 if ((custVO.getCust_sex()).equals("f"))
     sex="小姐";
 %>
@@ -30,25 +31,22 @@
 <p><%=custVO.getCust_name()%><%=sex%>    您好!<br>
 
 
-	</table>
-	<form method="post"
-		action="<%=request.getContextPath()%>/broadcast/broadcast.do" id="myForm">
+
+	<form method="post" action="<%=request.getContextPath()%>/broadcast/broadcast.do" id="myForm">
 		<div class="dropdown" >
-			<button type=button class="btn btn-secondary dropdown-toggle"
-				id="dropdownMenuButton" data-toggle="dropdown" name="EnterBroadMsg" >
+			<button type=button class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" name="EnterBroadMsg" >
 				推播通知訊息 <span class="badge badge-light">${unReadCount}</span>
-			</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-	           <c:forEach var="broadcastVO" items="${broadcastConList}" varStatus="read">
-				 <c:if test="${not empty broadcastVO.broadcast_con}">
+			  </button>
+			    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+	                 <c:forEach var="broadcastVO" items="${broadcastConList}" varStatus="read">
+				      <c:if test="${not empty broadcastVO.broadcast_con}">
 					<button type="submit" name="readAction" class="dropdown-item" value="${read.index}">${broadcastVO.broadcast_con}></button>
-				 </c:if>	
-				
-			   </c:forEach>
-			     <c:if test="${empty broadcastConList}">
-					<li>---沒有未讀的推播訊息---</li>
-				 </c:if>
-			</div>
+				      </c:if>	
+			         </c:forEach>
+			       <c:if test="${empty broadcastConList}">
+					  <li>---沒有未讀的推播訊息---</li>
+				   </c:if>
+			   </div>
 		</div>
 	</form>
 

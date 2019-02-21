@@ -13,10 +13,7 @@
 	crossorigin="anonymous">
 <title>Insert title here</title>
 </head>
-
 <body>
-
-
 	<form method="post" action="<%=request.getContextPath()%>/cust/cust.do">
 		<div class="conatiner-fluid">
 			<div class="row justify-content-center">
@@ -54,14 +51,14 @@
 			</div>
 		</div>
 	</form>
-	<script
+<script
 		src="<%=request.getContextPath()%>/back-end/cust/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script src="<%=request.getContextPath()%>/back-end/cust/popper.min.js"
+<script src="<%=request.getContextPath()%>/back-end/cust/popper.min.js"
 		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
 		crossorigin="anonymous"></script>
-	<script
+<script
 		src="<%=request.getContextPath()%>/back-end/cust/bootstrap.min.js"
 		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 		crossorigin="anonymous"></script>

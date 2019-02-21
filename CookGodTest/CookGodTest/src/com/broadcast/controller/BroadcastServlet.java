@@ -26,6 +26,8 @@ public class BroadcastServlet extends HttpServlet {
 		List<BroadcastVO> broadcastConList = (ArrayList<BroadcastVO>) session.getAttribute("broadcastConList");
 		int unReadCount = (int) session.getAttribute("unReadCount");// JSP未讀推播訊息上的次數
 
+		
+		
 		if (!broadcastConList.isEmpty()) {// 當從資料庫推播訊息list不為空時
 			String readAction = req.getParameter("readAction");// 讀取jsp上的已讀推播訊息位置
 			int d = Integer.parseInt(readAction);
