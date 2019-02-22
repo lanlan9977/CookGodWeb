@@ -11,7 +11,7 @@
 	href="<%=request.getContextPath()%>/back-end/cust/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-<title>Insert title here</title>
+<title>login in</title>
 </head>
 <body>
 	<form method="post" action="<%=request.getContextPath()%>/cust/cust.do">

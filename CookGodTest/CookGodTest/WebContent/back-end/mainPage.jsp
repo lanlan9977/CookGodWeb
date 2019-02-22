@@ -6,7 +6,7 @@
     ArrayList<BroadcastVO> broadcastConList = (ArrayList<BroadcastVO>) session.getAttribute("broadcastConList");
 	CustVO custVO = (CustVO) session.getAttribute("cust");
 	int unReadCount = (int) session.getAttribute("unReadCount");
-	String sex="先生";
+	String sex="MR.";
 %>
 
 <!DOCTYPE html>
@@ -18,19 +18,15 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/back-end/cust/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<title>Insert title here</title>
+<title>Main Page</title>
 </head>
 <body>
 
 
 
 <nav class="navbar navbar-dark bg-primary">
-<%if(custVO==null){
-	response.sendRedirect(request.getContextPath()+"/back-end/cust/selectCust.jsp");
-	}else{ 
-	if ((custVO.getCust_sex()).equals("f")) sex="小姐";%>
-<p>顧客編號:<%=custVO.getCust_ID()%>
-<p><%=custVO.getCust_name()%><%=sex%>    歡迎!<br>
+<% if ((custVO.getCust_sex()).equals("f")) sex="MISS.";%>
+<font size="5" color="#CCCCCC"><%=sex%><%=custVO.getCust_name()%>歡迎!</font><br>
 
 
 
@@ -69,7 +65,7 @@
 		crossorigin="anonymous">
 		
 	</script>
-<%}%>
+
 
 </body>
 </html>

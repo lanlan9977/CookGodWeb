@@ -44,10 +44,10 @@ public class BroadcastServlet extends HttpServlet {
 				}
 			}
 		}
-		String contextPath = req.getContextPath();
-		res.sendRedirect(contextPath + "/back-end/mainPage.jsp");
-//		RequestDispatcher rd = req.getRequestDispatcher("/back-end/mainPage.jsp");
-//		rd.forward(req, res);
+//		String contextPath = req.getContextPath();
+//		res.sendRedirect(contextPath + "/back-end/mainPage.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/back-end/mainPage.jsp");
+		rd.forward(req, res);
 
 	}
 

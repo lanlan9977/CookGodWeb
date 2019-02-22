@@ -20,11 +20,8 @@ public class MenuOrderServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
 		res.setCharacterEncoding("UTF-8");
-		HttpSession session = req.getSession();
-
-		String action = req.getParameter("action");
-
 		StringBuilder broadcast_con_sb = new StringBuilder();
 
 		String status = req.getParameter("MenuOrderStatus");
@@ -39,26 +36,21 @@ public class MenuOrderServlet extends HttpServlet {
 
 		if ("g1".equals(status)) {
 			broadcast_con_sb.append("已通過審核");
-//			menuOrderVO_DB.setMenu_od_status("M1");
 			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "g1", menuOrderVO_DB.getMenu_od_book(),
 					menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
 					menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
 
 		} else if ("g2".equals(status)) {
 			broadcast_con_sb.append("未通過審核");
-//			menuOrderVO_DB.setMenu_od_status("M2");
 			menuOrderService.updateMenuOrder(menuOrderVO_DB.getMenu_ID(), "g2", menuOrderVO_DB.getMenu_od_book(),
 					menuOrderVO_DB.getMenu_od_end(), menuOrderVO_DB.getMenu_od_rate(), menuOrderVO_DB.getMenu_od_msg(),
 					menuOrderVO_DB.getChef_ID(), menuOrderVO_DB.getMenu_ID());
-
 		}
-
 		BroadcastService broadcastService = new BroadcastService();
 		broadcastService.addBroadcast(broadcast_con_sb.toString(), menuOrderVO_DB.getCust_ID());
-
-//		String url = "/back-end/menuOrder/updateMenuOrder.jsp";
-//		RequestDispatcher rd = req.getRequestDispatcher(url);
-//		rd.forward(req, res);
+		String url = "/back-end/menuOrder/updateMenuOrder.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher(url);
+		rd.forward(req, res);
 
 	}
 
