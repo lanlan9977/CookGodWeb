@@ -41,10 +41,26 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>MenuOrderServlet</servlet-name>
-    <servlet-class>android.com.menuOrder.controller.MenuOrderServlet</servlet-class>
+    <servlet-class>com.menuOrder.controller.MenuOrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MenuOrderServlet</servlet-name>
     <url-pattern>/menuOrder/menuOrder.do</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>AndroidMenuOrderServlet</servlet-name>
+    <servlet-class>android.com.menuOrder.controller.MenuOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidMenuOrderServlet</servlet-name>
+    <url-pattern>/MenuOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidCustServlet</servlet-name>
+    <servlet-class>android.com.cust.controller.CustServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidCustServlet</servlet-name>
+    <url-pattern>/AndroidCustServlet</url-pattern>
   </servlet-mapping>
 </web-app>

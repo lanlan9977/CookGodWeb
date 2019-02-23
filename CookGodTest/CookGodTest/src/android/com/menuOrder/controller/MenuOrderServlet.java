@@ -16,7 +16,6 @@ import com.google.gson.JsonObject;
 import com.menuOrder.model.MenuOrderService;
 import com.menuOrder.model.MenuOrderVO;
 
-@SuppressWarnings("serial")
 public class MenuOrderServlet extends HttpServlet {
 
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
@@ -24,9 +23,9 @@ public class MenuOrderServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		MenuOrderService menuOrderService=new MenuOrderService();
-		list=menuOrderService.getall();
 		super.init();
+		MenuOrderService menuOrderService = new MenuOrderService();
+		list = menuOrderService.getall();
 
 	}
 
@@ -50,7 +49,7 @@ public class MenuOrderServlet extends HttpServlet {
 		String param = jsonObject.get("param").getAsString();
 		
 		String outStr = "";
-		switch (param) {
+		switch ("selectCust") {
 		case "menuOredrList":
 			outStr = gson.toJson(list);
 			break;
@@ -76,8 +75,6 @@ public class MenuOrderServlet extends HttpServlet {
 		out.println(list.size());
 		out.println(menuOrder_json);
 		
-		
-
 
 	}
 }
