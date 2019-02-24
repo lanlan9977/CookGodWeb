@@ -61,6 +61,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidCustServlet</servlet-name>
-    <url-pattern>/AndroidCustServlet</url-pattern>
+    <url-pattern>/CustServlet</url-pattern>
   </servlet-mapping>
 </web-app>

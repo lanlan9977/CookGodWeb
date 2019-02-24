@@ -46,10 +46,10 @@ public class MenuOrderServlet extends HttpServlet {
 		System.out.println("input: " + jsonIn);
 		
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
-		String param = jsonObject.get("param").getAsString();
+		String selectMenuOrder = jsonObject.get("selectMenuOrder").getAsString();
 		
 		String outStr = "";
-		switch ("selectCust") {
+		switch (selectMenuOrder) {
 		case "menuOredrList":
 			outStr = gson.toJson(list);
 			break;
@@ -66,14 +66,7 @@ public class MenuOrderServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		Gson gson = new Gson();
-		String menuOrder_json = gson.toJson(list);
-		res.setContentType(CONTENT_TYPE);
-		PrintWriter out = res.getWriter();
-		out.println("<h3>menuOrder_json</h3><br>");
-		out.println("<p>length</p><br>");
-		out.println(list.size());
-		out.println(menuOrder_json);
+		doPost(req,res);
 		
 
 	}

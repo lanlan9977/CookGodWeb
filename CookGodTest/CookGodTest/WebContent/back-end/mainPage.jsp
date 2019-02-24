@@ -25,8 +25,7 @@
 
 
 <nav class="navbar navbar-dark bg-primary">
-<% if(custVO==null&&unRead==null)response.sendRedirect(request.getContextPath()+/cust/Cust)
-<% if ((custVO.getCust_sex()).equals("f")) sex="MISS.";%>
+
 <font size="5" color="#CCCCCC"><%=sex%><%=custVO.getCust_name()%>歡迎!</font><br>
 
 
