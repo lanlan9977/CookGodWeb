@@ -22,42 +22,33 @@ public class MenuOrderServlet extends HttpServlet {
 	private List<MenuOrderVO> list;
 
 	@Override
-	public void init() throws ServletException {
-		super.init();
-		MenuOrderService menuOrderService = new MenuOrderService();
-		list = menuOrderService.getall();
-
-	}
-
-	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		
+
 		Gson gson = new Gson();
-		
+
 		BufferedReader br = req.getReader();
 		StringBuilder jsonIn = new StringBuilder();
-		
+
 		String line = null;
 		while ((line = br.readLine()) != null) {
 			jsonIn.append(line);
 		}
-		
-		System.out.println("input: " + jsonIn);
-		
-		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
-		String selectMenuOrder = jsonObject.get("selectMenuOrder").getAsString();
-		
-		String outStr = "";
-		switch (selectMenuOrder) {
-		case "menuOredrList":
-			outStr = gson.toJson(list);
-			break;
-		default:
-			doGet(req, res);
-			break;
-		}
 
+		System.out.println("input: " + jsonIn);
+
+		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
+		String cust_ID = jsonObject.get("selectMenuOrder").getAsString();
+
+		MenuOrderService menuOrderService = new MenuOrderService();
+		list = menuOrderService.getCustMenuOrder(cust_ID);
+
+		String outStr = "";
+
+		if (!list.isEmpty()) {
+			outStr = gson.toJson(list);
+
+		}
 		res.setContentType(CONTENT_TYPE);
 		PrintWriter out = res.getWriter();
 		out.println(outStr);
@@ -66,8 +57,7 @@ public class MenuOrderServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doPost(req,res);
-		
+		doPost(req, res);
 
 	}
 }

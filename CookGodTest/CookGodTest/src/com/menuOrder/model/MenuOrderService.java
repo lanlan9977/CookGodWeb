@@ -47,4 +47,7 @@ public class MenuOrderService {
 	public List<MenuOrderVO> getall(){
 		return dao.getAll();
 	}
+	public List<MenuOrderVO> getCustMenuOrder(String cust_ID){
+		return dao.findByCustID(cust_ID);
+	}
 }

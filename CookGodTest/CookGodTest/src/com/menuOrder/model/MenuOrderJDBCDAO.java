@@ -20,6 +20,8 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 			"DELETE FROM MENU_ORDER WHERE MENU_OD_ID = ?";
 	private static final String Get_One_Stmt = 
 			"SELECT * FROM MENU_ORDER WHERE MENU_OD_ID = ?";
+	private static final String Get_One_Stmt_CustID = 
+			"SELECT * FROM MENU_ORDER WHERE CUST_ID = ?";
 	private static final String Get_All_Stmt = 
 			"SELECT * FROM MENU_ORDER";
 	
@@ -315,5 +317,69 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 //			System.out.print(menuOrder04.getChef_ID()+",");
 //			System.out.print(menuOrder04.getMenu_ID()+"\n");
 //		}
+	}
+
+	@Override
+	public List<MenuOrderVO> findByCustID(String cust_ID) {
+		List<MenuOrderVO> listAll = new ArrayList<MenuOrderVO>();
+		MenuOrderVO menuOrderVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+//			con = ds.getConnection();
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(Get_One_Stmt_CustID);
+
+			
+			pstmt.setString(1, cust_ID);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				menuOrderVO = new MenuOrderVO();
+				menuOrderVO.setMenu_od_ID(rs.getString("MENU_OD_ID"));
+				menuOrderVO.setMenu_od_status(rs.getString("MENU_OD_STATUS"));
+				menuOrderVO.setMenu_od_start(rs.getTimestamp("MENU_OD_START"));
+				menuOrderVO.setMenu_od_book(rs.getTimestamp("MENU_OD_BOOK"));
+				menuOrderVO.setMenu_od_end(rs.getDate("MENU_OD_END"));
+				menuOrderVO.setMenu_od_rate(rs.getInt("MENU_OD_RATE"));
+				menuOrderVO.setMenu_od_msg(rs.getString("MENU_OD_MSG"));
+				menuOrderVO.setCust_ID(rs.getString("CUST_ID"));
+				menuOrderVO.setChef_ID(rs.getString("CHEF_ID"));
+				menuOrderVO.setMenu_ID(rs.getString("MENU_ID"));
+				listAll.add(menuOrderVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("Database Error : " + se.getMessage());
+		}catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());	
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return listAll;
 	}
 }
