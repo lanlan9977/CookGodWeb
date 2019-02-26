@@ -39,7 +39,6 @@ public class CustServlet extends HttpServlet {
 			try {
 				String cust_accDB = db_custVO.getCust_acc();
 				if (cust_accDB.equals(cust_acc)) {// 判斷資料庫內是否有此顧客帳號
-
 					session.setAttribute("cust", db_custVO);// 顧客資料設定在session
 					BroadcastService broadcastService = new BroadcastService();//
 					List<BroadcastVO> broadcastConList = new ArrayList<BroadcastVO>();
