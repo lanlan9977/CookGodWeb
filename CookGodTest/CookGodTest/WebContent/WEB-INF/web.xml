@@ -63,7 +63,7 @@
     <servlet-name>AndroidCustServlet</servlet-name>
     <url-pattern>/CustServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AndroidFoodOrderServlet</servlet-name>
     <servlet-class>com.foodOrder.controller.FoodOrderServlet</servlet-class>
   </servlet>
