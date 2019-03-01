@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.festOrder.model.FestOrderService;
+import com.festOrder.model.FestOrderVO;
+import com.foodOrder.model.FoodOrderDAO;
+import com.foodOrder.model.FoodOrderService;
+import com.foodOrder.model.FoodOrderVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -20,7 +25,11 @@ import com.menuOrder.model.MenuOrderVO;
 public class MenuOrderServlet extends HttpServlet {
 
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
-	private List<MenuOrderVO> list;
+	private List<MenuOrderVO> menuOrderList;
+	private List<FestOrderVO> festOrderList;
+	private List<FoodOrderVO> foodOrderList;
+	
+	private List<String> Orderlist = new ArrayList<>();
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -37,19 +46,40 @@ public class MenuOrderServlet extends HttpServlet {
 		}
 
 		System.out.println("input: " + jsonIn);
-
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
-		String cust_ID = jsonObject.get("selectMenuOrder").getAsString();
+		String cust_ID = jsonObject.get("selectOrder").getAsString();
 
 		MenuOrderService menuOrderService = new MenuOrderService();
-		list = menuOrderService.getCustMenuOrder(cust_ID);
+		menuOrderList = menuOrderService.getCustMenuOrder(cust_ID);
+		String menuOrderJsonIn = gson.toJson(menuOrderList);
+		if (!menuOrderList.isEmpty()) {
+			Orderlist.add(menuOrderJsonIn);
+		}else {
+			Orderlist.add("");
+		}
+		
+		FestOrderService festOrderService = new FestOrderService();
+		festOrderList = festOrderService.getCustFestOrder(cust_ID);
+		String festOrderJsonIn = gson.toJson(festOrderList);
+		if (!festOrderList.isEmpty()) {
+			Orderlist.add(festOrderJsonIn);
+		}else {
+			Orderlist.add("XXXXXXXXXXXXXXX");
+		}
+
+		FoodOrderService foodOrderService = new FoodOrderService();
+		foodOrderList = foodOrderService.getCustFoodOrder(cust_ID);
+		String foodOrderJsonIn = gson.toJson(foodOrderList);
+		if (!foodOrderList.isEmpty()) {
+			Orderlist.add(foodOrderJsonIn);
+		}else {
+			Orderlist.add("");
+		}
+	
 
 		String outStr = "";
 
-		if (!list.isEmpty()) {
-			outStr = gson.toJson(list);
-
-		}
+		outStr = gson.toJson(Orderlist);
 		res.setContentType(CONTENT_TYPE);
 		PrintWriter out = res.getWriter();
 		out.println(outStr);

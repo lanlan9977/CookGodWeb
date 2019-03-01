@@ -45,7 +45,7 @@ public class FoodOrderService {
 	public List<FoodOrderVO> getAll(){
 		return dao.getAll();
 	}
-	public List<FoodOrderVO> getCustMenuOrder(String cust_ID){
+	public List<FoodOrderVO> getCustFoodOrder(String cust_ID){
 		return dao.findByCustID(cust_ID);
 	}
 }
