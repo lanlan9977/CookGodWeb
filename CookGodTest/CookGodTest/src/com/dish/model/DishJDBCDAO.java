@@ -307,4 +307,10 @@ public class DishJDBCDAO implements DishDAO_interface {
 //			System.out.println();
 //		}
 	}
+
+	@Override
+	public byte[] getImage(String dish_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

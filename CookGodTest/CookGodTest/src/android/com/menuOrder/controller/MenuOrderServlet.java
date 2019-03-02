@@ -64,7 +64,7 @@ public class MenuOrderServlet extends HttpServlet {
 		if (!festOrderList.isEmpty()) {
 			Orderlist.add(festOrderJsonIn);
 		}else {
-			Orderlist.add("XXXXXXXXXXXXXXX");
+			Orderlist.add("");
 		}
 
 		FoodOrderService foodOrderService = new FoodOrderService();
@@ -83,6 +83,7 @@ public class MenuOrderServlet extends HttpServlet {
 		res.setContentType(CONTENT_TYPE);
 		PrintWriter out = res.getWriter();
 		out.println(outStr);
+		out.close();
 		System.out.println("output: " + outStr);
 	}
 

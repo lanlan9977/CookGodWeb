@@ -71,4 +71,28 @@
     <servlet-name>AndroidFoodOrderServlet</servlet-name>
     <url-pattern>/FoodOrderServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidMenuDishServlet</servlet-name>
+    <servlet-class>android.com.menuDish.controller.MenuDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidMenuDishServlet</servlet-name>
+    <url-pattern>/MenuDishServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidMenuServlet</servlet-name>
+    <servlet-class>android.com.menu.controller.MenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidMenuServlet</servlet-name>
+    <url-pattern>/MenuServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>AndroidDishServlet</servlet-name>
+    <servlet-class>android.com.dish.controller.DishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidDishServlet</servlet-name>
+    <url-pattern>/DishServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -57,7 +57,9 @@ public class DishService {
 			return dao.getAll();
 		}
 		
-		
+		public byte[] getDish_Pic(String dish_ID) {
+			return dao.getImage(dish_ID);
+		}
 	}
 
 

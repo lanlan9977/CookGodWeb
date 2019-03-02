@@ -56,13 +56,11 @@ public class CustServlet extends HttpServlet {
 		CustService custService = new CustService();
 		CustVO cust_db = custService.getOneCustAcc(cust_account.getCust_acc());// 利用cust_account查詢資料庫該筆顧客資料
 		String custJsonIn = gson.toJson(cust_db);
-		System.out.println( custJsonIn);
 		// 推播
 		BroadcastService broadcastService = new BroadcastService();
 		List<BroadcastVO> blist = broadcastService.getOneBroadcastByCustID(cust_db.getCust_ID());
 		String broadcastJsonIn = gson.toJson(blist);
 		map.put(custJsonIn, broadcastJsonIn);
-		System.out.println( custJsonIn);
 		// 主廚
 		ChefService chefService = new ChefService();
 		ChefVO chef_db = chefService.getOneChef(cust_db.getCust_ID());

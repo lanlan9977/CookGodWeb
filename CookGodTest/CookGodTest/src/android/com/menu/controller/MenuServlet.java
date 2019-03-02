@@ -1,10 +1,9 @@
-package android.com.menuDish.controller;
+package android.com.menu.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,18 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dish.model.DishService;
-import com.dish.model.DishVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.menu.model.MenuService;
-import com.menu.model.MenuVO;
-import com.menuDish.model.MenuDishService;
-import com.menuDish.model.MenuDishVO;
+
 import piciotest.ImageUtil;
 
-public class MenuDishServlet extends HttpServlet {
+public class MenuServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	List<String> stringList;
 
@@ -45,35 +40,25 @@ public class MenuDishServlet extends HttpServlet {
 		}
 		System.out.println("input: " + jsonIn);
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
-		String action = jsonObject.get("selectMenuOrderDetail").getAsString();
-		stringList = new ArrayList<>();
+		String action = jsonObject.get("action").getAsString();
 
-		// 套餐
 		MenuService menuService = new MenuService();
-		MenuVO menuVO = menuService.getOneMenu(action);
-		String menuJsonIn = gson.toJson(menuVO);
-		stringList.add(menuJsonIn);
-
-		// 套餐菜色
-		MenuDishService menuDishService = new MenuDishService();
-		List<MenuDishVO> menuDishList = menuDishService.getAllMenuDish(action);
-
-		// 菜色
-		List<DishVO> dishList = new ArrayList<>();
-		DishService dishService = new DishService();
-		for (int i = 0; i < menuDishList.size(); i++) {
-			DishVO dishVO = dishService.getOneDish(menuDishList.get(i).getDish_ID());
-			dishList.add(dishVO);
+		if ("getImage".equals(action)) {
+			OutputStream os = res.getOutputStream();
+			String menu_iD = jsonObject.get("menu_ID").getAsString();
+			int imageSize = jsonObject.get("imageSize").getAsInt();
+			byte[] image = menuService.getMenu_Pic(menu_iD);
+			if (image != null) {
+				// 縮圖 in server side
+				image = ImageUtil.shrink(image, imageSize);
+				res.setContentType("image/jpeg");
+				res.setContentLength(image.length);
+			
+			}
+			os.write(image);
+			os.close();
 		}
-		String dishJsonIn = gson.toJson(dishList);
-		stringList.add(dishJsonIn);
-		String outStr = "";
-		outStr = gson.toJson(stringList);
 		res.setContentType(CONTENT_TYPE);
-		PrintWriter out = res.getWriter();
-		out.println(outStr);
-		System.out.println("output: " + outStr);
-		out.close();
 
 	}
 

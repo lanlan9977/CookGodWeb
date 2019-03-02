@@ -9,5 +9,6 @@ public interface DishDAO_interface {
 	public void delete (String dish_ID);
 	public DishVO findByPrimaryKey (String dish_ID);
 	public List<DishVO> getAll();
+	public byte[] getImage(String dish_ID);
 
 }

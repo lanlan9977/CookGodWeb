@@ -26,6 +26,8 @@ public class DishDAO implements DishDAO_interface{
 			"SELECT DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE FROM DISH order by DISH_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT DISH_ID,DISH_NAME,DISH_STATUS,DISH_PIC,DISH_RESUME,DISH_PRICE FROM DISH where DISH_ID=?";
+	private static final String GET_IMAGE = 
+			"SELECT DISH_PIC  FROM DISH where DISH_ID=?";
 	private static final String DELETE = 
 			"DELETE FROM DISH where DISH_ID=?";
 	private static final String UPDATE = 
@@ -171,7 +173,6 @@ public class DishDAO implements DishDAO_interface{
 				DishVO.setDish_ID(rs.getString("dish_ID"));
 				DishVO.setDish_name(rs.getString("dish_name"));
 				DishVO.setDish_status(rs.getString("dish_status"));
-				DishVO.setDish_pic(rs.getBytes("dish_pic"));
 				DishVO.setDish_resume(rs.getString("dish_resume"));
 				DishVO.setDish_price(rs.getInt("dish_price"));
 				
@@ -262,6 +263,61 @@ public class DishDAO implements DishDAO_interface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public byte[] getImage(String dish_ID) {
+		
+		DishVO DishVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_IMAGE);
+			
+			pstmt.setString(1, dish_ID);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				DishVO = new DishVO();
+		
+				DishVO.setDish_pic(rs.getBytes("dish_pic"));
+				
+				
+			}
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured."
+					+ se.getMessage());
+		
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				}catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			}catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			}catch (Exception e) {
+			e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return DishVO.getDish_pic();
 	}
 
 }

@@ -257,7 +257,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 
 	public static void main(String[] args) {
 
-		// ·s¼W
+		// ï¿½sï¿½W
 //		MenuJDBCDAO dao = new MenuJDBCDAO();
 //		MenuVO menuVO = new MenuVO();
 //		menuVO.setMenuName("88888");
@@ -266,7 +266,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 //		menuVO.setMenuPrice(1);
 //		dao.insert(menuVO);
 
-		// ­×§ï
+		// ï¿½×§ï¿½
 //		MenuVO menuVO2 = new MenuVO();
 //		menuVO2.setMenuId("M00011");
 //		menuVO2.setMenuName("999");
@@ -275,10 +275,10 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 //		menuVO2.setMenuPrice(1);
 //		dao.update(menuVO2);
 
-		// §R°£
+		// ï¿½Rï¿½ï¿½
 //		dao.delete("M00007");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		MenuVO menuVO3 = dao.findByPrimaryKey("M00009");
 //		System.out.print(menuVO3.getMenuId() + ",");
 //		System.out.print(menuVO3.getMenuName() + ",");
@@ -287,7 +287,7 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 //		System.out.print(menuVO3.getMenuPrice() + ",");
 //		System.out.println("---------------------");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		List<MenuVO> list = dao.getAll();
 //		for (MenuVO aMenu : list) {
 //			System.out.print(aMenu.getMenuId() + ",");
@@ -298,6 +298,12 @@ public class MenuJDBCDAO implements MenuDAO_interface {
 //			System.out.println();
 //		}
 
+	}
+
+	@Override
+	public byte[] getImage(String menu_ID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

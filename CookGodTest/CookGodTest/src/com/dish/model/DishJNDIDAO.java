@@ -264,4 +264,10 @@ public class DishJNDIDAO implements DishDAO_interface{
 		return list;
 	}
 
+	@Override
+	public byte[] getImage(String dish_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

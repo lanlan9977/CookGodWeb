@@ -12,4 +12,5 @@ public interface MenuDAO_interface {
 	public MenuVO findByPrimaryKey(String menu_ID);
 
 	public List<MenuVO> getAll();
+	public byte[] getImage(String menu_ID);
 }

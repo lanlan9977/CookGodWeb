@@ -47,5 +47,9 @@ public class MenuService {
 	public List<MenuVO> gelAllMenu() {
 		return dao.getAll();
 	}
+	
+	public byte[] getMenu_Pic(String menu_ID) {
+		return dao.getImage(menu_ID);
+	}
 
 }

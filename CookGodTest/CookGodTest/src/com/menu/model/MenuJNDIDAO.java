@@ -251,4 +251,10 @@ public class MenuJNDIDAO implements MenuDAO_interface {
 		return list;
 	}
 
+	@Override
+	public byte[] getImage(String menu_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
