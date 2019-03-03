@@ -87,12 +87,20 @@
     <servlet-name>AndroidMenuServlet</servlet-name>
     <url-pattern>/MenuServlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>AndroidDishServlet</servlet-name>
     <servlet-class>android.com.dish.controller.DishServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidDishServlet</servlet-name>
     <url-pattern>/DishServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AndroidFestOrderServlet</servlet-name>
+    <servlet-class>android.com.festOrder.controller.FestOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidFestOrderServlet</servlet-name>
+    <url-pattern>/FestOrderServlet</url-pattern>
   </servlet-mapping>
 </web-app>

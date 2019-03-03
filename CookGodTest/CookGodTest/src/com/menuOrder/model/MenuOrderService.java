@@ -50,4 +50,7 @@ public class MenuOrderService {
 	public List<MenuOrderVO> getCustMenuOrder(String cust_ID){
 		return dao.findByCustID(cust_ID);
 	}
+	public List<MenuOrderVO> getChefMenuOrder(String chef_ID){
+		return dao.findByChefID(chef_ID);
+	}
 }

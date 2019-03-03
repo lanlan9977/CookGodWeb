@@ -9,6 +9,8 @@ public class MenuDishService {
 		dao = new MenuDishDAO();
 	}
 	
+	
+	
 	public List<MenuDishVO> getAllMenuDish(String menu_ID){
 		return dao.findyByPrimaryKeysMenuID(menu_ID);
 	}

@@ -80,6 +80,7 @@ public class CustServlet extends HttpServlet {
 		res.setContentType(CONTENT_TYPE);
 		PrintWriter out = res.getWriter();
 		out.println(outStr);
+		out.close();
 		System.out.println("output: " + outStr);
 		System.out.println();
 		System.out.println();

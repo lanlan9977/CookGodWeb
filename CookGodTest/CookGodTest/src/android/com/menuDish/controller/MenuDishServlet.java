@@ -72,9 +72,8 @@ public class MenuDishServlet extends HttpServlet {
 		res.setContentType(CONTENT_TYPE);
 		PrintWriter out = res.getWriter();
 		out.println(outStr);
-		System.out.println("output: " + outStr);
 		out.close();
-
+		System.out.println("output: " + outStr);
 	}
 
 }

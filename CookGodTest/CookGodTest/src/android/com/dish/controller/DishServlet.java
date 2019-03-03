@@ -45,27 +45,22 @@ public class DishServlet extends HttpServlet {
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		String action = jsonObject.get("action").getAsString();
 
+		//菜色
 		DishService dishService = new DishService();
 		if ("getImage".equals(action)) {
 			OutputStream os = res.getOutputStream();
 			String dish_ID = jsonObject.get("dish_ID").getAsString();
-            
-            
-       
 			int imageSize = jsonObject.get("imageSize").getAsInt();
 			byte[] image = dishService.getDish_Pic(dish_ID);
 			if (image != null) {
-				// 縮圖 in server side
 				image = ImageUtil.shrink(image, imageSize);
 				res.setContentType("image/jpeg");
-				res.setContentLength(image.length);
-				
+				res.setContentLength(image.length);	
 			}
 			os.write(image);
 			os.close();
 		}
 		res.setContentType(CONTENT_TYPE);
-
 	}
 
 }

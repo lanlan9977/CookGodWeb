@@ -310,4 +310,10 @@ public class MenuOrderJNDIDAO implements MenuOrderDAO_Interface{
 		}
 		return listAll;
 	}
+
+	@Override
+	public List<MenuOrderVO> findByChefID(String chef_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

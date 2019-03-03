@@ -42,6 +42,7 @@ public class MenuServlet extends HttpServlet {
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		String action = jsonObject.get("action").getAsString();
 
+		//套餐
 		MenuService menuService = new MenuService();
 		if ("getImage".equals(action)) {
 			OutputStream os = res.getOutputStream();
@@ -49,11 +50,9 @@ public class MenuServlet extends HttpServlet {
 			int imageSize = jsonObject.get("imageSize").getAsInt();
 			byte[] image = menuService.getMenu_Pic(menu_iD);
 			if (image != null) {
-				// 縮圖 in server side
 				image = ImageUtil.shrink(image, imageSize);
 				res.setContentType("image/jpeg");
 				res.setContentLength(image.length);
-			
 			}
 			os.write(image);
 			os.close();
