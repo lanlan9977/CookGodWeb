@@ -47,13 +47,16 @@
     <servlet-name>MenuOrderServlet</servlet-name>
     <url-pattern>/menuOrder/menuOrder.do</url-pattern>
   </servlet-mapping>
+  
+  
+  
   <servlet>
-    <servlet-name>AndroidMenuOrderServlet</servlet-name>
-    <servlet-class>android.com.menuOrder.controller.MenuOrderServlet</servlet-class>
+    <servlet-name>AndroidOrderByCustServlet</servlet-name>
+    <servlet-class>android.com.orderByCust.controller.OrderByCustServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AndroidMenuOrderServlet</servlet-name>
-    <url-pattern>/MenuOrderServlet</url-pattern>
+    <servlet-name>AndroidOrderByCustServlet</servlet-name>
+    <url-pattern>/OrderByCustServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>AndroidCustServlet</servlet-name>
@@ -95,12 +98,13 @@
     <servlet-name>AndroidDishServlet</servlet-name>
     <url-pattern>/DishServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
-    <servlet-name>AndroidFestOrderServlet</servlet-name>
-    <servlet-class>android.com.festOrder.controller.FestOrderServlet</servlet-class>
+   <servlet>
+    <servlet-name>AndroidOrderByChefServlet</servlet-name>
+    <servlet-class>android.com.orderByChef.controller.OrderByChefServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AndroidFestOrderServlet</servlet-name>
-    <url-pattern>/FestOrderServlet</url-pattern>
+    <servlet-name>AndroidOrderByChefServlet</servlet-name>
+    <url-pattern>/OrderByChefServlet</url-pattern>
   </servlet-mapping>
+
 </web-app>

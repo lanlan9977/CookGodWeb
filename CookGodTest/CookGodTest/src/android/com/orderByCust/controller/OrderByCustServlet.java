@@ -1,4 +1,4 @@
-package android.com.menuOrder.controller;
+package android.com.orderByCust.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import com.google.gson.JsonObject;
 import com.menuOrder.model.MenuOrderService;
 import com.menuOrder.model.MenuOrderVO;
 
-public class MenuOrderServlet extends HttpServlet {
+public class OrderByCustServlet extends HttpServlet {
 
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	private List<MenuOrderVO> menuOrderList;

@@ -1,4 +1,4 @@
-package android.com.festOrder.controller;
+package android.com.orderByChef.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import com.menuOrder.model.MenuOrderVO;
 
 
 
-public class FestOrderServlet extends HttpServlet {
+public class OrderByChefServlet extends HttpServlet {
 
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	private List<MenuOrderVO> menuOrderList;
