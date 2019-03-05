@@ -57,6 +57,8 @@ public class FoodMallServlet extends HttpServlet {
 				image = ImageUtil.shrink(image, imageSize);
 				res.setContentType("image/jpeg");
 				res.setContentLength(image.length);	
+			}else {
+				System.out.println(""+food_ID);
 			}
 			os.write(image);
 			os.close();

@@ -33,7 +33,7 @@ public class FoodMallDAO implements FoodMallDAO_interface {
 	private static final String GET_ONE_STMT =
 			"SELECT FOOD_SUP_ID , FOOD_ID, FOOD_M_NAME, FOOD_M_STATUS, FOOD_M_PRICE, FOOD_M_UNIT, FOOD_M_PLACE, FOOD_M_PIC, FOOD_M_RESUME, FOOD_M_RATE FROM FOOD_MALL WHERE FOOD_SUP_ID = ? AND FOOD_ID = ?";
 	private static final String GET_IMAGE = 
-			"SELECT FOOD_M_PIC  FROM DISH where FOOD_ID=?";
+			"SELECT FOOD_M_PIC  FROM FOOD_MALL where FOOD_ID=?";
 	@Override
 	public void insert(FoodMallVO foodMallVO) {
 		Connection con = null;
