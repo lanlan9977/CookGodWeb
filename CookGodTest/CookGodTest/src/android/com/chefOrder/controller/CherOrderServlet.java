@@ -25,8 +25,8 @@ import com.google.gson.JsonObject;
 
 public class CherOrderServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
-	List<FavFdSupVO> favSuoList;
 	List<String> stringList;
+	List<FavFdSupVO> favSuoList;
 	List<FoodMallVO> foodMallList;
 	List<FoodSupVO> foodSupList;
 	
@@ -49,7 +49,7 @@ public class CherOrderServlet extends HttpServlet {
 		}
 		System.out.println("input: " + jsonIn);
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
-		String chef_ID = jsonObject.get("selectCust").getAsString();
+		String chef_ID = jsonObject.get("selectFoodMall").getAsString();
 		favSuoList=new ArrayList<>();
 		stringList=new ArrayList<>();
 		foodMallList=new ArrayList<>();
@@ -58,6 +58,8 @@ public class CherOrderServlet extends HttpServlet {
 		//最愛的食材供應商
 		FavFdSupService favFdSupService=new FavFdSupService();
 		favSuoList=favFdSupService.getAllByChefID(chef_ID);
+		String favSuoListJsonIn=gson.toJson(favSuoList);
+		stringList.add(favSuoListJsonIn);
 		
 		//食材商城
 		FoodMallService foodMallService=new FoodMallService();
@@ -65,11 +67,14 @@ public class CherOrderServlet extends HttpServlet {
 		String foodMallJsonIn=gson.toJson(foodMallList);
 		stringList.add(foodMallJsonIn);
 		
-		//食材通應商
+		//食材供應商
 		FoodSupService foodSupService=new FoodSupService();
 		for(int i=0;i<foodMallList.size();i++) {
-			foodMallList.get(i).getFood_sup_ID();
+			FoodSupVO foodSupVO=foodSupService.getOneFoodSup(foodMallList.get(i).getFood_sup_ID());
+			foodSupList.add(foodSupVO);
 		}
+		String foodSupJsonIn=gson.toJson(foodSupList);
+		stringList.add(foodSupJsonIn);
 		
 		
 		

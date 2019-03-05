@@ -268,7 +268,7 @@ public class DishDAO implements DishDAO_interface{
 	@Override
 	public byte[] getImage(String dish_ID) {
 		
-		DishVO DishVO = null;
+		DishVO dishVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -283,9 +283,9 @@ public class DishDAO implements DishDAO_interface{
 			
 			while(rs.next()) {
 				
-				DishVO = new DishVO();
+				dishVO = new DishVO();
 		
-				DishVO.setDish_pic(rs.getBytes("dish_pic"));
+				dishVO.setDish_pic(rs.getBytes("dish_pic"));
 				
 				
 			}
@@ -317,7 +317,7 @@ public class DishDAO implements DishDAO_interface{
 			}
 		}
 		
-		return DishVO.getDish_pic();
+		return dishVO.getDish_pic();
 	}
 
 }

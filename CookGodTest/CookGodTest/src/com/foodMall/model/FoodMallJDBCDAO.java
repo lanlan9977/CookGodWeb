@@ -310,6 +310,12 @@ public class FoodMallJDBCDAO implements FoodMallDAO_interface {
 		
 		
 	}
+
+	@Override
+	public byte[] getImage(String food_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

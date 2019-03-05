@@ -230,4 +230,9 @@ public class FoodMallJNDIDAO implements FoodMallDAO_interface {
 		}
 		return list;
 	}
+	@Override
+	public byte[] getImage(String food_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -47,9 +47,6 @@
     <servlet-name>MenuOrderServlet</servlet-name>
     <url-pattern>/menuOrder/menuOrder.do</url-pattern>
   </servlet-mapping>
-     
-     
-     
   <servlet>
     <servlet-name>AndroidOrderByCustServlet</servlet-name>
     <servlet-class>android.com.orderByCust.controller.OrderByCustServlet</servlet-class>
@@ -106,12 +103,20 @@
     <servlet-name>AndroidOrderByChefServlet</servlet-name>
     <url-pattern>/OrderByChefServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AndroidCherOrderServlet</servlet-name>
     <servlet-class>android.com.chefOrder.controller.CherOrderServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidCherOrderServlet</servlet-name>
     <url-pattern>/CherOrderServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AndroidFoodMallServlet</servlet-name>
+    <servlet-class>android.com.foodMall.controller.FoodMallServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidFoodMallServlet</servlet-name>
+    <url-pattern>/FoodMallServlet</url-pattern>
   </servlet-mapping>
 </web-app>
