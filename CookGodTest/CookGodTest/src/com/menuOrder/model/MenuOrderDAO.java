@@ -418,7 +418,7 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(Update_Stmt_MenuOrderStatus);
+			pstmt = con.prepareStatement(Update_Stmt_MenuOrderRate);
 			
 			pstmt.setFloat(1, menu_od_rate);
 			pstmt.setString(2, menu_od_ID);

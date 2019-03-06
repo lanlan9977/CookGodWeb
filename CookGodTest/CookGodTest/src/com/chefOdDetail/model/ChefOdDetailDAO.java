@@ -245,4 +245,44 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void inser2(ChefOdDetailVO chefOdDetailVO, Connection con) {
+
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT);
+
+			pstmt.setString(1, chefOdDetailVO.getChef_or_ID());
+			pstmt.setString(2, chefOdDetailVO.getFood_sup_ID());
+			pstmt.setString(3, chefOdDetailVO.getFood_ID());
+			pstmt.setInt(4, chefOdDetailVO.getChef_od_qty());
+			pstmt.setInt(5, chefOdDetailVO.getChef_od_stotal());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
 }

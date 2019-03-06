@@ -251,7 +251,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 
 	public static void main(String[] args) {
 
-		// ·s¼W
+		// ï¿½sï¿½W
 //		ChefOdDetailJDBCDAO dao = new ChefOdDetailJDBCDAO();
 //		ChefOdDetailVO chefOdDetailVO = new ChefOdDetailVO();
 //		chefOdDetailVO.setChefOrId("CF20190213-000012");
@@ -261,7 +261,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 //		chefOdDetailVO.setChefOdStotal(1);
 //		dao.insert(chefOdDetailVO);
 
-		// ­×§ï
+		// ï¿½×§ï¿½
 //		ChefOdDetailVO chefOdDetailVO2 = new ChefOdDetailVO();
 //		chefOdDetailVO2.setChefOrId("CF20190213-000012");
 //		chefOdDetailVO2.setFoodSupId("T00003");
@@ -270,10 +270,10 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 //		chefOdDetailVO2.setChefOdStotal(2);
 //		dao.update(chefOdDetailVO2);
 
-		// §R°£
+		// ï¿½Rï¿½ï¿½
 //		dao.delete("CF20190213-000012");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		ChefOdDetailVO chefOdDetailVO3 = dao.findByPrimaryKey("CF20190213-000012");
 //		System.out.print(chefOdDetailVO3.getChefOrId() + ",");
 //		System.out.print(chefOdDetailVO3.getFoodSupId() + ",");
@@ -282,7 +282,7 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 //		System.out.print(chefOdDetailVO3.getChefOdStotal() + ",");
 //		System.out.println("---------------------");
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 //		List<ChefOdDetailVO> list = dao.getAll();
 //		for (ChefOdDetailVO aChefOdDetail : list) {
 //			System.out.print(aChefOdDetail.getChefOrId() + ",");
@@ -293,6 +293,12 @@ public class ChefOdDetailJDBCDAO implements ChefOdDetailDAO_interface {
 //			System.out.println();
 //		}
 
+	}
+
+	@Override
+	public void inser2(ChefOdDetailVO chefOdDetailVO, Connection con) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

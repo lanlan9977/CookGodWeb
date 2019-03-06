@@ -8,6 +8,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.chefOdDetail.model.ChefOdDetailDAO;
+import com.chefOdDetail.model.ChefOdDetailVO;
+
 public class ChefOrderDAO implements ChefOrderDAO_interface {
 
 	private static DataSource ds = null;
@@ -261,6 +264,67 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void insertChefOrderDetail(ChefOrderVO chefOrderVO, List<ChefOdDetailVO> list) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+
+			con.setAutoCommit(false);
+			String[] cheforder = { "CHEFORDER" };
+			pstmt = con.prepareStatement(INSERT_STMT,cheforder);
+			pstmt.setString(1, chefOrderVO.getChef_or_status());
+			pstmt.setTimestamp(2, chefOrderVO.getChef_or_start());
+			pstmt.setTimestamp(3, chefOrderVO.getChef_or_send());
+			pstmt.setTimestamp(4, chefOrderVO.getChef_or_rcv());
+			pstmt.setTimestamp(5, chefOrderVO.getChef_or_end());
+			pstmt.setString(6, chefOrderVO.getChef_or_name());
+			pstmt.setString(7, chefOrderVO.getChef_or_addr());
+			pstmt.setString(8, chefOrderVO.getChef_or_tel());
+			pstmt.setString(9, chefOrderVO.getChef_ID());
+			pstmt.executeUpdate();
+			
+			String next_cheforder=null;
+			ResultSet rs=pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				next_cheforder=rs.getString(1);
+			}else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			ChefOdDetailDAO dao=new ChefOdDetailDAO();
+			for(ChefOdDetailVO chefOdDetailVO:list) {
+				chefOdDetailVO.setChef_or_ID(next_cheforder);
+				dao.inser2(chefOdDetailVO, con);
+			}
+			con.commit();
+			con.setAutoCommit(true);
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 }

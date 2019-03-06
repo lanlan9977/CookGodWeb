@@ -245,4 +245,10 @@ public class ChefOdDetailJNDIDAO implements ChefOdDetailDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void inser2(ChefOdDetailVO chefOdDetailVO, Connection con) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

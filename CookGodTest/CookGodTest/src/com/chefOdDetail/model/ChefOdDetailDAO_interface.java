@@ -12,4 +12,6 @@ public interface ChefOdDetailDAO_interface {
 	public ChefOdDetailVO findByPrimaryKey(String chef_or_ID);
 
 	public List<ChefOdDetailVO> getAll();
+	
+	public void inser2(ChefOdDetailVO chefOdDetailVO,java.sql.Connection con);
 }

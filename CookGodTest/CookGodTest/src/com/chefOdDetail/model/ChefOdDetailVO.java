@@ -4,6 +4,14 @@ public class ChefOdDetailVO {
 
 	private String chef_or_ID;
 	private String food_sup_ID;
+	public ChefOdDetailVO(String food_sup_ID, String food_ID, Integer chef_od_qty, Integer chef_od_stotal) {
+		super();
+		this.food_sup_ID = food_sup_ID;
+		this.food_ID = food_ID;
+		this.chef_od_qty = chef_od_qty;
+		this.chef_od_stotal = chef_od_stotal;
+	}
+
 	private String food_ID;
 	private Integer chef_od_qty;
 	private Integer chef_od_stotal;
