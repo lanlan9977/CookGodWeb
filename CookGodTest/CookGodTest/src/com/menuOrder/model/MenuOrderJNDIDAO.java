@@ -84,7 +84,7 @@ public class MenuOrderJNDIDAO implements MenuOrderDAO_Interface{
 			pstmt.setString(1, menuOrderVO.getMenu_od_status());
 			pstmt.setTimestamp(2, menuOrderVO.getMenu_od_book());
 			pstmt.setDate(3, menuOrderVO.getMenu_od_end());
-			pstmt.setInt(4, menuOrderVO.getMenu_od_rate());
+			pstmt.setFloat(4, menuOrderVO.getMenu_od_rate());
 			pstmt.setString(5, menuOrderVO.getMenu_od_msg());
 			pstmt.setString(6, menuOrderVO.getChef_ID());
 			pstmt.setString(7, menuOrderVO.getMenu_ID());	
@@ -316,4 +316,22 @@ public class MenuOrderJNDIDAO implements MenuOrderDAO_Interface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public void updateMenuOdStatus(String menu_od_ID, String menu_od_status) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateMenuOdRate(String menu_od_ID, float menu_od_rate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+		
+	
 }

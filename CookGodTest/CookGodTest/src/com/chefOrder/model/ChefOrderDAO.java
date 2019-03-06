@@ -37,13 +37,13 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, chefOrderVO.getChef_or_status());
-			pstmt.setDate(2, chefOrderVO.getChef_or_start());
-			pstmt.setDate(3, chefOrderVO.getChef_or_send());
-			pstmt.setDate(4, chefOrderVO.getChef_or_rcv());
-			pstmt.setDate(5, chefOrderVO.getChef_or_end());
+			pstmt.setTimestamp(2, chefOrderVO.getChef_or_start());
+			pstmt.setTimestamp(3, chefOrderVO.getChef_or_send());
+			pstmt.setTimestamp(4, chefOrderVO.getChef_or_rcv());
+			pstmt.setTimestamp(5, chefOrderVO.getChef_or_end());
 			pstmt.setString(6, chefOrderVO.getChef_or_name());
 			pstmt.setString(7, chefOrderVO.getChef_or_addr());
-			pstmt.setInt(8, chefOrderVO.getChef_or_tel());
+			pstmt.setString(8, chefOrderVO.getChef_or_tel());
 			pstmt.setString(9, chefOrderVO.getChef_ID());
 
 			pstmt.executeUpdate();
@@ -80,13 +80,13 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, chefOrderVO.getChef_or_status());
-			pstmt.setDate(2, chefOrderVO.getChef_or_start());
-			pstmt.setDate(3, chefOrderVO.getChef_or_send());
-			pstmt.setDate(4, chefOrderVO.getChef_or_rcv());
-			pstmt.setDate(5, chefOrderVO.getChef_or_end());
+			pstmt.setTimestamp(2, chefOrderVO.getChef_or_start());
+			pstmt.setTimestamp(3, chefOrderVO.getChef_or_send());
+			pstmt.setTimestamp(4, chefOrderVO.getChef_or_rcv());
+			pstmt.setTimestamp(5, chefOrderVO.getChef_or_end());
 			pstmt.setString(6, chefOrderVO.getChef_or_name());
 			pstmt.setString(7, chefOrderVO.getChef_or_addr());
-			pstmt.setInt(8, chefOrderVO.getChef_or_tel());
+			pstmt.setString(8, chefOrderVO.getChef_or_tel());
 			pstmt.setString(9, chefOrderVO.getChef_ID());
 			pstmt.setString(10, chefOrderVO.getChef_or_ID());
 
@@ -167,13 +167,13 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 				chefOrderVO = new ChefOrderVO();
 				chefOrderVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
 				chefOrderVO.setChef_or_status(rs.getString("CHEF_OR_STATUS"));
-				chefOrderVO.setChef_or_start(rs.getDate("CHEF_OR_START"));
-				chefOrderVO.setChef_or_end(rs.getDate("CHEF_OR_SEND"));
-				chefOrderVO.setChef_or_rcv(rs.getDate("CHEF_OR_RCV"));
-				chefOrderVO.setChef_or_end(rs.getDate("CHEF_OR_END"));
+				chefOrderVO.setChef_or_start(rs.getTimestamp("CHEF_OR_START"));
+				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_SEND"));
+				chefOrderVO.setChef_or_rcv(rs.getTimestamp("CHEF_OR_RCV"));
+				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_END"));
 				chefOrderVO.setChef_or_name(rs.getString("CHEF_OR_NAME"));
 				chefOrderVO.setChef_or_addr(rs.getString("CHEF_OR_ADDR"));
-				chefOrderVO.setChef_or_tel(rs.getInt("CHEF_OR_TEL"));
+				chefOrderVO.setChef_or_tel(rs.getString("CHEF_OR_TEL"));
 				chefOrderVO.setChef_ID(rs.getString("CHEF_ID"));
 			}
 
@@ -224,13 +224,13 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 				chefOrderVO = new ChefOrderVO();
 				chefOrderVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
 				chefOrderVO.setChef_or_status(rs.getString("CHEF_OR_STATUS"));
-				chefOrderVO.setChef_or_start(rs.getDate("CHEF_OR_START"));
-				chefOrderVO.setChef_or_end(rs.getDate("CHEF_OR_SEND"));
-				chefOrderVO.setChef_or_rcv(rs.getDate("CHEF_OR_RCV"));
-				chefOrderVO.setChef_or_end(rs.getDate("CHEF_OR_END"));
+				chefOrderVO.setChef_or_start(rs.getTimestamp("CHEF_OR_START"));
+				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_SEND"));
+				chefOrderVO.setChef_or_rcv(rs.getTimestamp("CHEF_OR_RCV"));
+				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_END"));
 				chefOrderVO.setChef_or_name(rs.getString("CHEF_OR_NAME"));
 				chefOrderVO.setChef_or_addr(rs.getString("CHEF_OR_ADDR"));
-				chefOrderVO.setChef_or_tel(rs.getInt("CHEF_OR_TEL"));
+				chefOrderVO.setChef_or_tel(rs.getString("CHEF_OR_TEL"));
 				chefOrderVO.setChef_ID(rs.getString("CHEF_ID"));
 				list.add(chefOrderVO);
 			}

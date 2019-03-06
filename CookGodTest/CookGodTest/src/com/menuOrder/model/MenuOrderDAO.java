@@ -25,6 +25,10 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 			"INSERT INTO MENU_ORDER (MENU_OD_ID,MENU_OD_STATUS,MENU_OD_START,MENU_OD_BOOK,CUST_ID,CHEF_ID,MENU_ID) VALUES ('MU'||TO_CHAR(CURRENT_DATE, 'YYYYMMDD')||'-'||LPAD(TO_CHAR(MENU_OD_ID_SEQ.NEXTVAL), 6, '0'),?,SYSDATE,?,?,?,?)";
 	private static final String Update_Stmt = 
 			"UPDATE MENU_ORDER SET MENU_OD_STATUS = ?, MENU_OD_BOOK = ?, MENU_OD_END = ?, MENU_OD_RATE = ?, MENU_OD_MSG = ? ,CHEF_ID = ?, MENU_ID = ? WHERE MENU_OD_ID = ?";
+	private static final String Update_Stmt_MenuOrderStatus = 
+			"UPDATE MENU_ORDER SET MENU_OD_STATUS = ? WHERE MENU_OD_ID = ?";
+	private static final String Update_Stmt_MenuOrderRate = 
+			"UPDATE MENU_ORDER SET MENU_OD_RATE = ? WHERE MENU_OD_ID = ?";
 	private static final String Delete_Stmt = 
 			"DELETE FROM MENU_ORDER WHERE MENU_OD_ID = ?";
 	private static final String Get_One_Stmt = 
@@ -86,7 +90,7 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 			pstmt.setString(1, menuOrderVO.getMenu_od_status());
 			pstmt.setTimestamp(2, menuOrderVO.getMenu_od_book());
 			pstmt.setDate(3, menuOrderVO.getMenu_od_end());
-			pstmt.setInt(4, menuOrderVO.getMenu_od_rate());
+			pstmt.setFloat(4, menuOrderVO.getMenu_od_rate());
 			pstmt.setString(5, menuOrderVO.getMenu_od_msg());
 			pstmt.setString(6, menuOrderVO.getChef_ID());
 			pstmt.setString(7, menuOrderVO.getMenu_ID());	
@@ -371,4 +375,78 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 		}
 		return listAll;
 	}
+
+	@Override
+	public void updateMenuOdStatus(String menu_od_ID,String menu_od_status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Update_Stmt_MenuOrderStatus);
+			
+			pstmt.setString(1, menu_od_status);
+			pstmt.setString(2, menu_od_ID);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("Database Error : " + se.getMessage());
+		}finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+		
+	}
+
+	@Override
+	public void updateMenuOdRate(String menu_od_ID, float menu_od_rate) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(Update_Stmt_MenuOrderStatus);
+			
+			pstmt.setFloat(1, menu_od_rate);
+			pstmt.setString(2, menu_od_ID);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("Database Error : " + se.getMessage());
+		}finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+		
+		
+	}
+
+	
+	
 }

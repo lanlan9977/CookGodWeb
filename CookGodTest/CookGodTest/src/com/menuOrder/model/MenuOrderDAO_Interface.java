@@ -6,6 +6,8 @@ public interface MenuOrderDAO_Interface {
 	
 	public void insert(MenuOrderVO menuOrderVO);
     public void update(MenuOrderVO menuOrderVO);
+    public void updateMenuOdStatus(String menu_od_ID,String menu_od_status);
+    public void updateMenuOdRate(String menu_od_ID,float menu_od_rate);
     public void delete(String menu_od_ID);
     public MenuOrderVO findByPrimaryKey(String menu_od_ID);
     public List<MenuOrderVO> findByCustID(String cust_ID);

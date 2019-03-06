@@ -111,12 +111,36 @@
     <servlet-name>AndroidCherOrderServlet</servlet-name>
     <url-pattern>/CherOrderServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AndroidFoodMallServlet</servlet-name>
     <servlet-class>android.com.foodMall.controller.FoodMallServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidFoodMallServlet</servlet-name>
     <url-pattern>/FoodMallServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidChefOdDetailServlet</servlet-name>
+    <servlet-class>android.com.chefOdDetail.controller.ChefOdDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidChefOdDetailServlet</servlet-name>
+    <url-pattern>/ChefOdDetailServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidMenuOrderServlet</servlet-name>
+    <servlet-class>android.com.menuOrder.controller.MenuOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidMenuOrderServlet</servlet-name>
+    <url-pattern>/MenuOrderServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AndroidMenuOrderRateServlet</servlet-name>
+    <servlet-class>android.com.menuOrder.controller.MenuOrderRateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidMenuOrderRateServlet</servlet-name>
+    <url-pattern>/MenuOrderRateServlet</url-pattern>
   </servlet-mapping>
 </web-app>

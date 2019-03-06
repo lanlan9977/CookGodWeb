@@ -9,7 +9,7 @@ public class MenuOrderVO {
 	private Timestamp menu_od_start;
 	private Timestamp menu_od_book;
 	private Date menu_od_end;
-	private Integer menu_od_rate;
+	private float menu_od_rate;
 	private String menu_od_msg;
 	private String cust_ID;
 	private String chef_ID;
@@ -45,10 +45,10 @@ public class MenuOrderVO {
 	public void setMenu_od_end(Date menu_od_end) {
 		this.menu_od_end = menu_od_end;
 	}
-	public Integer getMenu_od_rate() {
+	public float getMenu_od_rate() {
 		return menu_od_rate;
 	}
-	public void setMenu_od_rate(Integer menu_od_rate) {
+	public void setMenu_od_rate(float menu_od_rate) {
 		this.menu_od_rate = menu_od_rate;
 	}
 	public String getMenu_od_msg() {

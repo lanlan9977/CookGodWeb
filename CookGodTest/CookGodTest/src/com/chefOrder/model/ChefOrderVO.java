@@ -1,23 +1,23 @@
 package com.chefOrder.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ChefOrderVO {
 	private String chef_or_ID;
 	private String chef_or_status;
-	private Date chef_or_start;
-	private Date chef_or_send;
-	private Date chef_or_rcv;
-	private Date chef_or_end;
+	private Timestamp chef_or_start;
+	private Timestamp chef_or_send;
+	private Timestamp chef_or_rcv;
+	private Timestamp chef_or_end;
 	private String chef_or_name;
 	private String chef_or_addr;
-	private Integer chef_or_tel;
+	private String chef_or_tel;
 	private String chef_ID;
 
 	public ChefOrderVO() {
 
 	}
-
 	public String getChef_or_ID() {
 		return chef_or_ID;
 	}
@@ -34,35 +34,35 @@ public class ChefOrderVO {
 		this.chef_or_status = chef_or_status;
 	}
 
-	public Date getChef_or_start() {
+	public Timestamp getChef_or_start() {
 		return chef_or_start;
 	}
 
-	public void setChef_or_start(Date chef_or_start) {
+	public void setChef_or_start(Timestamp chef_or_start) {
 		this.chef_or_start = chef_or_start;
 	}
 
-	public Date getChef_or_send() {
+	public Timestamp getChef_or_send() {
 		return chef_or_send;
 	}
 
-	public void setChef_or_send(Date chef_or_send) {
+	public void setChef_or_send(Timestamp chef_or_send) {
 		this.chef_or_send = chef_or_send;
 	}
 
-	public Date getChef_or_rcv() {
+	public Timestamp getChef_or_rcv() {
 		return chef_or_rcv;
 	}
 
-	public void setChef_or_rcv(Date chef_or_rcv) {
+	public void setChef_or_rcv(Timestamp chef_or_rcv) {
 		this.chef_or_rcv = chef_or_rcv;
 	}
 
-	public Date getChef_or_end() {
+	public Timestamp getChef_or_end() {
 		return chef_or_end;
 	}
 
-	public void setChef_or_end(Date chef_or_end) {
+	public void setChef_or_end(Timestamp chef_or_end) {
 		this.chef_or_end = chef_or_end;
 	}
 
@@ -82,11 +82,11 @@ public class ChefOrderVO {
 		this.chef_or_addr = chef_or_addr;
 	}
 
-	public Integer getChef_or_tel() {
+	public String getChef_or_tel() {
 		return chef_or_tel;
 	}
 
-	public void setChef_or_tel(Integer chef_or_tel) {
+	public void setChef_or_tel(String chef_or_tel) {
 		this.chef_or_tel = chef_or_tel;
 	}
 
