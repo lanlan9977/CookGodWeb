@@ -48,5 +48,8 @@ public class ChefOdDetailService {
 	public List<ChefOdDetailVO> gelAllChefOdDetail() {
 		return dao.getAll();
 	}
+	public List<ChefOdDetailVO> gelAllChefOdDetailByChefOrID(String chef_or_ID) {
+		return dao.getAllChefOrID(chef_or_ID);
+	}
 
 }

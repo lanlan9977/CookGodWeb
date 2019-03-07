@@ -59,5 +59,9 @@ public class ChefOrderService {
 	public List<ChefOrderVO> gelAllChefOrder() {
 		return dao.getAll();
 	}
+	
+	public List<ChefOrderVO> getOneChefOrder_ChefID(String chef_ID) {
+		return dao.findByCuefID(chef_ID);
+	}
 
 }

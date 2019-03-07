@@ -16,4 +16,6 @@ public interface ChefOrderDAO_interface {
 	public List<ChefOrderVO> getAll();
 	
 	public void insertChefOrderDetail(ChefOrderVO chefOrderVO,List<ChefOdDetailVO> list);
+	
+	public List<ChefOrderVO>  findByCuefID(String chef_ID);
 }

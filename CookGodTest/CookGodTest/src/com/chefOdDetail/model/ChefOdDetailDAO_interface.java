@@ -13,5 +13,7 @@ public interface ChefOdDetailDAO_interface {
 
 	public List<ChefOdDetailVO> getAll();
 	
+	public List<ChefOdDetailVO> getAllChefOrID(String chef_or_ID);
+	
 	public void inser2(ChefOdDetailVO chefOdDetailVO,java.sql.Connection con);
 }

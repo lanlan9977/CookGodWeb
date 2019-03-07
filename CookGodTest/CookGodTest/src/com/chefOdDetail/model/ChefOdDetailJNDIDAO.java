@@ -251,4 +251,10 @@ public class ChefOdDetailJNDIDAO implements ChefOdDetailDAO_interface {
 		
 	}
 
+	@Override
+	public List<ChefOdDetailVO> getAllChefOrID(String chef_or_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

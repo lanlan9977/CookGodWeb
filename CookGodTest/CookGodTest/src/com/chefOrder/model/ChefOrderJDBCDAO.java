@@ -343,4 +343,10 @@ public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 		
 	}
 
+	@Override
+	public List<ChefOrderVO>  findByCuefID(String chef_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

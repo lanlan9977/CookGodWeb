@@ -38,10 +38,9 @@ import com.google.gson.reflect.TypeToken;
 public class ChefOdDetailServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	List<String> stringList;
-//	Map<FoodMallVO, FoodMallVO> stringMap;
-	Map<FoodMallVO, ChefOdDetailVO> stringMapQua;
 	List<FoodSupVO> foodSupList;
-	List<ChefOdDetailVO> chefOdDetailList=new ArrayList<>();
+	List<ChefOdDetailVO> chefOdDetailList;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -49,6 +48,7 @@ public class ChefOdDetailServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		chefOdDetailList=new ArrayList<>();
 		req.setCharacterEncoding("UTF-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		BufferedReader br = req.getReader();
@@ -60,6 +60,42 @@ public class ChefOdDetailServlet extends HttpServlet {
 		System.out.println("input: " + jsonIn);
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		String chef_ID = jsonObject.get("chef_ID").getAsString();
+		String chefOdDetailJsonIn = jsonObject.get("chefOdDetailJsonIn").getAsString();
+		
+		
+		Type chefOdDetailType = new TypeToken<List<ChefOdDetailVO>>() {
+		}.getType();
+		chefOdDetailList=gson.fromJson(chefOdDetailJsonIn, chefOdDetailType);
+
+		CustService custService = new CustService();
+		ChefOrderVO chefOrderVO = new ChefOrderVO("o0", new Timestamp(System.currentTimeMillis()),
+				new Timestamp(System.currentTimeMillis() + (3600 * 24 * 1000)), null,null,
+				custService.getOneCust(chef_ID).getCust_name(), custService.getOneCust(chef_ID).getCust_addr(),
+				custService.getOneCust(chef_ID).getCust_tel(), chef_ID);
+		
+		ChefOrderDAO_interface dao=new ChefOrderDAO();
+//		dao.insert(chefOrderVO);
+		dao.insertChefOrderDetail(chefOrderVO, chefOdDetailList);
+		
+		
+		
+		
+		
+		
+		
+		
+//		String outStr = "";
+//		outStr = gson.toJson(stringList);
+//		res.setContentType(CONTENT_TYPE);
+//		PrintWriter out = res.getWriter();
+//		out.println(outStr);
+//		out.close();
+//		System.out.println("output: " + outStr);
+//		System.out.println();
+		
+		
+		
+		
 		
 		
 
@@ -70,58 +106,7 @@ public class ChefOdDetailServlet extends HttpServlet {
 //				custService.getOneCust(chef_ID).getCust_tel(), chef_ID);
 		
 		
-		
-		
-		
-		
-		String stringMapQuaJsonIn = jsonObject.get("stringMapQuaJsonIn").getAsString();
-		Type stringMapQuaType = new TypeToken<List<ChefOdDetailVO>>() {
-		}.getType();
-//		String stringMapJsonIn = jsonObject.get("stringMapJsonIn").getAsString();
-//		String stringMapQuaJsonIn = jsonObject.get("stringMapQuaJsonIn").getAsString();
-//		stringMap = new LinkedHashMap<>();
-		stringMapQua = new LinkedHashMap<>();
-		chefOdDetailList=gson.fromJson(stringMapQuaJsonIn, stringMapQuaType);
-		List<ChefOdDetailVO> chefOdDetailList=new ArrayList<>();
-		List<FoodMallVO> foodMallList=new ArrayList<>();
-		
-//		for(FoodMallVO key:stringMapQua.keySet()) {
-//			foodMallList.add(key);
-//			chefOdDetailList.add(stringMapQua.get(key));
-//		}
-//		for(int i=0;i<chefOdDetailList.size();i++) {
-//			chefOdDetailList.get(i).setFood_sup_ID(foodMallList.get(i).getFood_sup_ID());
-//			chefOdDetailList.get(i).setFood_ID(foodMallList.get(i).getFood_ID());
-//		}
-		
-//		Type stringMapType = new TypeToken<Map<FoodMallVO, FoodMallVO>>() {
-//		}.getType();
-		
-//		stringMap = gson.fromJson(stringMapJsonIn, stringMapType);
-//		stringMapQua = gson.fromJson(stringMapQuaJsonIn, stringMapQuaType);
 
-		
-		ChefOrderService chefOrderService = new ChefOrderService();
-		ChefService chefService = new ChefService();
-		CustService custService = new CustService();
-		ChefOrderVO chefOrderVO = new ChefOrderVO("o0", new Timestamp(System.currentTimeMillis()),
-				new Timestamp(System.currentTimeMillis() + (3600 * 24 * 1000)), null,null,
-				custService.getOneCust(chef_ID).getCust_name(), custService.getOneCust(chef_ID).getCust_addr(),
-				custService.getOneCust(chef_ID).getCust_tel(), chef_ID);
-		
-		ChefOrderDAO_interface dao=new ChefOrderDAO();
-		dao.insertChefOrderDetail(chefOrderVO, chefOdDetailList);
-		
-		
-		
-		String outStr = "";
-		outStr = gson.toJson(stringList);
-		res.setContentType(CONTENT_TYPE);
-		PrintWriter out = res.getWriter();
-		out.println(outStr);
-		out.close();
-		System.out.println("output: " + outStr);
-		System.out.println();
 	}
 
 }

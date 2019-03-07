@@ -252,7 +252,7 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 
 		try {
 
-			con = ds.getConnection();
+
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, chefOdDetailVO.getChef_or_ID());
@@ -264,9 +264,66 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-ChefOdDetail");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-
 		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+
+		}
+
+	}
+
+	@Override
+	public List<ChefOdDetailVO> getAllChefOrID(String chef_or_ID) {
+		List<ChefOdDetailVO> list = new ArrayList<ChefOdDetailVO>();
+		ChefOdDetailVO chefOdDetailVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt.setString(1, chef_or_ID);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				chefOdDetailVO = new ChefOdDetailVO();
+				chefOdDetailVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
+				chefOdDetailVO.setFood_sup_ID(rs.getString("FOOD_SUP_ID"));
+				chefOdDetailVO.setFood_ID(rs.getString("FOOD_ID"));
+				chefOdDetailVO.setChef_od_qty(rs.getInt("CHEF_OD_QTY"));
+				chefOdDetailVO.setChef_od_stotal(rs.getInt("CHEF_OD_STOTAL"));
+				list.add(chefOdDetailVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -282,7 +339,7 @@ public class ChefOdDetailDAO implements ChefOdDetailDAO_interface {
 				}
 			}
 		}
-
+		return list;
 	}
 
 }

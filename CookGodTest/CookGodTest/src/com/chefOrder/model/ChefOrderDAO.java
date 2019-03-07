@@ -26,6 +26,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO CHEF_ORDER(CHEF_OR_ID,CHEF_OR_STATUS,CHEF_OR_START,CHEF_OR_SEND,CHEF_OR_RCV,CHEF_OR_END,CHEF_OR_NAME,CHEF_OR_ADDR,CHEF_OR_TEL,CHEF_ID) VALUES ('CF'||TO_CHAR(SYSDATE,'YYYYMMDD')||'-'||LPAD((CHEF_ORDER_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM CHEF_ORDER";
 	private static final String GET_ONE_STMT = "SELECT * FROM CHEF_ORDER WHERE CHEF_OR_ID = ?";
+	private static final String GET_ONE_STMT_CHEEFID = "SELECT * FROM CHEF_ORDER WHERE CHEF_ID = ?";
 	private static final String DELETE = "DELETE FROM CHEF_ORDER WHERE CHEF_OR_ID = ?";
 	private static final String UPDATE = "UPDATE CHEF_ORDER SET CHEF_OR_STATUS= ?, CHEF_OR_START= ?, CHEF_OR_SEND= ?, CHEF_OR_RCV= ?, CHEF_OR_END= ?, CHEF_OR_NAME= ?, CHEF_OR_ADDR= ?, CHEF_OR_TEL= ?, CHEF_ID= ? WHERE CHEF_OR_ID = ?";
 
@@ -277,8 +278,8 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 			con = ds.getConnection();
 
 			con.setAutoCommit(false);
-			String[] cheforder = { "CHEFORDER" };
-			pstmt = con.prepareStatement(INSERT_STMT,cheforder);
+			String[] cheforder = { "CHEF_OR_ID" };
+			pstmt = con.prepareStatement(INSERT_STMT, cheforder);
 			pstmt.setString(1, chefOrderVO.getChef_or_status());
 			pstmt.setTimestamp(2, chefOrderVO.getChef_or_start());
 			pstmt.setTimestamp(3, chefOrderVO.getChef_or_send());
@@ -289,26 +290,40 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 			pstmt.setString(8, chefOrderVO.getChef_or_tel());
 			pstmt.setString(9, chefOrderVO.getChef_ID());
 			pstmt.executeUpdate();
-			
-			String next_cheforder=null;
-			ResultSet rs=pstmt.getGeneratedKeys();
-			if(rs.next()) {
-				next_cheforder=rs.getString(1);
-			}else {
+
+			String next_cheforder = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_cheforder = rs.getString(1);
+				System.out.println("自增主鍵值" + next_cheforder);
+			} else {
 				System.out.println("未取得自增主鍵值");
 			}
 			rs.close();
-			ChefOdDetailDAO dao=new ChefOdDetailDAO();
-			for(ChefOdDetailVO chefOdDetailVO:list) {
-				chefOdDetailVO.setChef_or_ID(next_cheforder);
+			ChefOdDetailDAO dao = new ChefOdDetailDAO();
+			System.out.println("list.size()-A="+list.size());
+			for (ChefOdDetailVO chefOdDetailVO : list) {
+				chefOdDetailVO.setChef_or_ID(new String(next_cheforder));
 				dao.inser2(chefOdDetailVO, con);
 			}
 			con.commit();
 			con.setAutoCommit(true);
+			System.out.println("list.size()-B="+list.size());
+			System.out.println("新增訂單編號" + next_cheforder + "時,共有" + list.size()
+					+ "筆同時被新增");
 
 		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-cheforder");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-
+			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -325,6 +340,67 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 				}
 			}
 		}
+
+	}
+
+	@Override
+	public List<ChefOrderVO>  findByCuefID(String chef_ID) {
+		List<ChefOrderVO> list=new ArrayList<>();
+		ChefOrderVO chefOrderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT_CHEEFID);
+
+			pstmt.setString(1, chef_ID);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				chefOrderVO = new ChefOrderVO();
+				chefOrderVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
+				chefOrderVO.setChef_or_status(rs.getString("CHEF_OR_STATUS"));
+				chefOrderVO.setChef_or_start(rs.getTimestamp("CHEF_OR_START"));
+				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_SEND"));
+				chefOrderVO.setChef_or_rcv(rs.getTimestamp("CHEF_OR_RCV"));
+				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_END"));
+				chefOrderVO.setChef_or_name(rs.getString("CHEF_OR_NAME"));
+				chefOrderVO.setChef_or_addr(rs.getString("CHEF_OR_ADDR"));
+				chefOrderVO.setChef_or_tel(rs.getString("CHEF_OR_TEL"));
+				chefOrderVO.setChef_ID(rs.getString("CHEF_ID"));
+				list.add(chefOrderVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 }
