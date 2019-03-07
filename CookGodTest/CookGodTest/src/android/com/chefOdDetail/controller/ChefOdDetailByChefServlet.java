@@ -43,6 +43,7 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		chefOdDetailList = new ArrayList<>();
+		stringList = new ArrayList<>();
 		req.setCharacterEncoding("UTF-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		BufferedReader br = req.getReader();
@@ -57,8 +58,11 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 
 		ChefOrderService chefOrderService = new ChefOrderService();
 		chefOrderList = chefOrderService.getOneChefOrder_ChefID(chef_ID);
-		String chefOrderJsonIn = gson.toJson(chefOrderList);
-		stringList.add(chefOrderJsonIn);
+		if (!chefOrderList.isEmpty()) {
+			System.out.println(""+chefOrderList.size());
+			String chefOrderJsonIn = gson.toJson(chefOrderList);
+			stringList.add(chefOrderJsonIn);
+		}
 
 		ChefOdDetailService chefOdDetailService = new ChefOdDetailService();
 		for (int i = 0; i < chefOrderList.size(); i++) {

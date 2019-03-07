@@ -172,7 +172,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 				chefOrderVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
 				chefOrderVO.setChef_or_status(rs.getString("CHEF_OR_STATUS"));
 				chefOrderVO.setChef_or_start(rs.getTimestamp("CHEF_OR_START"));
-				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_SEND"));
+				chefOrderVO.setChef_or_send(rs.getTimestamp("CHEF_OR_SEND"));
 				chefOrderVO.setChef_or_rcv(rs.getTimestamp("CHEF_OR_RCV"));
 				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_END"));
 				chefOrderVO.setChef_or_name(rs.getString("CHEF_OR_NAME"));
@@ -229,7 +229,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 				chefOrderVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
 				chefOrderVO.setChef_or_status(rs.getString("CHEF_OR_STATUS"));
 				chefOrderVO.setChef_or_start(rs.getTimestamp("CHEF_OR_START"));
-				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_SEND"));
+				chefOrderVO.setChef_or_send(rs.getTimestamp("CHEF_OR_SEND"));
 				chefOrderVO.setChef_or_rcv(rs.getTimestamp("CHEF_OR_RCV"));
 				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_END"));
 				chefOrderVO.setChef_or_name(rs.getString("CHEF_OR_NAME"));
@@ -365,7 +365,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 				chefOrderVO.setChef_or_ID(rs.getString("CHEF_OR_ID"));
 				chefOrderVO.setChef_or_status(rs.getString("CHEF_OR_STATUS"));
 				chefOrderVO.setChef_or_start(rs.getTimestamp("CHEF_OR_START"));
-				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_SEND"));
+				chefOrderVO.setChef_or_send(rs.getTimestamp("CHEF_OR_SEND"));
 				chefOrderVO.setChef_or_rcv(rs.getTimestamp("CHEF_OR_RCV"));
 				chefOrderVO.setChef_or_end(rs.getTimestamp("CHEF_OR_END"));
 				chefOrderVO.setChef_or_name(rs.getString("CHEF_OR_NAME"));
