@@ -75,19 +75,20 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		chefOdDetailList = chefOdDetailService.gelAllChefOdDetail();
 		int count = chefOdDetailService.gelAllChefOdDetail().size();
 		System.out.println("count: " + count);
-		int count1=0;
+		int count1 = 0;
 		for (int i = 0; i < chefOrderList.size(); i++) {
+
+			List<ChefOdDetailVO> list = null;
+			list = new ArrayList<>();
+
 			for (int j = 0; j < count; j++) {
-				List<ChefOdDetailVO> list = null;
-				list = new ArrayList<>();
+
 				if (chefOdDetailList.get(j).getChef_or_ID().equals(chefOrderList.get(i).getChef_or_ID())) {
 					list.add(chefOdDetailList.get(j));
-
-					
 				}
-				if (!list.isEmpty()) {
-					chefOdDetailMap.put(chefOrderList.get(i).getChef_or_ID(), list);
-				}
+			}
+			if (!list.isEmpty()) {
+				chefOdDetailMap.put(chefOrderList.get(i).getChef_or_ID(), list);
 			}
 
 		}
