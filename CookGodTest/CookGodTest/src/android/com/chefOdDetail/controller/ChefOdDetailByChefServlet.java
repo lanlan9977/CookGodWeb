@@ -24,6 +24,8 @@ import com.chefOrder.model.ChefOrderService;
 import com.chefOrder.model.ChefOrderVO;
 import com.cust.model.CustService;
 import com.cust.model.CustVO;
+import com.food.model.FoodService;
+import com.food.model.FoodVO;
 import com.foodSup.model.FoodSupVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,8 +39,9 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 	List<String> stringList;
 	List<ChefOrderVO> chefOrderList;
 	List<ChefOdDetailVO> chefOdDetailList;
+	
 	Map<String, List<ChefOdDetailVO>> chefOdDetailMap;
-//	Map<ChefOdDetailVO,List<>>
+	Map<String, List<FoodVO>> foodMap;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -49,7 +52,9 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		chefOdDetailList = new ArrayList<>();
 		stringList = new ArrayList<>();
+		
 		chefOdDetailMap = new LinkedHashMap<>();
+		foodMap= new LinkedHashMap<>();
 		req.setCharacterEncoding("UTF-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		BufferedReader br = req.getReader();
@@ -66,7 +71,7 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		ChefOrderService chefOrderService = new ChefOrderService();
 		chefOrderList = chefOrderService.getOneChefOrder_ChefID(chef_ID);
 		if (!chefOrderList.isEmpty()) {
-			System.out.println("" + chefOrderList.size());
+//			System.out.println("" + chefOrderList.size());
 			String chefOrderJsonIn = gson.toJson(chefOrderList);
 			stringList.add(chefOrderJsonIn);
 		}
@@ -74,29 +79,40 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		ChefOdDetailService chefOdDetailService = new ChefOdDetailService();
 		chefOdDetailList = chefOdDetailService.gelAllChefOdDetail();
 		int count = chefOdDetailService.gelAllChefOdDetail().size();
-		System.out.println("count: " + count);
-		int count1 = 0;
+//		System.out.println("count: " + count);
+		
+		FoodService foodService=new FoodService();
+		
 		for (int i = 0; i < chefOrderList.size(); i++) {
-
-			List<ChefOdDetailVO> list = null;
-			list = new ArrayList<>();
+			List<ChefOdDetailVO> list = new ArrayList<>();
+			List<FoodVO> foodList=new ArrayList<FoodVO>();
 
 			for (int j = 0; j < count; j++) {
-
 				if (chefOdDetailList.get(j).getChef_or_ID().equals(chefOrderList.get(i).getChef_or_ID())) {
 					list.add(chefOdDetailList.get(j));
+					FoodVO foodVO=foodService.getOneFood(chefOdDetailList.get(j).getFood_ID());
+					foodList.add(foodVO);
+					
+				
 				}
 			}
 			if (!list.isEmpty()) {
 				chefOdDetailMap.put(chefOrderList.get(i).getChef_or_ID(), list);
+				foodMap.put(chefOrderList.get(i).getChef_or_ID(), foodList);
 			}
-
 		}
+		
+		
+		
+		
+		
 
-		System.out.println("chefOdDetailMap.size(): " + chefOdDetailMap.size());
+//		System.out.println("chefOdDetailMap.size(): " + chefOdDetailMap.size());
 
 		String chefOdDetailJsonIn = gson.toJson(chefOdDetailMap);
+		String foodJsonIn=gson.toJson(foodMap);
 		stringList.add(chefOdDetailJsonIn);
+		stringList.add(foodJsonIn);
 
 		String outStr = "";
 		outStr = gson.toJson(stringList);

@@ -77,21 +77,23 @@ public class ChefOdDetailServlet extends HttpServlet {
 //		dao.insert(chefOrderVO);
 		dao.insertChefOrderDetail(chefOrderVO, chefOdDetailList);
 		
+			String outStr = "";
+		if(!chefOdDetailList.isEmpty()) {
+			outStr=chefOrderVO.getChef_or_ID();
+		}
 		
 		
 		
 		
 		
-		
-		
-//		String outStr = "";
-//		outStr = gson.toJson(stringList);
-//		res.setContentType(CONTENT_TYPE);
-//		PrintWriter out = res.getWriter();
-//		out.println(outStr);
-//		out.close();
-//		System.out.println("output: " + outStr);
-//		System.out.println();
+	
+		outStr = gson.toJson(stringList);
+		res.setContentType(CONTENT_TYPE);
+		PrintWriter out = res.getWriter();
+		out.println(outStr);
+		out.close();
+		System.out.println("output: " + outStr);
+		System.out.println();
 		
 		
 		
