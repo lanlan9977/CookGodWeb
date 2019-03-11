@@ -12,6 +12,8 @@ import com.chefOdDetail.model.ChefOdDetailDAO;
 import com.chefOdDetail.model.ChefOdDetailVO;
 
 public class ChefOrderDAO implements ChefOrderDAO_interface {
+	
+	public static String autoKey;
 
 	private static DataSource ds = null;
 	static {
@@ -299,6 +301,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 			} else {
 				System.out.println("未取得自增主鍵值");
 			}
+			autoKey=new String(next_cheforder);
 			rs.close();
 			ChefOdDetailDAO dao = new ChefOdDetailDAO();
 			System.out.println("list.size()-A="+list.size());

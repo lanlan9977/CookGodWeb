@@ -50,22 +50,9 @@ public class MenuOrderServlet extends HttpServlet {
 
 		MenuOrderService menuOrderService = new MenuOrderService();
 		menuOrderService.updateMenuOrderStatus(menu_od_ID, menu_od_status);
+		
+		
 
-		BroadcastService broadcastService = new BroadcastService();
-		StringBuilder broadcast_con_sb = new StringBuilder();
-		broadcast_con_sb.append("訂單推播通知；您在")
-				.append((menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_od_start()).toString())
-				.append("所訂購的嚴選套餐訂單");
-
-		if ("g1".equals(menu_od_status)) {
-			broadcast_con_sb.append("已通過審核");
-
-		} else if ("g2".equals(menu_od_status)) {
-			broadcast_con_sb.append("未通過審核");
-		}
-
-		broadcastService.addBroadcast(broadcast_con_sb.toString(),
-				menuOrderService.getOneMenuOrder(menu_od_ID).getCust_ID());
 
 	}
 

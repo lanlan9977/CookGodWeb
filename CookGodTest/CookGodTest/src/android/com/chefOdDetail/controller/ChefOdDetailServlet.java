@@ -79,15 +79,15 @@ public class ChefOdDetailServlet extends HttpServlet {
 		
 			String outStr = "";
 		if(!chefOdDetailList.isEmpty()) {
-			outStr=chefOrderVO.getChef_or_ID();
+			new ChefOrderDAO();
+			outStr=ChefOrderDAO.autoKey;
 		}
 		
 		
 		
 		
 		
-	
-		outStr = gson.toJson(stringList);
+
 		res.setContentType(CONTENT_TYPE);
 		PrintWriter out = res.getWriter();
 		out.println(outStr);
