@@ -42,10 +42,11 @@ public class MenuOrderRateServlet extends HttpServlet {
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		String menu_od_id = jsonObject.get("menu_od_id").getAsString();
 		String menu_od_rate = jsonObject.get("menu_od_rate").getAsString();
+		String menu_od_msg = jsonObject.get("menu_od_msg").getAsString();
 		float menu_od_rate_float=gson.fromJson(menu_od_rate, float.class);
 
 		MenuOrderService menuOrderService = new MenuOrderService();
-		menuOrderService.updateMenuOrderRate(menu_od_id,menu_od_rate_float);
+		menuOrderService.updateMenuOrderRate(menu_od_id,menu_od_rate_float,menu_od_msg);
 
 
 

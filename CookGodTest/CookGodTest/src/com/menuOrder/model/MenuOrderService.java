@@ -65,7 +65,7 @@ public class MenuOrderService {
 	public void updateMenuOrderStatus(String menu_od_ID, String menu_od_status) {
 		dao.updateMenuOdStatus(menu_od_ID, menu_od_status);
 	}
-	public void updateMenuOrderRate(String menu_od_ID,float menu_od_rate) {
-		dao.updateMenuOdRate(menu_od_ID, menu_od_rate);
+	public void updateMenuOrderRate(String menu_od_ID,float menu_od_rate,String menu_od_msg) {
+		dao.updateMenuOdRate(menu_od_ID, menu_od_rate,menu_od_msg);
 	}
 }

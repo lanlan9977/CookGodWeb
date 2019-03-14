@@ -28,7 +28,7 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 	private static final String Update_Stmt_MenuOrderStatus = 
 			"UPDATE MENU_ORDER SET MENU_OD_STATUS = ? WHERE MENU_OD_ID = ?";
 	private static final String Update_Stmt_MenuOrderRate = 
-			"UPDATE MENU_ORDER SET MENU_OD_RATE = ? WHERE MENU_OD_ID = ?";
+			"UPDATE MENU_ORDER SET MENU_OD_RATE = ?, MENU_OD_MSG = ? WHERE MENU_OD_ID = ?";
 	private static final String Delete_Stmt = 
 			"DELETE FROM MENU_ORDER WHERE MENU_OD_ID = ?";
 	private static final String Get_One_Stmt = 
@@ -412,7 +412,7 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 	}
 
 	@Override
-	public void updateMenuOdRate(String menu_od_ID, float menu_od_rate) {
+	public void updateMenuOdRate(String menu_od_ID, float menu_od_rate,String menu_od_msg) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -421,7 +421,8 @@ public class MenuOrderDAO implements MenuOrderDAO_Interface{
 			pstmt = con.prepareStatement(Update_Stmt_MenuOrderRate);
 			
 			pstmt.setFloat(1, menu_od_rate);
-			pstmt.setString(2, menu_od_ID);
+			pstmt.setString(2, menu_od_msg);
+			pstmt.setString(3, menu_od_ID);
 			
 			pstmt.executeUpdate();
 			

@@ -1,6 +1,7 @@
 package android.com.broadcast.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,15 +22,15 @@ import javax.websocket.server.ServerEndpoint;
 import com.broadcast.model.BroadcastService;
 import com.broadcast.model.BroadcastVO;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.menuOrder.model.MenuOrderService;
 import com.menuOrder.model.MenuOrderVO;
-
-
 
 @ServerEndpoint("/BroadcastSocket/{userName}")
 public class BroadcastSocket {
 	private static Map<String, Session> sessionsMap = new ConcurrentHashMap<>();
-	Gson gson = new Gson();
+	Gson gson =new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
 	@OnOpen
 	public void onOpen(@PathParam("userName") String userName, Session userSession) throws IOException {
@@ -57,52 +58,50 @@ public class BroadcastSocket {
 	// 此方法接收String型式資料
 	@OnMessage
 	public void onMessage(Session userSession, String message) {
-//		System.out.println("message received: " + message);
-		
-		MenuOrderVO menuOrderVO = gson.fromJson(message, MenuOrderVO.class);
-		
-		
-		
-//		List<String> list=new ArrayList<>();
-//		
-//		list.add("menu_order");
-//		list.add(menuOrderVO);
-//		
-		
-		
-		
-//		
-//		list.get(0).equals(anObject)
-		
-		
-		
-		
-		
-		MenuOrderService menuOrderService = new MenuOrderService();
-		BroadcastService broadcastService = new BroadcastService();
-		StringBuilder broadcast_con_sb = new StringBuilder();
-		broadcast_con_sb.append("訂單推播通知；您在")
-				.append((menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getMenu_od_start()).toString())
-				.append("所訂購的嚴選套餐訂單");
+		System.out.println("message received: " + message);
+		String receiver="";
+		String sentMessage="";
+		Type stringType = new TypeToken<List<String>>() {
+		}.getType();
 
-		if ("g1".equals(menuOrderVO.getMenu_od_status())) {
-			broadcast_con_sb.append("已通過審核");
+		List<String> list = gson.fromJson(message, stringType);
+		String type = list.get(0);
+		if ("menu_order".equals(type)) {
+			MenuOrderVO menuOrderVO = gson.fromJson(list.get(1), MenuOrderVO.class);
+			MenuOrderService menuOrderService = new MenuOrderService();
+			BroadcastService broadcastService = new BroadcastService();
+			StringBuilder broadcast_con_sb = new StringBuilder();
+			broadcast_con_sb.append("訂單推播通知；您在").append(
+					(menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getMenu_od_start()).toString())
+					.append("所訂購的嚴選套餐訂單");
+			if ("g1".equals(menuOrderVO.getMenu_od_status())) {
+				broadcast_con_sb.append("已通過審核");
 
-		} else if ("g2".equals(menuOrderVO.getMenu_od_status())) {
-			broadcast_con_sb.append("未通過審核");
+			} else if ("g2".equals(menuOrderVO.getMenu_od_status())) {
+				broadcast_con_sb.append("未通過審核");
+			}
+			BroadcastVO broadcastVO = broadcastService.addBroadcast(broadcast_con_sb.toString(),
+					menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getCust_ID());
+			receiver = menuOrderVO.getCust_ID();
+			String broadcastJsonIn=gson.toJson(broadcastVO);
+			List<String> sentList=new ArrayList<>();
+			sentList.add(type);
+			sentList.add(broadcastJsonIn);
+			sentMessage = gson.toJson(sentList);
+
+		}else if("location".equals(type)) {
+//			List<String> sentList=new ArrayList<>();
+			receiver=list.get(1);
+//			sentList.add(list.get(2));
+			sentMessage=message;
 		}
 
-		BroadcastVO broadcastVO=broadcastService.addBroadcast(broadcast_con_sb.toString(),menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getCust_ID());
-		
-		
-		String receiver = menuOrderVO.getCust_ID();
-		String sentMessage=gson.toJson(broadcastVO);
 		Session receiverSession = sessionsMap.get(receiver);
 		if (receiverSession != null && receiverSession.isOpen()) {
 			receiverSession.getAsyncRemote().sendText(sentMessage);
+			System.out.println("sentMessage: " +sentMessage);
 		}
 	}
-
 
 	@OnError
 	public void onError(Session userSession, Throwable e) {
@@ -125,9 +124,9 @@ public class BroadcastSocket {
 			State stateMessage = new State("close", userNameClose, userNames);
 			String stateMessageJson = gson.toJson(stateMessage);
 			Collection<Session> sessions = sessionsMap.values();
-			for (Session session : sessions) {
-				session.getAsyncRemote().sendText(stateMessageJson);
-			}
+//			for (Session session : sessions) {
+//				session.getAsyncRemote().sendText(stateMessageJson);
+//			}
 		}
 
 		String text = String.format("session ID = %s, disconnected; close code = %d%nusers: %s", userSession.getId(),

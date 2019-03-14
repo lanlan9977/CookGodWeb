@@ -397,8 +397,9 @@ public class MenuOrderJDBCDAO implements MenuOrderDAO_Interface{
 		
 	}
 
+
 	@Override
-	public void updateMenuOdRate(String menu_od_ID, float menu_od_rate) {
+	public void updateMenuOdRate(String menu_od_ID, float menu_od_rate, String menu_od_msg) {
 		// TODO Auto-generated method stub
 		
 	}
