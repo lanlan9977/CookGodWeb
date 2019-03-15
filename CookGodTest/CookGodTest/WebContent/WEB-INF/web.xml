@@ -151,12 +151,20 @@
     <servlet-name>AndroidChefOdDetailByChefServlet</servlet-name>
     <url-pattern>/ChefOdDetailByChefServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AndroidOrderByChefQRCodeServlet</servlet-name>
     <servlet-class>android.com.orderByChef.controller.OrderByChefQRCodeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidOrderByChefQRCodeServlet</servlet-name>
     <url-pattern>/OrderByChefQRCodeServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>AndroidBroadcastServlet</servlet-name>
+    <servlet-class>android.com.broadcast.controller.BroadcastServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidBroadcastServlet</servlet-name>
+    <url-pattern>/BroadcastServlet</url-pattern>
   </servlet-mapping>
 </web-app>
