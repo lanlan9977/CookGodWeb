@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cust.model.CustService;
 import com.cust.model.CustVO;
+import com.ad.model.AdService;
 import com.broadcast.model.BroadcastService;
 import com.broadcast.model.BroadcastVO;
 import com.chef.model.ChefService;
@@ -66,6 +67,11 @@ public class CustServlet extends HttpServlet {
 		ChefVO chef_db = chefService.getOneChef(cust_db.getCust_ID());
 		String chefJsonIn = gson.toJson(chef_db);
 
+		AdService adService=new AdService();
+		int AdSize=adService.getAll().size();
+		String stringSize=String.valueOf(AdSize);
+		map.put(stringSize,stringSize);
+		
 		if (cust_db != null && cust_account.getCust_pwd().equals(cust_db.getCust_pwd())) {
 			// 若有該顧客資料且密碼輸入正確
 			if (chef_db != null) {

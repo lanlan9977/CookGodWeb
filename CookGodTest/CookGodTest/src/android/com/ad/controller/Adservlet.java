@@ -2,9 +2,12 @@ package android.com.ad.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,7 +24,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import piciotest.ImageUtil;
-import android.com.ad.controller.Base64Decoder;
 
 public class Adservlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
@@ -46,38 +48,28 @@ public class Adservlet extends HttpServlet {
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		String action = jsonObject.get("action").getAsString();
 
-		AdService  adService = new AdService (); 
+		AdService adService = new AdService();
 		if ("getImage".equals(action)) {
 			OutputStream os = res.getOutputStream();
+			int position = jsonObject.get("position").getAsInt();
 			int imageSize = jsonObject.get("imageSize").getAsInt();
-//			byte[] image = dishService.getDish_Pic(dish_ID);
-			String StringImage=adService.getAllAdCon().get(0);
-//			System.out.println("CLOB: " + StringImage);
-//			byte [] image=StringImage.getBytes();
-//			
-			Base64Decoder decoder = null;
-		    try {
-		      decoder = new Base64Decoder(
-		                new BufferedInputStream(
-		                new FileInputStream(StringImage)));
-		      byte[] buf = new byte[4 * 1024];  // 4K buffer
-		      int bytesRead;
-		      while ((bytesRead = decoder.read(buf)) != -1) {
-		        System.out.write(buf, 0, bytesRead);
-		        os.write(buf);
-				os.close();
-		      }
-		    }
-		    finally {
-		      if (decoder != null) decoder.close();
-		    }
-			
-//			if (image != null) {
-//				image = ImageUtil.shrink(image, imageSize);
-//				res.setContentType("image/jpeg");
-//				res.setContentLength(image.length);	
-//			}
-			
+			String StringImage = adService.getAllAdCon().get(position);
+			Base64.Decoder decoder = Base64.getDecoder();
+			// Base64解碼
+			byte[] image = decoder.decode(StringImage);
+			for (int i = 0; i <image.length; ++i) {
+				if (image[i] < 0) {
+					image[i] += 256;
+				}
+			}
+			if (image != null) {
+				image = ImageUtil.shrink(image, imageSize);
+				res.setContentType("image/jpeg");
+				res.setContentLength(image.length);
+			}
+			os.write(image);
+			os.close();
+
 		}
 		res.setContentType(CONTENT_TYPE);
 	}
