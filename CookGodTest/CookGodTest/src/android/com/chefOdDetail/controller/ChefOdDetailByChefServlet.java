@@ -78,7 +78,7 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 
 			String chefOrderJsonIn = gson.toJson(chefOrderList);
 			stringList.add(chefOrderJsonIn);
-			System.out.println("FFFFFFFF");
+		
 
 		} else {
 
@@ -86,7 +86,7 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 
 			String chefOrderJsonIn = gson.toJson(chefOrderList);
 			stringList.add(chefOrderJsonIn);
-			System.out.println("KKKKKKKKKK");
+	
 
 		}
 

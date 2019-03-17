@@ -42,8 +42,8 @@ public class DishFoodService {
 		dao.delete(dish_ID,food_ID);
 	}
 	
-	public DishFoodVO getOneDishFood(String dish_ID,String food_ID) {
-		return dao.findByPrimaryKey(dish_ID, food_ID);
+	public List<DishFoodVO> getOneDishFood(String dish_ID) {
+		return dao.findByPrimaryKey(dish_ID);
 	}
 
 	public List<DishFoodVO> getAll(){

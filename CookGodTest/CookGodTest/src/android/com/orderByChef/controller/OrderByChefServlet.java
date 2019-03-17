@@ -60,14 +60,14 @@ public class OrderByChefServlet extends HttpServlet {
 			Orderlist.add("");
 		}
 		
-//		FestOrderService festOrderService = new FestOrderService();
-//		festOrderList = festOrderService.getCustFestOrder(cust_ID);
-//		String festOrderJsonIn = gson.toJson(festOrderList);
-//		if (!festOrderList.isEmpty()) {
-//			Orderlist.add(festOrderJsonIn);
-//		}else {
-//			Orderlist.add("");
-//		}
+		FestOrderService festOrderService = new FestOrderService();
+		festOrderList = festOrderService.getCustFestOrder(chef_ID);
+		String festOrderJsonIn = gson.toJson(festOrderList);
+		if (!festOrderList.isEmpty()) {
+			Orderlist.add(festOrderJsonIn);
+		}else {
+			Orderlist.add("");
+		}
 
 	
 

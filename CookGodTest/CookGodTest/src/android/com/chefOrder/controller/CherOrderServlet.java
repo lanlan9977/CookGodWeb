@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dishFood.model.DishFoodService;
+import com.dishFood.model.DishFoodVO;
 import com.favFdSup.model.FavFdSupService;
 import com.favFdSup.model.FavFdSupVO;
+import com.food.model.FoodService;
+import com.food.model.FoodVO;
 import com.foodMall.model.FoodMallService;
 import com.foodMall.model.FoodMallVO;
 import com.foodSup.model.FoodSupService;
@@ -22,6 +26,9 @@ import com.foodSup.model.FoodSupVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.menuDish.model.MenuDishService;
+import com.menuDish.model.MenuDishVO;
+import com.menuOrder.model.MenuOrderService;
 
 public class CherOrderServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
@@ -29,6 +36,9 @@ public class CherOrderServlet extends HttpServlet {
 	List<FavFdSupVO> favSuoList;
 	List<FoodMallVO> foodMallList;
 	List<FoodSupVO> foodSupList;
+	List<FoodVO> foodList;
+	List<MenuDishVO> menuDishList;
+	List<DishFoodVO> dishFoodList; 
 	
 
 	@Override
@@ -40,6 +50,13 @@ public class CherOrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		favSuoList=new ArrayList<>();
+		stringList=new ArrayList<>();
+		foodMallList=new ArrayList<>();
+		foodSupList=new ArrayList<>();
+		foodList=new ArrayList<>();
+		menuDishList=new ArrayList<>();
+		dishFoodList=new ArrayList<>();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		BufferedReader br = req.getReader();
 		StringBuilder jsonIn = new StringBuilder();
@@ -50,10 +67,23 @@ public class CherOrderServlet extends HttpServlet {
 		System.out.println("input: " + jsonIn);
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		String chef_ID = jsonObject.get("selectFoodMall").getAsString();
-		favSuoList=new ArrayList<>();
-		stringList=new ArrayList<>();
-		foodMallList=new ArrayList<>();
-		foodSupList=new ArrayList<>();
+		String menu_od_ID = jsonObject.get("menu_od_ID").getAsString();
+
+		//套餐菜色的食材
+		MenuOrderService menuOrderService=new MenuOrderService();
+		MenuDishService menuDishService=new MenuDishService();
+		menuDishList=menuDishService.getAllMenuDish(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_ID());
+
+		DishFoodService dishFoodService=new DishFoodService();
+		for(int i=0;i<menuDishList.size();i++) {
+			List<DishFoodVO> allDishFoodList=dishFoodService.getOneDishFood(menuDishList.get(i).getDish_ID());
+			for(int j=0;j<allDishFoodList.size();j++) {
+				dishFoodList.add(allDishFoodList.get(j));
+//				System.out.println(""+dishFoodList.size());
+			}
+		}
+		String stringDishFoodList=gson.toJson(dishFoodList);
+
 
 		//最愛的食材供應商
 		FavFdSupService favFdSupService=new FavFdSupService();
@@ -67,16 +97,22 @@ public class CherOrderServlet extends HttpServlet {
 		String foodMallJsonIn=gson.toJson(foodMallList);
 		stringList.add(foodMallJsonIn);
 		
-		//食材供應商
+		//食材供應商&食材
+		FoodService foodService=new FoodService();
 		FoodSupService foodSupService=new FoodSupService();
 		for(int i=0;i<foodMallList.size();i++) {
 			FoodSupVO foodSupVO=foodSupService.getOneFoodSup(foodMallList.get(i).getFood_sup_ID());
 			foodSupList.add(foodSupVO);
+			FoodVO foodVO=foodService.getOneFood(foodMallList.get(i).getFood_ID());
+			foodList.add(foodVO);
+			
 		}
 		String foodSupJsonIn=gson.toJson(foodSupList);
+		String foodJsonIn=gson.toJson(foodList);
 		stringList.add(foodSupJsonIn);
+		stringList.add(foodJsonIn);
 		
-		
+		stringList.add(stringDishFoodList);
 		
 		String outStr="";
 		outStr=gson.toJson(stringList);

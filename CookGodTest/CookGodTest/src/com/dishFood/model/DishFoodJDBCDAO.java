@@ -138,66 +138,7 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 	}
 
 
-	@Override
-	public DishFoodVO findByPrimaryKey(String dish_ID, String food_ID) {
-		
-		DishFoodVO DishFoodVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ONE_STMT);
-			
-			pstmt.setString(1, dish_ID);
-			pstmt.setString(2, food_ID);
-			
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-
-				DishFoodVO = new DishFoodVO();
-				DishFoodVO.setDish_ID(rs.getString("dish_ID"));
-				DishFoodVO.setFood_ID(rs.getString("food_ID"));
-				DishFoodVO.setDish_f_qty(rs.getInt("dish_f_qty"));
-				DishFoodVO.setDish_f_unit(rs.getString("dish_f_unit"));
-				
-			}
-
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
-
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured." + se.getMessage());
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-		return DishFoodVO;
-	}
+	
 
 	@Override
 	public List<DishFoodVO>  getAll() {
@@ -298,5 +239,13 @@ public class DishFoodJDBCDAO implements DishFoodDAO_interface{
 			System.out.print(adish.getDish_f_unit() + ",");
 			System.out.println();
 		}
+	}
+
+
+
+	@Override
+	public List<DishFoodVO> findByPrimaryKey(String dish_ID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

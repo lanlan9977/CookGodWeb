@@ -7,7 +7,7 @@ package com.dishFood.model;
 		public void insert (DishFoodVO dishFoodVO);
 		public void update (DishFoodVO dishFoodVO);
 		public void delete (String dish_ID,String food_ID);
-		public DishFoodVO findByPrimaryKey(String dish_ID,String food_ID);
+		public List<DishFoodVO> findByPrimaryKey(String dish_ID);
 		public List<DishFoodVO> getAll();
 		
 
