@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Base64;
 import java.util.List;
 
@@ -70,6 +71,14 @@ public class Adservlet extends HttpServlet {
 			os.write(image);
 			os.close();
 
+		}else if("getSize".equals(action)){
+			
+			int AdSize=adService.getAll().size();
+			String stringSize=String.valueOf(AdSize);
+			res.setContentType(CONTENT_TYPE);
+			PrintWriter out = res.getWriter();
+			out.println(stringSize);
+			out.close();
 		}
 		res.setContentType(CONTENT_TYPE);
 	}

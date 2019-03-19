@@ -65,7 +65,10 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		}
 		System.out.println("input: " + jsonIn);
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
+		String action = jsonObject.get("action").getAsString();
 		ChefOrderService chefOrderService = new ChefOrderService();
+		if("add".equals(action)) {
+		
 		String chef_ID = "";
 		chef_ID = jsonObject.get("chef_ID").getAsString();
 
@@ -121,7 +124,6 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		String foodJsonIn = gson.toJson(foodMap);
 		stringList.add(chefOdDetailJsonIn);
 		stringList.add(foodJsonIn);
-
 		String outStr = "";
 		outStr = gson.toJson(stringList);
 		res.setContentType(CONTENT_TYPE);
@@ -130,6 +132,14 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		out.close();
 		System.out.println("output: " + outStr);
 		System.out.println();
+		}else if("update".equals(action)) {
+			String chef_or_status = jsonObject.get("chef_ID").getAsString();
+			String chef_or_ID = jsonObject.get("chef_or_ID").getAsString();
+			chefOrderService.updateChefOrderStatus(chef_or_ID, chef_or_status);
+		}
+		
+		
+		
 
 	}
 

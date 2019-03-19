@@ -18,4 +18,6 @@ public interface ChefOrderDAO_interface {
 	public void insertChefOrderDetail(ChefOrderVO chefOrderVO,List<ChefOdDetailVO> list);
 	
 	public List<ChefOrderVO>  findByCuefID(String chef_ID);
+	
+	public void updateChefOrderStatus(String chef_or_ID,String chef_or_status);
 }

@@ -67,10 +67,8 @@ public class CustServlet extends HttpServlet {
 		ChefVO chef_db = chefService.getOneChef(cust_db.getCust_ID());
 		String chefJsonIn = gson.toJson(chef_db);
 
-		AdService adService=new AdService();
-		int AdSize=adService.getAll().size();
-		String stringSize=String.valueOf(AdSize);
-		map.put(stringSize,stringSize);
+		
+	
 		
 		if (cust_db != null && cust_account.getCust_pwd().equals(cust_db.getCust_pwd())) {
 			// 若有該顧客資料且密碼輸入正確

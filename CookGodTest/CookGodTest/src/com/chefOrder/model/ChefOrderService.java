@@ -63,5 +63,10 @@ public class ChefOrderService {
 	public List<ChefOrderVO> getOneChefOrder_ChefID(String chef_ID) {
 		return dao.findByCuefID(chef_ID);
 	}
+	public void updateChefOrderStatus(String chef_or_ID,String chef_or_status) {
+
+		dao.updateChefOrderStatus(chef_or_ID, chef_or_status);
+
+	}
 
 }

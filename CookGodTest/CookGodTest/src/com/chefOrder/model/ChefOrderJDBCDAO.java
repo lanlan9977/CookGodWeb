@@ -349,4 +349,10 @@ public class ChefOrderJDBCDAO implements ChefOrderDAO_interface {
 		return null;
 	}
 
+	@Override
+	public void updateChefOrderStatus(String chef_or_ID,String chef_or_status) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

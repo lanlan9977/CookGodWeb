@@ -31,7 +31,7 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 	private static final String GET_ONE_STMT_CHEEFID = "SELECT * FROM CHEF_ORDER WHERE CHEF_ID = ?";
 	private static final String DELETE = "DELETE FROM CHEF_ORDER WHERE CHEF_OR_ID = ?";
 	private static final String UPDATE = "UPDATE CHEF_ORDER SET CHEF_OR_STATUS= ?, CHEF_OR_START= ?, CHEF_OR_SEND= ?, CHEF_OR_RCV= ?, CHEF_OR_END= ?, CHEF_OR_NAME= ?, CHEF_OR_ADDR= ?, CHEF_OR_TEL= ?, CHEF_ID= ? WHERE CHEF_OR_ID = ?";
-
+	private static final String UPDATE_CHEFORDERSTATUS = "UPDATE CHEF_ORDER SET CHEF_OR_STATUS= ? WHERE CHEF_OR_ID = ?";
 	@Override
 	public void insert(ChefOrderVO chefOrderVO) {
 		Connection con = null;
@@ -404,6 +404,41 @@ public class ChefOrderDAO implements ChefOrderDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void updateChefOrderStatus(String chef_or_ID,String chef_or_status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_CHEFORDERSTATUS);
+
+			pstmt.setString(1, chef_or_status);
+			pstmt.setString(2, chef_or_ID);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 }
