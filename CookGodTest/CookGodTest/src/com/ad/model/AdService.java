@@ -59,7 +59,7 @@ public class AdService {
 	public List<AdVO> getAll() {
 		return dao.getAll();
 	}
-	public List<String> getAllAdCon() {
-		return dao.findAdCon();
+	public List<byte[]> getAllAdPic() {
+		return dao.findAdPic();
 	}
 }

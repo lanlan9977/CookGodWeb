@@ -167,12 +167,20 @@
     <servlet-name>AndroidBroadcastServlet</servlet-name>
     <url-pattern>/BroadcastServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
-    <servlet-name>AndroidAdservlet</servlet-name>
-    <servlet-class>android.com.ad.controller.Adservlet</servlet-class>
+  <servlet>
+    <servlet-name>AndroidAdServlet</servlet-name>
+    <servlet-class>android.com.ad.controller.AdServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AndroidAdservlet</servlet-name>
-    <url-pattern>/Adservlet</url-pattern>
+    <servlet-name>AndroidAdServlet</servlet-name>
+    <url-pattern>/AdServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AndroidChefSchServlet</servlet-name>
+    <servlet-class>android.com.chefSch.controller.ChefSchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidChefSchServlet</servlet-name>
+    <url-pattern>/ChefSchServlet</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ad.model.AdService;
-import com.dish.model.DishService;
 import com.dish.model.DishVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,7 +25,7 @@ import com.google.gson.JsonObject;
 
 import piciotest.ImageUtil;
 
-public class Adservlet extends HttpServlet {
+public class AdServletCopyClob extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	List<DishVO> dishList;
 

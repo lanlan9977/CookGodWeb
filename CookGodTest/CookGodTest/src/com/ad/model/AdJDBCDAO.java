@@ -406,8 +406,9 @@ public class AdJDBCDAO implements AdDAO_interface {
 		}
 		
 	}
+
 	@Override
-	public List<String> findAdCon() {
+	public List<byte[]> findAdPic() {
 		// TODO Auto-generated method stub
 		return null;
 	}

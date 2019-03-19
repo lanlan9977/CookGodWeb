@@ -10,5 +10,5 @@ public interface AdDAO_interface {
     public AdVO findByPrimaryKey(String ad_ID);
     public AdVO findByFoodSup_ID(String foodSup_ID);
     public List<AdVO> getAll();
-    public List<String> findAdCon();
+    public List<byte[]> findAdPic();
 }

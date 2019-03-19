@@ -21,20 +21,23 @@ public class AdDAO implements AdDAO_interface {
 		}
 	}
 	
+	
+	private static final String GET_ONE_STMT_ADPIC = 
+			"SELECT AD_PIC FROM AD";
 	private static final String INSERT_STMT =
-			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),4,'0'), ?, ?, ?, ?, ?, ? ,?)";
+			"Insert into AD (AD_ID,AD_STATUS,AD_START,AD_END,AD_TYPE,AD_TITLE,AD_PIC,AD_CON,FOOD_SUP_ID)  VALUES ('AD'||LPAD((AD_SEQ.NEXTVAL),4,'0'), ?, ?, ?, ?, ?, ?,? ,?)";
 	private static final String GET_ALL_STMT = 
 			"SELECT * FROM AD ORDER BY AD_ID";
 	private static final String GET_ONE_STMT = 
 			"SELECT * FROM AD where AD_ID = ?";
-	private static final String GET_ONE_STMT_ADCON = 
-			"SELECT AD_CON FROM AD= ?";
 	private static final String GET_ONE_FOODSUP_ID_STMT = 
 			"SELECT * FROM AD where FOODSUP_ID = ?";
 	private static final String DELETE =
 			"DELETE FROM AD where AD_ID=? ";
 	private static final String UPDATE =
-			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
+			"UPDATE AD set AD_STATUS=?, AD_START=?, AD_END=?, AD_TYPE=?, AD_TITLE=?,AD_PIC=?, AD_CON=?, FOOD_SUP_ID=? where AD_ID=?";
+	private static final String GET_NOW_AD_STMT = 
+			"SELECT * FROM AD where systimestamp >= AD_START AND systimestamp <=AD_END AND AD_STATUS ='d1'";
 	@Override
 	public void insert(AdVO adVO) {
 		// TODO Auto-generated method stub
@@ -318,10 +321,9 @@ public class AdDAO implements AdDAO_interface {
 	}
 
 	@Override
-	public List<String> findAdCon() {
+	public List<byte[]> findAdPic() {
 		// TODO Auto-generated method stub
-		List<String> list = new ArrayList<>();
-		AdVO adVO = null;
+		List<byte[]> list = new ArrayList<>();
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -329,13 +331,11 @@ public class AdDAO implements AdDAO_interface {
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
+			pstmt = con.prepareStatement(GET_ONE_STMT_ADPIC);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				adVO = new AdVO();
-				adVO.setAd_con(rs.getString("AD_CON"));
-				list.add(adVO.getAd_con());
+				list.add(rs.getBytes("AD_PIC"));
 			 }
 			}catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "
