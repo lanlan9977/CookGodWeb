@@ -49,36 +49,36 @@ public class AdServletCopyClob extends HttpServlet {
 		String action = jsonObject.get("action").getAsString();
 
 		AdService adService = new AdService();
-		if ("getImage".equals(action)) {
-			OutputStream os = res.getOutputStream();
-			int position = jsonObject.get("position").getAsInt();
-			int imageSize = jsonObject.get("imageSize").getAsInt();
-			String StringImage = adService.getAllAdCon().get(position);
-			Base64.Decoder decoder = Base64.getDecoder();
-			// Base64解碼
-			byte[] image = decoder.decode(StringImage);
-			for (int i = 0; i <image.length; ++i) {
-				if (image[i] < 0) {
-					image[i] += 256;
-				}
-			}
-			if (image != null) {
-				image = ImageUtil.shrink(image, imageSize);
-				res.setContentType("image/jpeg");
-				res.setContentLength(image.length);
-			}
-			os.write(image);
-			os.close();
-
-		}else if("getSize".equals(action)){
-			
-			int AdSize=adService.getAll().size();
-			String stringSize=String.valueOf(AdSize);
-			res.setContentType(CONTENT_TYPE);
-			PrintWriter out = res.getWriter();
-			out.println(stringSize);
-			out.close();
-		}
+//		if ("getImage".equals(action)) {
+//			OutputStream os = res.getOutputStream();
+//			int position = jsonObject.get("position").getAsInt();
+//			int imageSize = jsonObject.get("imageSize").getAsInt();
+////			String StringImage = adService.getAllAdCon().get(position);
+//			Base64.Decoder decoder = Base64.getDecoder();
+//			// Base64解碼
+//			byte[] image = decoder.decode(StringImage);
+//			for (int i = 0; i <image.length; ++i) {
+//				if (image[i] < 0) {
+//					image[i] += 256;
+//				}
+//			}
+//			if (image != null) {
+//				image = ImageUtil.shrink(image, imageSize);
+//				res.setContentType("image/jpeg");
+//				res.setContentLength(image.length);
+//			}
+//			os.write(image);
+//			os.close();
+//
+//		}else if("getSize".equals(action)){
+//			
+//			int AdSize=adService.getAll().size();
+//			String stringSize=String.valueOf(AdSize);
+//			res.setContentType(CONTENT_TYPE);
+//			PrintWriter out = res.getWriter();
+//			out.println(stringSize);
+//			out.close();
+//		}
 		res.setContentType(CONTENT_TYPE);
 	}
 }
