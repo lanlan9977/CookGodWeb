@@ -3,6 +3,8 @@ package android.com.broadcast.controller;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -71,8 +73,9 @@ public class BroadcastSocket {
 			MenuOrderService menuOrderService = new MenuOrderService();
 			BroadcastService broadcastService = new BroadcastService();
 			StringBuilder broadcast_con_sb = new StringBuilder();
-			broadcast_con_sb.append("訂單推播通知；您在").append(
-					(menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getMenu_od_start()).toString())
+			 DateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+			broadcast_con_sb.append("訂單推播通知：您在").append(
+					sdf.format((menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getMenu_od_start())))
 					.append("所訂購的嚴選套餐訂單");
 			if ("g1".equals(menuOrderVO.getMenu_od_status())) {
 				broadcast_con_sb.append("已通過審核");

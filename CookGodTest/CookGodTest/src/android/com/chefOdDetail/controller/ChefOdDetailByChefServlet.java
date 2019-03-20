@@ -34,6 +34,7 @@ import com.google.gson.reflect.TypeToken;
 
 import android.com.chefOrder.controller.CherOrderServlet;
 
+
 public class ChefOdDetailByChefServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	List<String> stringList;
@@ -135,7 +136,12 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		}else if("update".equals(action)) {
 			String chef_or_status = jsonObject.get("chef_ID").getAsString();
 			String chef_or_ID = jsonObject.get("chef_or_ID").getAsString();
+			String total = jsonObject.get("total").getAsString();
 			chefOrderService.updateChefOrderStatus(chef_or_ID, chef_or_status);
+		 	Send se = new Send();
+		 	String[] tel ={"0921514217"};
+		 	String message = "您已於食神來了網站消費總額：$"+total+"元，該消費帳單會於當月月底前寄出！";
+		 	se.sendMessage(tel , message);
 		}
 		
 		
