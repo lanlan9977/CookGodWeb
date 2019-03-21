@@ -36,7 +36,7 @@ public class CustServlet extends HttpServlet {
 		list = new ArrayList<>();
 		map = new LinkedHashMap<>();
 		req.setCharacterEncoding("UTF-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		BufferedReader br = req.getReader();// 將請求透過BufferedReader輸出在StringBuilder
 		StringBuilder jsonIn = new StringBuilder();
 		String line = null;
@@ -46,6 +46,7 @@ public class CustServlet extends HttpServlet {
 		}
 		System.out.println("input: " + jsonIn);
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
+	
 
 		String cust_account_json = jsonObject.get("selectCust").getAsString();// Android送出的KEY
 		CustVO cust_account = gson.fromJson(cust_account_json, CustVO.class);// 利用gson.fromJson轉換CustVO類型
@@ -62,6 +63,7 @@ public class CustServlet extends HttpServlet {
 		List<BroadcastVO> blist = broadcastService.getOneBroadcastByCustID(cust_db.getCust_ID());
 		String broadcastJsonIn = gson.toJson(blist);
 		map.put(custJsonIn, broadcastJsonIn);
+	
 		// 主廚
 		ChefService chefService = new ChefService();
 		ChefVO chef_db = chefService.getOneChef(cust_db.getCust_ID());

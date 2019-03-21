@@ -97,12 +97,20 @@ public class BroadcastSocket {
 			receiver=list.get(1);
 //			sentList.add(list.get(2));
 			sentMessage=message;
+		}else if("menu_order_finsh".equals(type)) {
+			MenuOrderService menuOrderService=new MenuOrderService();
+			MenuOrderVO menuOrderVO=menuOrderService.getOneMenuOrder(list.get(1));
+			List<String> finalList=new ArrayList<>();
+			finalList.add(type);
+			finalList.add("編號:"+menuOrderVO.getMenu_od_ID()+"訂單已完成!");
+			receiver=menuOrderVO.getChef_ID();
+			sentMessage=gson.toJson(finalList);
 		}
 
 		Session receiverSession = sessionsMap.get(receiver);
 		if (receiverSession != null && receiverSession.isOpen()) {
 			receiverSession.getAsyncRemote().sendText(sentMessage);
-			System.out.println("sentMessage: " +sentMessage);
+			System.out.println("receiver"+receiver+"sentMessage: " +sentMessage);
 		}
 	}
 

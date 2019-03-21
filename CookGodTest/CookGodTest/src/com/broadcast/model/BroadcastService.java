@@ -1,5 +1,6 @@
 package com.broadcast.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import java.sql.Timestamp;
@@ -43,11 +44,15 @@ public class BroadcastService {
 	}
 
 	public List<BroadcastVO> gelAllBroadcast() {
-		return dao.getAll();
+		List<BroadcastVO> list=dao.getAll();
+		Collections.sort(list);
+		return list ;
 	}
 
 	public List<BroadcastVO> getOneBroadcastByCustID(String cust_ID) {
-		return dao.findByCust_ID(cust_ID);
+		List<BroadcastVO> list=dao.findByCust_ID(cust_ID);
+		Collections.sort(list);
+		return list ;
 	}
 
 }
