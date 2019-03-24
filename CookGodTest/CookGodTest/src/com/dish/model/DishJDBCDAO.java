@@ -313,4 +313,10 @@ public class DishJDBCDAO implements DishDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public DishVO findByPrimaryKeyNoPic(String dish_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -60,6 +60,9 @@ public class DishService {
 		public byte[] getDish_Pic(String dish_ID) {
 			return dao.getImage(dish_ID);
 		}
+		public DishVO getOneDishNoPic(String dish_ID) {
+			return dao.findByPrimaryKeyNoPic(dish_ID);
+		}
 	}
 
 

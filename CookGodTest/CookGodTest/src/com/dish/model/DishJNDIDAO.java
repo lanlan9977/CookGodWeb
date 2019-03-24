@@ -270,4 +270,10 @@ public class DishJNDIDAO implements DishDAO_interface{
 		return null;
 	}
 
+	@Override
+	public DishVO findByPrimaryKeyNoPic(String dish_ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

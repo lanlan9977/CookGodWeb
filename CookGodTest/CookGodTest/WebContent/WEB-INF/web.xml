@@ -175,12 +175,20 @@
     <servlet-name>AndroidAdServlet</servlet-name>
     <url-pattern>/AdServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AndroidChefSchServlet</servlet-name>
     <servlet-class>android.com.chefSch.controller.ChefSchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidChefSchServlet</servlet-name>
     <url-pattern>/ChefSchServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AndroidFoodMallDetailServlet</servlet-name>
+    <servlet-class>android.com.foodMall.controller.FoodMallDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidFoodMallDetailServlet</servlet-name>
+    <url-pattern>/FoodMallDetailServlet</url-pattern>
   </servlet-mapping>
 </web-app>

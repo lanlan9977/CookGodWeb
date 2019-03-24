@@ -10,5 +10,7 @@ public interface DishDAO_interface {
 	public DishVO findByPrimaryKey (String dish_ID);
 	public List<DishVO> getAll();
 	public byte[] getImage(String dish_ID);
+	
+	public DishVO findByPrimaryKeyNoPic (String dish_ID);
 
 }

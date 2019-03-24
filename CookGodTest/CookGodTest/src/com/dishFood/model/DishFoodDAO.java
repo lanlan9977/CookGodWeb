@@ -25,6 +25,7 @@ public class DishFoodDAO implements DishFoodDAO_interface{
 	private static final String INSERT_STMT = "INSERT INTO DISH_FOOD (DISH_ID,FOOD_ID,DISH_F_QTY,DISH_F_UNIT) VALUES (?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM DISH_FOOD ";
 	private static final String GET_ONE_STMT = "SELECT * FROM DISH_FOOD where  DISH_ID = ? ";
+	private static final String GET_ONE_STMT_FOODID = "SELECT * FROM DISH_FOOD where  FOOD_ID = ? ";
 	private static final String DELETE = "DELETE FROM DISH_FOOD where DISH_ID = ? AND FOOD_ID = ?";
 	private static final String UPDATE = "UPDATE DISH_FOOD set DISH_F_QTY=?,DISH_F_UNIT=? where DISH_ID=? and FOOD_ID=?";
 	
@@ -258,6 +259,66 @@ public class DishFoodDAO implements DishFoodDAO_interface{
 			}
 		}
 
+		return list;
+	}
+
+
+
+
+	@Override
+	public List<DishFoodVO> findByPrimaryKey_FoodID(String food_ID) {
+		List<DishFoodVO> list = new ArrayList<DishFoodVO>();
+		DishFoodVO dishFoodVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT_FOODID);
+			
+			pstmt.setString(1, food_ID);
+
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				dishFoodVO = new DishFoodVO();
+				dishFoodVO.setDish_ID(rs.getString("dish_ID"));
+				dishFoodVO.setFood_ID(rs.getString("food_ID"));
+				dishFoodVO.setDish_f_qty(rs.getInt("dish_f_qty"));
+				dishFoodVO.setDish_f_unit(rs.getString("dish_f_unit"));
+				list.add(dishFoodVO);
+			}
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured."
+					+ se.getMessage());
+			
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				}catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				}catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				}catch (Exception e) {
+					e.printStackTrace(System.err);
+					}
+				}
+			}
 		return list;
 	}
 
