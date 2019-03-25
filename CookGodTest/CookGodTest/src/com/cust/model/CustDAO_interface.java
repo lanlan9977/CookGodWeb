@@ -16,4 +16,6 @@ public interface CustDAO_interface {
 	
 	public CustVO findByCustAcc(String cust_acc);
 
+	public byte[] findByCustAccPic(String cust_acc);
+
 }

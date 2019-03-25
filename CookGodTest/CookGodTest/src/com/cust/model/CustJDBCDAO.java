@@ -396,5 +396,10 @@ public class CustJDBCDAO implements CustDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public byte[] findByCustAccPic(String cust_acc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

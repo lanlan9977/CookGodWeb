@@ -45,8 +45,8 @@ public class OrderByChefQRCodeServlet extends HttpServlet {
 		MenuOrderService menuOrderService = new MenuOrderService();
 		if (identity.equals("isChef")) {
 			if (menuOrderService.getOneMenuOrder(menu_od_ID).getChef_ID().equals(identity_ID)) {
-				if ("g1".equals(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_od_status())) {
-					menuOrderService.updateMenuOrderStatus(menu_od_ID, "g3");
+				if ("g2".equals(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_od_status())) {
+					menuOrderService.updateMenuOrderStatus(menu_od_ID, "g4");
 					outStr = "主廚到府確認成功!";
 				} else {
 					outStr = "訂單狀態有誤，請確認!";
@@ -60,8 +60,8 @@ public class OrderByChefQRCodeServlet extends HttpServlet {
 		} else if (identity.equals("isCust")) {
 
 			if (menuOrderService.getOneMenuOrder(menu_od_ID).getCust_ID().equals(identity_ID)) {
-				if ("g3".equals(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_od_status())) {
-					menuOrderService.updateMenuOrderStatus(menu_od_ID, "g4");
+				if ("g4".equals(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_od_status())) {
+					menuOrderService.updateMenuOrderStatus(menu_od_ID, "g5");
 					outStr = "訂單已完成!";
 				} else {
 					outStr = "訂單狀態有誤，請確認!";

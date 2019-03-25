@@ -71,5 +71,9 @@ public class CustService {
 	public CustVO getOneCustAcc(String cust_acc) {
 		return dao.findByCustAcc(cust_acc);
 	}
+	
+	public byte[] getOneCustAccPic(String cust_acc) {
+		return dao.findByCustAccPic(cust_acc);
+	}
 
 }

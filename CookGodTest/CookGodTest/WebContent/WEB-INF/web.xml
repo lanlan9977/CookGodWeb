@@ -183,12 +183,20 @@
     <servlet-name>AndroidChefSchServlet</servlet-name>
     <url-pattern>/ChefSchServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AndroidFoodMallDetailServlet</servlet-name>
     <servlet-class>android.com.foodMall.controller.FoodMallDetailServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidFoodMallDetailServlet</servlet-name>
     <url-pattern>/FoodMallDetailServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>AndroidCustImageServlet</servlet-name>
+    <servlet-class>android.com.cust.controller.CustImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidCustImageServlet</servlet-name>
+    <url-pattern>/CustImageServlet</url-pattern>
   </servlet-mapping>
 </web-app>

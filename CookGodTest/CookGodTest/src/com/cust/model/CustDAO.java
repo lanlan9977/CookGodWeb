@@ -27,7 +27,8 @@ public class CustDAO implements CustDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME FROM CUST where CUST_ID = ?";
 	private static final String DELETE = "DELETE FROM CUST where CUST_ID=? ";
 	private static final String UPDATE = "UPDATE CUST set CUST_ACC=?, CUST_PWD=?, CUST_NAME=?, CUST_SEX=?, CUST_TEL=?, CUST_ADDR=?, CUST_PID=?, CUST_MAIL=? CUST_BRD=?, CUST_REG=?, CUST_PIC=?, CUST_STATUS=?, CUST_NINAME=? WHERE CUST_ID=?";
-	private static final String GET_ONE_STMT_FROM_CUST_ACC = "SELECT * FROM CUST WHERE CUST_ACC = ?";
+	private static final String GET_ONE_STMT_FROM_CUST_ACC = "SELECT  CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_STATUS,CUST_NINAME FROM CUST WHERE CUST_ACC = ?";
+	private static final String GET_ONE_STMT_FROM_CUST_ACC_PIC = "SELECT  CUST_PIC FROM CUST WHERE CUST_ACC = ?";
 
 	@Override
 	public void insert(CustVO custVO) {
@@ -307,7 +308,6 @@ public class CustDAO implements CustDAO_interface {
 				custVO.setCust_mail(rs.getString("CUST_MAIL"));
 				custVO.setCust_brd(rs.getDate("CUST_BRD"));
 				custVO.setCust_reg(rs.getDate("CUST_REG"));
-				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
 				custVO.setCust_status(rs.getString("CUST_STATUS"));
 				custVO.setCust_niname(rs.getString("CUST_NINAME"));
 
@@ -340,6 +340,55 @@ public class CustDAO implements CustDAO_interface {
 		}
 		return custVO;
 
+	}
+
+	@Override
+	public byte[] findByCustAccPic(String cust_acc) {
+		CustVO custVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_STMT_FROM_CUST_ACC_PIC);
+
+			pstmt.setString(1, cust_acc);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				custVO = new CustVO();
+				custVO.setCust_pic(rs.getBytes("CUST_PIC"));
+
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return custVO.getCust_pic();
 	}
 
 }
