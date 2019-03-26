@@ -276,4 +276,10 @@ public class DishJNDIDAO implements DishDAO_interface{
 		return null;
 	}
 
+	@Override
+	public List<DishVO> getAllNoPic() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

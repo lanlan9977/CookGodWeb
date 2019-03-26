@@ -380,4 +380,60 @@ public class DishDAO implements DishDAO_interface{
 		return DishVO;
 	}
 
+	@Override
+	public List<DishVO> getAllNoPic() {
+		List<DishVO> list = new ArrayList<DishVO>();
+		DishVO DishVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				DishVO = new DishVO();
+				
+				DishVO.setDish_name(rs.getString("dish_name"));
+				DishVO.setDish_status(rs.getString("dish_status"));
+				DishVO.setDish_resume(rs.getString("dish_resume"));
+				DishVO.setDish_price(rs.getInt("dish_price"));
+				DishVO.setDish_ID(rs.getString("dish_ID"));
+				list.add(DishVO);				
+				
+			}
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured."
+					+ se.getMessage());
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				}catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				}catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 }

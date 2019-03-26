@@ -319,4 +319,10 @@ public class DishJDBCDAO implements DishDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<DishVO> getAllNoPic() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

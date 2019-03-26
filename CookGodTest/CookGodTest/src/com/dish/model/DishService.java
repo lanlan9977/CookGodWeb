@@ -63,6 +63,9 @@ public class DishService {
 		public DishVO getOneDishNoPic(String dish_ID) {
 			return dao.findByPrimaryKeyNoPic(dish_ID);
 		}
+		public List<DishVO> getAllNoPic(){
+			return dao.getAllNoPic();
+		}
 	}
 
 

@@ -12,5 +12,6 @@ public interface DishDAO_interface {
 	public byte[] getImage(String dish_ID);
 	
 	public DishVO findByPrimaryKeyNoPic (String dish_ID);
+	public List<DishVO> getAllNoPic();
 
 }
