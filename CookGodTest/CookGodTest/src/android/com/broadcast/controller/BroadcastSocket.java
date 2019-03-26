@@ -77,10 +77,10 @@ public class BroadcastSocket {
 			broadcast_con_sb.append("訂單推播通知：您在").append(
 					sdf.format((menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getMenu_od_start())))
 					.append("所訂購的嚴選套餐訂單");
-			if ("g1".equals(menuOrderVO.getMenu_od_status())) {
+			if ("g2".equals(menuOrderVO.getMenu_od_status())) {
 				broadcast_con_sb.append("已通過審核");
 
-			} else if ("g2".equals(menuOrderVO.getMenu_od_status())) {
+			} else if ("g1".equals(menuOrderVO.getMenu_od_status())) {
 				broadcast_con_sb.append("未通過審核");
 			}
 			BroadcastVO broadcastVO = broadcastService.addBroadcast(broadcast_con_sb.toString(),

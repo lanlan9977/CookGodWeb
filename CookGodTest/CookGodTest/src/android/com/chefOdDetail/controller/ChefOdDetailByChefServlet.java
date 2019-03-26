@@ -31,6 +31,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.menu.model.MenuService;
+import com.menu.model.MenuVO;
+import com.menuOrder.model.MenuOrderService;
+import com.menuOrder.model.MenuOrderVO;
 
 import android.com.chefOrder.controller.CherOrderServlet;
 
@@ -141,6 +145,21 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 		 	Send se = new Send();
 		 	String[] tel ={"0921514217"};
 		 	String message = "您已於食神來了網站消費總額：$"+total+"元，該消費帳單會於當月月底前寄出！";
+		 	se.sendMessage(tel , message);
+		}else if("updateCust".equals(action)) {
+			
+			String menu_od_status = jsonObject.get("chef_ID").getAsString();
+			String menu_od_ID = jsonObject.get("chef_or_ID").getAsString();
+			MenuOrderService menuOrderService=new MenuOrderService();
+			MenuService menuService=new MenuService();
+			MenuVO menuVO=menuService.getOneMenu(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_ID());
+			
+			
+//			String total = jsonObject.get("total").getAsString();
+			menuOrderService.updateMenuOrderStatus(menu_od_ID, menu_od_status);
+		 	Send se = new Send();
+		 	String[] tel ={"0921514217"};
+		 	String message = "您已於食神來了網站消費總額：$"+menuVO.getMenu_price()+"元，該消費帳單會於當月月底前寄出！";
 		 	se.sendMessage(tel , message);
 		}
 		
