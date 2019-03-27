@@ -28,7 +28,7 @@ public class DishSelectServlet extends HttpServlet {
 	List<DishFoodVO> dishFoodList;
 	List<DishVO> dishList;
 	List<String> stringList, newDishList;
-	List<DishFoodVO> newDishFoodList;
+	List<DishFoodVO> newDishFoodList,finalDishFoodList;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -64,6 +64,7 @@ public class DishSelectServlet extends HttpServlet {
 			System.out.println();
 
 		} else if ("dishAll".equals(action)) {
+			finalDishFoodList=new ArrayList<>();
 			DishFoodService dishFoodService = new DishFoodService();
 			FoodService foodService = new FoodService();
 			String newJson = "";
@@ -71,14 +72,18 @@ public class DishSelectServlet extends HttpServlet {
 			Type stringDishListType = new TypeToken<List<String>>() {
 			}.getType();
 			stringList = gson.fromJson(dishAll, stringDishListType);
-			if (stringList.size() > 0) {
+			if (stringList!=null) {
 				for (int i = 0; i < stringList.size(); i++) {
 					newDishFoodList = dishFoodService.getOneDishFood(stringList.get(i));
-					System.out.println("Test: " + newDishFoodList.get(i));
+					for(int j=0;j<newDishFoodList.size();j++) {
+						finalDishFoodList.add(newDishFoodList.get(j));
+					}
+					System.out.println("TSET^^: "+newDishFoodList.get(i).getDish_ID());
 					System.out.println("TSET^^: ");
 				}
-				newJson = gson.toJson(newDishFoodList);
-
+				if(finalDishFoodList!=null) {
+				newJson = gson.toJson(finalDishFoodList);
+				}
 			}
 			res.setContentType(CONTENT_TYPE);
 			PrintWriter out = res.getWriter();

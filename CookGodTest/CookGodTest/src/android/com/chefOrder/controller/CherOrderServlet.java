@@ -73,6 +73,10 @@ public class CherOrderServlet extends HttpServlet {
 		MenuOrderService menuOrderService=new MenuOrderService();
 		MenuDishService menuDishService=new MenuDishService();
 		menuDishList=menuDishService.getAllMenuDish(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_ID());
+		for(int i=0;i<menuDishList.size();i++) {
+			System.out.println(""+menuDishList.get(i).getDish_ID());
+			menuDishList.get(i);
+		}
 
 		DishFoodService dishFoodService=new DishFoodService();
 		for(int i=0;i<menuDishList.size();i++) {
@@ -90,6 +94,7 @@ public class CherOrderServlet extends HttpServlet {
 		favSuoList=favFdSupService.getAllByChefID(chef_ID);
 		String favSuoListJsonIn=gson.toJson(favSuoList);
 		stringList.add(favSuoListJsonIn);
+		
 		
 		//食材商城
 		FoodMallService foodMallService=new FoodMallService();
@@ -120,7 +125,7 @@ public class CherOrderServlet extends HttpServlet {
 		PrintWriter out = res.getWriter();
 		out.println(outStr);
 		out.close();
-		System.out.println("output: " + outStr);
+		System.out.println("output: " + stringDishFoodList);
 		System.out.println();
 	}
 

@@ -62,7 +62,7 @@ public class OrderByChefQRCodeServlet extends HttpServlet {
 			if (menuOrderService.getOneMenuOrder(menu_od_ID).getCust_ID().equals(identity_ID)) {
 				if ("g4".equals(menuOrderService.getOneMenuOrder(menu_od_ID).getMenu_od_status())) {
 					menuOrderService.updateMenuOrderStatus(menu_od_ID, "g5");
-					outStr = "訂單已完成";
+					outStr = "finsh";
 				} else {
 					outStr = "訂單狀態有誤，請確認!";
 					System.out.println("顧客");
