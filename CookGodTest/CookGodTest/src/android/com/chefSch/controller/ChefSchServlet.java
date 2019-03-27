@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ad.model.AdService;
-import com.chefSch.model.ChefSchService;
-import com.chefSch.model.ChefSchVO;
-import com.dish.model.DishVO;
+import android.com.ad.model.AdService;
+import android.com.chefSch.model.ChefSchService;
+import android.com.chefSch.model.ChefSchVO;
+import android.com.dish.model.DishVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;

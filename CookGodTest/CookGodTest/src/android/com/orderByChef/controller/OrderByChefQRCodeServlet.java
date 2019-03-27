@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.festOrder.model.FestOrderVO;
+import android.com.festOrder.model.FestOrderVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.menuOrder.model.MenuOrderService;
-import com.menuOrder.model.MenuOrderVO;
+import android.com.menuOrder.model.MenuOrderService;
+import android.com.menuOrder.model.MenuOrderVO;
 
 public class OrderByChefQRCodeServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";

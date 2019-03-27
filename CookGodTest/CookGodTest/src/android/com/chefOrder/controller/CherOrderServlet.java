@@ -13,22 +13,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dishFood.model.DishFoodService;
-import com.dishFood.model.DishFoodVO;
-import com.favFdSup.model.FavFdSupService;
-import com.favFdSup.model.FavFdSupVO;
-import com.food.model.FoodService;
-import com.food.model.FoodVO;
-import com.foodMall.model.FoodMallService;
-import com.foodMall.model.FoodMallVO;
-import com.foodSup.model.FoodSupService;
-import com.foodSup.model.FoodSupVO;
+import android.com.dishFood.model.DishFoodService;
+import android.com.dishFood.model.DishFoodVO;
+import android.com.favFdSup.model.FavFdSupService;
+import android.com.favFdSup.model.FavFdSupVO;
+import android.com.food.model.FoodService;
+import android.com.food.model.FoodVO;
+import android.com.foodMall.model.FoodMallService;
+import android.com.foodMall.model.FoodMallVO;
+import android.com.foodSup.model.FoodSupService;
+import android.com.foodSup.model.FoodSupVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.menuDish.model.MenuDishService;
-import com.menuDish.model.MenuDishVO;
-import com.menuOrder.model.MenuOrderService;
+import android.com.menuDish.model.MenuDishService;
+import android.com.menuDish.model.MenuDishVO;
+import android.com.menuOrder.model.MenuOrderService;
 
 public class CherOrderServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";

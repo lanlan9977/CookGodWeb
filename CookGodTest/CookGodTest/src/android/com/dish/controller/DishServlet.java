@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dish.model.DishService;
-import com.dish.model.DishVO;
+import android.com.dish.model.DishService;
+import android.com.dish.model.DishVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.menu.model.MenuService;
+import android.com.menu.model.MenuService;
 
 import piciotest.ImageUtil;
 

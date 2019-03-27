@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.broadcast.model.BroadcastService;
-import com.festOrder.model.FestOrderVO;
+import android.com.broadcast.model.BroadcastService;
+import android.com.festOrder.model.FestOrderVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.menuOrder.model.MenuOrderService;
-import com.menuOrder.model.MenuOrderVO;
+import android.com.menuOrder.model.MenuOrderService;
+import android.com.menuOrder.model.MenuOrderVO;
 
 public class MenuOrderServlet extends HttpServlet {
 

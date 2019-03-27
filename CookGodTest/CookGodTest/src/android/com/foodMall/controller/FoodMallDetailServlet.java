@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dish.model.DishService;
-import com.dish.model.DishVO;
-import com.dishFood.model.DishFoodService;
-import com.dishFood.model.DishFoodVO;
-import com.foodMall.model.FoodMallService;
-import com.foodMall.model.FoodMallVO;
+import android.com.dish.model.DishService;
+import android.com.dish.model.DishVO;
+import android.com.dishFood.model.DishFoodService;
+import android.com.dishFood.model.DishFoodVO;
+import android.com.foodMall.model.FoodMallService;
+import android.com.foodMall.model.FoodMallVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;

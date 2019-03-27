@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dish.model.DishService;
-import com.dish.model.DishVO;
+import android.com.dish.model.DishService;
+import android.com.dish.model.DishVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.menu.model.MenuService;
-import com.menu.model.MenuVO;
-import com.menuDish.model.MenuDishService;
-import com.menuDish.model.MenuDishVO;
+import android.com.menu.model.MenuService;
+import android.com.menu.model.MenuVO;
+import android.com.menuDish.model.MenuDishService;
+import android.com.menuDish.model.MenuDishVO;
 import piciotest.ImageUtil;
 
 public class MenuDishServlet extends HttpServlet {

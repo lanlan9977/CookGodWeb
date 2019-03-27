@@ -21,13 +21,13 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-import com.broadcast.model.BroadcastService;
-import com.broadcast.model.BroadcastVO;
+import android.com.broadcast.model.BroadcastService;
+import android.com.broadcast.model.BroadcastVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.menuOrder.model.MenuOrderService;
-import com.menuOrder.model.MenuOrderVO;
+import android.com.menuOrder.model.MenuOrderService;
+import android.com.menuOrder.model.MenuOrderVO;
 
 @ServerEndpoint("/BroadcastSocket/{userName}")
 public class BroadcastSocket {
@@ -69,6 +69,7 @@ public class BroadcastSocket {
 		List<String> list = gson.fromJson(message, stringType);
 		String type = list.get(0);
 		if ("menu_order".equals(type)) {
+			String newMenu_ID="";
 			MenuOrderVO menuOrderVO = gson.fromJson(list.get(1), MenuOrderVO.class);
 			MenuOrderService menuOrderService = new MenuOrderService();
 			BroadcastService broadcastService = new BroadcastService();
@@ -88,8 +89,10 @@ public class BroadcastSocket {
 			receiver = menuOrderVO.getCust_ID();
 			String broadcastJsonIn=gson.toJson(broadcastVO);
 			List<String> sentList=new ArrayList<>();
+			newMenu_ID=menuOrderService.getOneMenuOrder(menuOrderVO.getMenu_od_ID()).getMenu_ID();
 			sentList.add(type);
 			sentList.add(broadcastJsonIn);
+			sentList.add(newMenu_ID);
 			sentMessage = gson.toJson(sentList);
 
 		}else if("location".equals(type)) {

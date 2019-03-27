@@ -16,25 +16,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chefOdDetail.model.ChefOdDetailService;
-import com.chefOdDetail.model.ChefOdDetailVO;
-import com.chefOrder.model.ChefOrderDAO;
-import com.chefOrder.model.ChefOrderDAO_interface;
-import com.chefOrder.model.ChefOrderService;
-import com.chefOrder.model.ChefOrderVO;
-import com.cust.model.CustService;
-import com.cust.model.CustVO;
-import com.food.model.FoodService;
-import com.food.model.FoodVO;
-import com.foodSup.model.FoodSupVO;
+import android.com.chefOdDetail.model.ChefOdDetailService;
+import android.com.chefOdDetail.model.ChefOdDetailVO;
+import android.com.chefOrder.model.ChefOrderDAO;
+import android.com.chefOrder.model.ChefOrderDAO_interface;
+import android.com.chefOrder.model.ChefOrderService;
+import android.com.chefOrder.model.ChefOrderVO;
+import android.com.cust.model.CustService;
+import android.com.cust.model.CustVO;
+import android.com.food.model.FoodService;
+import android.com.food.model.FoodVO;
+import android.com.foodSup.model.FoodSupVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.menu.model.MenuService;
-import com.menu.model.MenuVO;
-import com.menuOrder.model.MenuOrderService;
-import com.menuOrder.model.MenuOrderVO;
+import android.com.menu.model.MenuService;
+import android.com.menu.model.MenuVO;
+import android.com.menuOrder.model.MenuOrderService;
+import android.com.menuOrder.model.MenuOrderVO;
 
 import android.com.chefOrder.controller.CherOrderServlet;
 
@@ -158,7 +158,7 @@ public class ChefOdDetailByChefServlet extends HttpServlet {
 //			String total = jsonObject.get("total").getAsString();
 			menuOrderService.updateMenuOrderStatus(menu_od_ID, menu_od_status);
 		 	Send se = new Send();
-		 	String[] tel ={"0921514217"};
+		 	String[] tel ={"0987187849"};
 		 	String message = "您已於食神來了網站消費總額：$"+menuVO.getMenu_price()+"元，該消費帳單會於當月月底前寄出！";
 		 	se.sendMessage(tel , message);
 		}

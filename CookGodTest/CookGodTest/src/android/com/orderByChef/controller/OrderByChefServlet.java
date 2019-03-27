@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.festOrder.model.FestOrderService;
-import com.festOrder.model.FestOrderVO;
-import com.foodOrder.model.FoodOrderService;
-import com.foodOrder.model.FoodOrderVO;
+import android.com.festOrder.model.FestOrderService;
+import android.com.festOrder.model.FestOrderVO;
+import android.com.foodOrder.model.FoodOrderService;
+import android.com.foodOrder.model.FoodOrderVO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.menuOrder.model.MenuOrderService;
-import com.menuOrder.model.MenuOrderVO;
+import android.com.menuOrder.model.MenuOrderService;
+import android.com.menuOrder.model.MenuOrderVO;
 
 
 

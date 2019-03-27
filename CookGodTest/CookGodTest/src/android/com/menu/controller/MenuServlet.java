@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.menu.model.MenuService;
+import android.com.menu.model.MenuService;
 
 import piciotest.ImageUtil;
 
