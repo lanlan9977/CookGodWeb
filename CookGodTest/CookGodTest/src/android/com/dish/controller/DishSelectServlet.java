@@ -23,12 +23,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-
 public class DishSelectServlet extends HttpServlet {
 	private final static String CONTENT_TYPE = "text/html; charset=UTF-8";
 	List<DishFoodVO> dishFoodList;
 	List<DishVO> dishList;
-	List<String> stringList,newDishList;
+	List<String> stringList, newDishList;
 	List<DishFoodVO> newDishFoodList;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -36,7 +35,7 @@ public class DishSelectServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		dishList=new ArrayList<>();
+		dishList = new ArrayList<>();
 		req.setCharacterEncoding("UTF-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		BufferedReader br = req.getReader();
@@ -51,40 +50,43 @@ public class DishSelectServlet extends HttpServlet {
 		JsonObject jsonObject = gson.fromJson(jsonIn.toString(), JsonObject.class);
 		String action = jsonObject.get("action").getAsString();
 
-		
-		DishService dishService=new DishService();
-		//菜色
-		if("selectAll".equals(action)) {
-			dishList=dishService.getAllNoPic();
-			
-			String dishJson=gson.toJson(dishList);
+		DishService dishService = new DishService();
+		// 菜色
+		if ("selectAll".equals(action)) {
+			dishList = dishService.getAllNoPic();
+
+			String dishJson = gson.toJson(dishList);
 			res.setContentType(CONTENT_TYPE);
 			PrintWriter out = res.getWriter();
 			out.println(dishJson);
 			out.close();
 			System.out.println("output: " + dishJson);
 			System.out.println();
-			
-		}else if("dishAll".equals(action)) {
-			DishFoodService dishFoodService=new DishFoodService();
-			FoodService foodService=new FoodService();
-			
+
+		} else if ("dishAll".equals(action)) {
+			DishFoodService dishFoodService = new DishFoodService();
+			FoodService foodService = new FoodService();
+			String newJson = "";
 			String dishAll = jsonObject.get("dishAll").getAsString();
-		    Type stringDishListType = new TypeToken<List<String>>() {
-            }.getType();
-            stringList=gson.fromJson(dishAll, stringDishListType);
-            for(int i=0;i<stringList.size();i++) {
-            	newDishFoodList=dishFoodService.getOneDishFood(stringList.get(i));
-            
-            }
-            String newJson=gson.toJson(newDishFoodList);
-        	res.setContentType(CONTENT_TYPE);
+			Type stringDishListType = new TypeToken<List<String>>() {
+			}.getType();
+			stringList = gson.fromJson(dishAll, stringDishListType);
+			if (stringList.size() > 0) {
+				for (int i = 0; i < stringList.size(); i++) {
+					newDishFoodList = dishFoodService.getOneDishFood(stringList.get(i));
+					System.out.println("Test: " + newDishFoodList.get(i));
+					System.out.println("TSET^^: ");
+				}
+				newJson = gson.toJson(newDishFoodList);
+
+			}
+			res.setContentType(CONTENT_TYPE);
 			PrintWriter out = res.getWriter();
 			out.println(newJson);
 			out.close();
 			System.out.println("output: " + newJson);
 			System.out.println();
-			
+
 		}
 	}
 }
