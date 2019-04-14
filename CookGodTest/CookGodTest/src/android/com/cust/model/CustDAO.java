@@ -21,8 +21,8 @@ public class CustDAO implements CustDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_STMT = "INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) "
-			+ "VALUES ('C'||LPAD((AD_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT =
+			"INSERT INTO CUST (CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,CUST_BRD,CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME) VALUES ('C'||LPAD((CUST_SEQ.NEXTVAL),5,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME FROM CUST order by CUST_ID";
 	private static final String GET_ONE_STMT = "SELECT CUST_ID,CUST_ACC,CUST_PWD,CUST_NAME,CUST_SEX,CUST_TEL,CUST_ADDR,CUST_PID,CUST_MAIL,to_Char(CUST_BRD,'yyyy-mm-dd')CUST_BRD,to_Char(CUST_REG,'yyyy-mm-dd')CUST_REG,CUST_PIC,CUST_STATUS,CUST_NINAME FROM CUST where CUST_ID = ?";
 	private static final String DELETE = "DELETE FROM CUST where CUST_ID=? ";
@@ -53,9 +53,10 @@ public class CustDAO implements CustDAO_interface {
 			pstmt.setBytes(11, custVO.getCust_pic());
 			pstmt.setString(12, custVO.getCust_status());
 			pstmt.setString(13, custVO.getCust_niname());
-
+			System.out.println("HUHUHUHUH");
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
+			System.out.println("HUHUHUHUH"+se.toString());
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		} finally {
 			if (pstmt != null) {

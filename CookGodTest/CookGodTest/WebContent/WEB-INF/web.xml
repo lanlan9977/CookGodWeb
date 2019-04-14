@@ -15,8 +15,7 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
- 
- <servlet>
+  <servlet>
     <servlet-name>AndroidOrderByCustServlet</servlet-name>
     <servlet-class>android.com.orderByCust.controller.OrderByCustServlet</servlet-class>
   </servlet>
@@ -168,12 +167,20 @@
     <servlet-name>AndroidCustImageServlet</servlet-name>
     <url-pattern>/CustImageServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>AndroidDishSelectServlet</servlet-name>
     <servlet-class>android.com.dish.controller.DishSelectServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AndroidDishSelectServlet</servlet-name>
     <url-pattern>/DishSelectServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AndroidNewCustServlet</servlet-name>
+    <servlet-class>android.com.cust.controller.NewCustServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AndroidNewCustServlet</servlet-name>
+    <url-pattern>/NewCustServlet</url-pattern>
   </servlet-mapping>
 </web-app>
